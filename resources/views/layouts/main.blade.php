@@ -46,7 +46,7 @@
           </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">الرئيسية</a>
+          <a href="{{ route('admin.home') }}" class="nav-link">الرئيسية</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">تواصل</a>
@@ -192,13 +192,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('admin.index') }}" class="nav-link">
                     <i class="fa fa-table nav-icon"></i>
                     <p>قائمة المشرفين</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('admin.create') }}" class="nav-link">
                     <i class="fa fa-user-plus nav-icon"></i>
                     <p>إضافة مشرف</p>
                   </a>
@@ -208,7 +208,7 @@
 
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user-lock"></i>
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                   المشرفين الفرعيين
                   <i class="right fas fa-angle-left"></i>
@@ -224,10 +224,44 @@
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="fa fa-user-plus nav-icon"></i>
-                    <p>إضافة مشرف فرعبي</p>
+                    <p>إضافة مشرف فرعي</p>
                   </a>
                 </li>
               </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                   المستخدمين
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fa fa-table nav-icon"></i>
+                    <p>قائمة المستخدمين</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fa fa-user-plus nav-icon"></i>
+                    <p>إضافة مستخدم</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                   الطلبات
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
             </li>
 
            
@@ -246,15 +280,31 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Dashboard</h1>
+              <span class="m-0 text-dark">
+                <!-- Title Of The Page -->
+                @yield('title')
+              </span>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
+
+                <li class="breadcrumb-item active">الرئيسية</li>
+
+                <li class="breadcrumb-item">
+                  <a href="#">
+                    @yield('breadcrumb')
+                  </a>
+                </li>
+
+                <li class="breadcrumb-item">
+                  <a href="#">
+                    @yield('breadcrumb2')
+                  </a>
+                </li>
+                
               </ol>
-            </div><!-- /.col -->
+            </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
@@ -272,12 +322,9 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-      All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.0.0-rc.1
-      </div>
+    <footer class="main-footer text-center">
+      <strong>AhM19eD &copy; 2020-2021 <a href="#">Laravel 8.6</a>.</strong>
+      All rights reserved.  
     </footer>
 
     <!-- Control Sidebar -->

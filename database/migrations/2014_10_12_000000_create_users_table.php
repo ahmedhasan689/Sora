@@ -19,6 +19,15 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('image_path');
+            $table->integer('followers')->default(0);
+            $table->integer('followings')->default(0);
+            $table->integer('user_type')->default(0);
+            $table->string('address');
+
+            // Foreign Key For Subscription Table
+            $table->foreignId('subscription_id')->constrained('subscriptions','id')->nullOnDelete();
+
             $table->rememberToken();
             $table->timestamps();
         });

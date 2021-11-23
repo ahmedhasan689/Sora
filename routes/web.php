@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\AdminsController;
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.admin.main');
+    return view('layouts.home');
 });
 
 // For Admin Dashboard [Admins]...
-Route::get('/admin/admins', [UsersController::class, 'index'])->name('admin.index');
+Route::get('/admin/admins', [AdminsController::class, 'index'])->name('admin.index');
+Route::get('/admin/admins/create', [AdminsController::class, 'create'])->name('admin.create');
+Route::get('/admin/home', [HomeController::class, 'index'])->name('admin.home');
+
+
 

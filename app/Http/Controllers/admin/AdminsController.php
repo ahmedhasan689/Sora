@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+use App\Models\User;
+use App\Models\Subscription;
+
+class AdminsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('layouts.admin.admins');
+
+        $users = User::with('subscriptions')->where('user_type', '2')->get();
+        return view('layouts.admin.index', compact('users'));
     }
 
     /**
@@ -24,7 +29,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.admin.create');
     }
 
     /**
