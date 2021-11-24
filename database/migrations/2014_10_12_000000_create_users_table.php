@@ -16,17 +16,17 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('phone_number')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('image_path');
+            $table->string('avatar');
             $table->integer('followers')->default(0);
             $table->integer('followings')->default(0);
             $table->integer('user_type')->default(0);
-            $table->string('address');
-
-            // Foreign Key For Subscription Table
+            // Foreign Key
             $table->foreignId('subscription_id')->constrained('subscriptions','id')->nullOnDelete();
+            $table->foreignId('country_id')->constrained('countries','id')->nullOnDelete();
 
             $table->rememberToken();
             $table->timestamps();

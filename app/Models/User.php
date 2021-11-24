@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function subscriptions() {
         return $this->belongsTo(Subscription::class, 'subscription_id');
     }
+
+    public function country() {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
 }

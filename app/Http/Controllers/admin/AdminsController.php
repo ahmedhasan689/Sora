@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -19,7 +20,7 @@ class AdminsController extends Controller
     {
 
         $users = User::with('subscriptions')->where('user_type', '2')->get();
-        return view('layouts.admin.index', compact('users'));
+        return view('admin.index', compact('users'));
     }
 
     /**
@@ -29,7 +30,8 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        return view('layouts.admin.create');
+        $countries = Country::all();
+        return view('admin.create', compact('countries'));
     }
 
     /**

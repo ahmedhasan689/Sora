@@ -22,6 +22,12 @@ Route::get('/', function () {
 // For Admin Dashboard [Admins]...
 Route::get('/admin/admins', [AdminsController::class, 'index'])->name('admin.index');
 Route::get('/admin/admins/create', [AdminsController::class, 'create'])->name('admin.create');
+Route::post('/admin/admins', [AdminsController::class, 'store'])->name('admin.store');
+Route::get('/admin/admins/{id}', [AdminsController::class, 'show'])->name('admin.show');
+Route::get('/admin/admins/{id}/edit', [AdminsController::class, 'edit'])->name('admin.edit');
+Route::put('/admin/admins/{id}', [AdminsController::class, 'update'])->name('admin.update');
+Route::delete('/admin/admins/{id}', [AdminsController::class, 'destroy'])->name('admin.delete');
+
 Route::get('/admin/home', [HomeController::class, 'index'])->name('admin.home');
 
 
