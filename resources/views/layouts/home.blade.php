@@ -1,5 +1,8 @@
 @extends ('layouts.main')
 
+@section('page_title', 'Dashboard')
+
+
 @section('title')
 
     <h3>

@@ -19,9 +19,29 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'phone_number',
         'email',
         'password',
+        'country_id',
+        'avatar',
+        'user_type',
+        
     ];
+
+
+    // Validate Rules
+    public static function adminValidateRules() 
+    {
+        return [
+            'name' => 'required|min:3|max:15',
+            'phone_number' => 'required|numeric|min:10',
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:20',
+            'country' => 'required',
+            'avatar' => 'nullable|image',
+            'admin',
+        ];
+    } 
 
     /**
      * The attributes that should be hidden for arrays.
