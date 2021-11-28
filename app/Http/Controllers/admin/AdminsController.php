@@ -34,9 +34,11 @@ class AdminsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {     
         $countries = Country::all();
-        return view('admin.create', compact('countries'));
+        $admin = User::get('country_id');
+        // dd($admin);
+        return view('admin.create', compact('countries', 'admin'));
     }
 
     /**
@@ -50,29 +52,35 @@ class AdminsController extends Controller
         // Rules
         $request->validate(User::adminValidateRules());
 
-        $request->merge([
-            'user_type' => $request->post('admin'),
-        ]);
+        // Upload Image
+        // if ($request->hasFile('avatar')) {
+        //     $file = $request->file('avatar'); // UploadedFile Objects
+        //
+        //     $image_path = $file->store('/', [
+        //         'disk' => 'uploads',
+        //     ]);
+        //
+        // }
+
 
         // Create
-        if ( $request->post('password') === $request->post('re-password')) {
+        if ($request->post('password') === $request->post('re-password')) {
 
-            // Hash The Password After Checked
+            // Hash The Password After Checked & Fill The User Type = 2 ('admin') & Insert The $image_path
             $request->merge([
+                // 'avatar' => $image_path,
+                'user_type' => $request->post('admin'),
                 'password' => Hash::make($request->post('password')),
             ]);
 
+            // dd($request);
             $admin = User::create($request->all());
 
             return redirect()->route('admin.index')->with('success', 'User ' . ($admin->name) . ' Created');
-        }else{
+        } else {
 
             return redirect()->route('admin.create')->with('success', 'The Password Not Correct');
-
         };
-
-        // return redirect()->route('admin.index')->with('success', 'User ' . ($admin->name) . ' Created');
-
 
     }
 
@@ -95,7 +103,15 @@ class AdminsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $admin = User::find($id);
+
+        $countries = Country::all();
+
+        if(!$admin) {
+          abort(404);
+        }
+
+        return view('admin.edit', compact('admin', 'countries'));
     }
 
     /**
@@ -107,7 +123,41 @@ class AdminsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $admin = User::findOrFail($id);
+
+        $request->validate(User::adminValidateRules());
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar'); // UploadedFile Objects 
+
+            $image_path = $file->store('/', [
+                'disk' => 'uploads',
+            ]);           
+            
+            $request->merge([
+                'avatar' => $image_path,
+            ]);
+        }
+
+
+        // Check If THe Password Input Not Empty
+        if( !empty($request->post('password')) && !empty($request->post('re-password')) ){
+            if ($request->post('password') === $request->post('re-password')) {
+                $request->merge([
+                    'password' => Hash::make($request->post('password'))
+                ]);
+            }
+        }
+
+        // dd($request);
+        $admin->update([
+            'name' => $request->post('name'),
+            'phone_number' => $request->post('phone_number'),
+            'email' => $request->post('email'),
+            'country_id' => $request->post('country'),
+        ]);
+
+        return redirect()->route('admin.index')->with('success', 'User ' . $admin->name . ' Updated');
     }
 
     /**
@@ -118,6 +168,47 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $users = User::find($id);
+        $users->delete();
+        return redirect()->route('admin.index')->with('success', 'User ' . ($users->name) .  ' Deleted');
     }
+
+    public function trash() 
+    {
+        $users = User::onlyTrashed()->get();
+
+        return view('admin.trash', compact('users'));
+    }
+
+    public function restore(Request $request, $id = null) 
+    {
+        if ($id) {
+            $users = User::onlyTrashed()->findOrFail($id);
+            $users->restore();
+
+            // PTG 
+            return redirect()->route('admin.index')->with('success', 'User ' . $users->name . ' Restored');
+        }
+
+        $users = User::onlyTrashed()->restore();
+        return redirect()->route('admin.index')->with('success', 'All User Restored');
+    }
+    
+    public function forceDelete($id = null) 
+    {
+        if ($id) {
+            $users = User::onlyTrashed()->findOrFail($id);
+            $users->forceDelete();
+
+            // PTG 
+            return redirect()->route('admin.index')->with('success', 'User ' . $users->name . ' Deleted');
+        }
+
+        $users = User::onlyTrashed()->forceDelete();
+        return redirect()->route('admin.index')->with('success', 'All User Deleted');
+    }
+
+
+
+
 }

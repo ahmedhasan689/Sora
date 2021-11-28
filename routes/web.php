@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminsController;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\admin\AdminsController;
+use App\Http\Controllers\admin\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +23,11 @@ Route::get('/', function () {
 Route::get('/admin/home', [HomeController::class, 'index'])->name('admin.home');
 
 // For Admin Dashboard [Admins]...
+    // For Soft Delete ...
+Route::get('/admin/admins/trash', [AdminsController::class, 'trash'])->name('admin.trash');
+Route::put('/admin/admins/trash/{id?}', [AdminsController::class, 'restore'])->name('admin.restore');
+Route::delete('/admin/admins/trash/{id?}', [AdminsController::class, 'forceDelete'])->name('admin.force-delete');
+    // Basics Routes ...
 Route::get('/admin/admins', [AdminsController::class, 'index'])->name('admin.index');
 Route::get('/admin/admins/create', [AdminsController::class, 'create'])->name('admin.create');
 Route::post('/admin/admins', [AdminsController::class, 'store'])->name('admin.store');
