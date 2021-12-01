@@ -210,7 +210,7 @@
 
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+                <i class="fas fa-user-shield"></i>
                 <p>
                   المشرفين الفرعيين
                   <i class="right fas fa-angle-left"></i>
@@ -218,13 +218,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('subadmin.index') }}" class="nav-link">
                     <i class="fa fa-table nav-icon"></i>
                     <p>قائمة المشرفين</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('subadmin.create') }}" class="nav-link">
                     <i class="fa fa-user-plus nav-icon"></i>
                     <p>إضافة مشرف فرعي</p>
                   </a>
@@ -242,13 +242,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('user.index') }}" class="nav-link">
                     <i class="fa fa-table nav-icon"></i>
                     <p>قائمة المستخدمين</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('user.create') }}" class="nav-link">
                     <i class="fa fa-user-plus nav-icon"></i>
                     <p>إضافة مستخدم</p>
                   </a>
@@ -266,7 +266,7 @@
               </a>
             </li>
 
-           
+
 
           </ul>
         </nav>
@@ -304,7 +304,7 @@
                     @yield('breadcrumb2')
                   </a>
                 </li>
-                
+
               </ol>
             </div>
           </div><!-- /.row -->
@@ -318,7 +318,7 @@
 
             @yield('content')
 
-          
+
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
@@ -326,7 +326,7 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer text-center">
       <strong>AhM19eD &copy; 2020-2021 <a href="#">Laravel 8.6</a>.</strong>
-      All rights reserved.  
+      All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->

@@ -10,7 +10,7 @@
     <div class="mt-3 mb-6 flex-row-reverse">
         <a href="{{ route('admin.trash') }}">
             <button class="btn btn-sm btn-warning">
-                قائمة المحذوفات  
+                قائمة المحذوفات
             </button>
         </a>
     </div>

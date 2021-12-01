@@ -28,12 +28,12 @@ class User extends Authenticatable
         'country_id',
         'avatar',
         'user_type',
-        
+
     ];
 
 
     // Validate Rules
-    public static function adminValidateRules() 
+    public static function adminValidateRules()
     {
         return [
             'name' => 'required|min:3|max:15',
@@ -44,7 +44,32 @@ class User extends Authenticatable
             'avatar' => 'nullable|Image',
             'admin',
         ];
-    } 
+    }
+
+    public static function SubadminValidateRules()
+    {
+        return [
+            'name' => 'required|min:3|max:15',
+            'phone_number' => 'required|numeric|min:10',
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:20',
+            'country' => 'required',
+            'avatar' => 'nullable|Image',
+            'subadmin',
+        ];
+    }
+
+    public static function usersValidateRules()
+    {
+        return [
+            'name' => 'required|min:3|max:15',
+            'phone_number' => 'required|numeric|min:10',
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:20',
+            'country' => 'required',
+            'avatar' => 'nullable|Image',
+        ];
+    }
 
     /**
      * The attributes that should be hidden for arrays.

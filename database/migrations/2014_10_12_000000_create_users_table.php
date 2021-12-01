@@ -19,14 +19,14 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('avatar')->nullable();
             $table->integer('followers')->default(0);
             $table->integer('followings')->default(0);
             $table->integer('user_type')->default(0);
-            // Foreign Key
-            $table->foreignId('subscription_id')->constrained('subscriptions','id')->nullOnDelete()->default(1);
-            $table->foreignId('country_id')->constrained('countries','id')->nullOnDelete()->default(1);;
+            // Foreign Keys
+            $table->foreignId('subscription_id')->constrained('subscriptions','id')->nullOnDelete();
+            $table->foreignId('country_id')->constrained('countries','id')->nullOnDelete();
 
             $table->rememberToken();
             $table->timestamps();
