@@ -317,7 +317,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <!-- Home tab content -->
+                <!-- Dashboard tab content -->
                 <div class="tab-pane active" id="control-sidebar-home-tab">
                     <h3 class="control-sidebar-heading">Recent Activity</h3>
                     <ul class="control-sidebar-menu">
