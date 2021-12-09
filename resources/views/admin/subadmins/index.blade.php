@@ -55,7 +55,7 @@
             <tr>
                 <th scope="row">{{ $sub_admin->id }}</th>
                 <td>
-                    <img src="{{ asset('uploads/' . $sub_admin->avatar) }}" width="100" height="80">
+                    <img src="{{ $sub_admin->image }}" width="100" height="80">
                 </td>
                 <td>{{ $sub_admin->name }}</td>
                 <td>{{ $sub_admin->phone_number }}</td>

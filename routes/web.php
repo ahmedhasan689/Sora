@@ -4,6 +4,9 @@ use App\Http\Controllers\admin\AdminsController;
 use App\Http\Controllers\admin\SubadminsController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\ImagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +44,25 @@ Route::namespace('Admin')
     ->middleware(['auth'])
     ->group(function () {
 
+        // Start Admin Dashboard [Roles]...
+        Route::group([
+            'prefix' => '/roles',
+            'as' => 'role.',
+        ], function() {
+            // For Soft Delete ...
+            Route::get('/trash', [RolesController::class, 'trash'])->name('trash');
+            Route::put('/trash/{id?}', [RolesController::class, 'restore'])->name('restore');
+            Route::delete('/admin/admins/trash/{id?}', [RolesController::class, 'forceDelete'])->name('force-delete');
+            // Basics Routes ...
+            Route::get('/', [RolesController::class, 'index'])->name('index');
+            Route::get('/create', [RolesController::class, 'create'])->name('create');
+            Route::post('/', [RolesController::class, 'store'])->name('store');
+            Route::get('/{id}', [RolesController::class, 'show'])->name('show');
+            Route::get('/{id}/edit', [RolesController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [RolesController::class, 'update'])->name('update');
+            Route::delete('/{id}', [RolesController::class, 'destroy'])->name('delete');
+        });
+        // End Admin Dashboard [Roles]...
 
         // Start Admin Dashboard [Admins]...
         Route::group([
@@ -99,6 +121,44 @@ Route::namespace('Admin')
             Route::delete('/{id}', [UsersController::class, 'destroy'])->name('delete');
         });
         // End Admin Dashboard [ Users ] ...
+
+        // Start Admin Dashboard [ Categories ] ...
+        Route::group([
+            'prefix' => '/categories', // admin/Categories
+            'as' => 'category.',
+        ], function(){
+            // For Soft Delete ...
+            Route::get('/trash', [CategoriesController::class, 'trash'])->name('trash');
+            Route::put('/trash/{id?}', [CategoriesController::class, 'restore'])->name('restore');
+            Route::delete('/trash/{id?}', [CategoriesController::class, 'forceDelete'])->name('force-delete');
+            // Basics Route ...
+            Route::get('/', [CategoriesController::class, 'index'])->name('index');
+            Route::get('/create', [CategoriesController::class, 'create'])->name('create');
+            Route::post('/', [CategoriesController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [CategoriesController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [CategoriesController::class, 'update'])->name('update');
+            Route::delete('/{id}', [CategoriesController::class, 'destroy'])->name('delete');
+        });
+        // End Admin Dashboard [ Categories ] ...
+        
+        // Start Admin Dashboard [ Image ] ...
+        Route::group([
+            'prefix' => '/images',
+            'as' => 'image.'
+        ], function() {
+            // For Soft Delete ...
+            Route::get('/trash', [ImagesController::class, 'trash'])->name('trash');
+            Route::put('/trash/{id?}', [ImagesController::class, 'restore'])->name('restore');
+            Route::delete('/trash/{id?}', [ImagesController::class, 'forceDelete'])->name('force-delete');
+            // Basics Route ...
+            Route::get('/', [ImagesController::class, 'index'])->name('index');
+            Route::get('/create', [ImagesController::class, 'create'])->name('create');
+            Route::post('/', [ImagesController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [ImagesController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [ImagesController::class, 'update'])->name('update');
+            Route::delete('/{id}', [ImagesController::class, 'destroy'])->name('delete');
+        });
+        // End Admin Dashboard [ Image ] ...
 
     });
 

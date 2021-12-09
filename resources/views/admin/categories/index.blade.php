@@ -1,14 +1,14 @@
 @extends ('layouts.main')
 
-@section('page_title', 'Admins')
+@section('page_title', 'Categories')
 
 @section('title')
 <h3 class="d-flex flex-column">
     <div>
-        قائمة المشرفين
+        قائمة الفئات
     </div>
     <div class="mt-3 mb-6 flex-row-reverse">
-        <a href="{{ route('admin.trash') }}">
+        <a href="{{ route('category.trash') }}">
             <button class="btn btn-sm btn-warning">
                 قائمة المحذوفات
             </button>
@@ -20,7 +20,7 @@
 
 @section('breadcrumb')
 <a href="{{ route('admin.index') }}">
-    Admin
+    الفئات
 </a>
 @endsection
 
@@ -41,36 +41,30 @@
     <thead class="table-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">الصورة الشخصية</th>
-            <th scope="col">الأسم</th>
-            <th scope="col">رقم الجوال</th>
-            <th scope="col">الايميل</th>
-            <th scope="col">الدولة</th>
-            <th scope="col">نوع الاشتراك</th>
+            <th scope="col">أسم الفئة</th>
+            <th scope="col">النوع</th>
+            <th scope="col">أسم الأب</th>
+            <th scope="col">قابل للبيع</th>
             <th scope="col">خيارات</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user)
+        @foreach ($categories as $category)
         <tr>
-            <th scope="row">{{ $user->id }}</th>
-            <td>
-                <img src="{{ $user->image }}" width="100" height="80">
-            </td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->phone_number }}</td>
-            <td>{{ $user->email }}</td>
-            <td>{{ $user->country->country_name }}</td>
-            <td>{{ $user->subscriptions->name }}</td>
+            <th scope="row">{{ $category->id }}</th>
+            <td>{{ $category->category_name }}</td>
+            <td>{{ $category->type }}</td>
+            <td>{{ $category->parent->category_name }}</td>
+            <td>{{ $category->salable }}</td>
             <td class="d-flex">
-                <a href="{{ route('admin.edit', ['id' => $user->id]) }}" class="mr-2">
+                <a href="{{ route('category.edit', ['id' => $category->id]) }}" class="mr-2">
                     <button type="submit" class="btn btn-sm btn-success">
                         <i class="far fa-edit"></i>
                         تعديل
                     </button>
                 </a>
 
-                <form action="{{ route('admin.delete', ['id' => $user->id]) }}" method="POST">
+                <form action="{{ route('category.delete', ['id' => $category->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger">

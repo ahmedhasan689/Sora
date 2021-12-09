@@ -1,18 +1,21 @@
 @extends ('layouts.main')
 
-@section('page_title', 'Users')
+@section('page_title', 'Trashed Users')
 
 @section('title')
-    <h3 class="d-flex flex-column">
-        <div>
-            قائمة المستخدمين
-        </div>
-        <div class="mt-3 mb-6 flex-row-reverse">
-            <a href="{{ route('user.trash') }}">
-                <button class="btn btn-sm btn-warning">
-                    قائمة المحذوفات
-                </button>
-            </a>
+    <h3>
+        قائمة المتسخدمين المحذوفين
+        <div class="d-flex mt-3">
+            <form action="{{ route('admin.restore')}}" method="POST" class="mx-1">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="btn btn-sm btn-warning">أستعادة الكل</button>
+            </form>
+            <form action="{{ route('admin.force-delete')}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-sm btn-danger">حذف الكل</button>
+            </form>
         </div>
     </h3>
 
@@ -20,22 +23,12 @@
 
 @section('breadcrumb')
     <a href="{{ route('user.index') }}">
-        Users
+        User
     </a>
 @endsection
 
 
 @section('content')
-
-    <!-- Read Flash MSG -->
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
-
-
-
 
     <table class="table table-striped">
         <thead class="table-dark">
@@ -55,7 +48,7 @@
             <tr>
                 <th scope="row">{{ $user->id }}</th>
                 <td>
-                    <img src="{{ $user->image }}" width="100" height="80">
+                    <img src="{{ asset('uploads/' . $user->avatar) }}" width="100" height="80">
                 </td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->phone_number }}</td>
@@ -63,19 +56,18 @@
                 <td>{{ $user->country->country_name }}</td>
                 <td>{{ $user->subscriptions->name }}</td>
                 <td class="d-flex">
-                    <a href="{{ route('user.edit', $user->id) }}" class="mr-2">
-                        <button type="submit" class="btn btn-sm btn-success">
-                            <i class="far fa-edit"></i>
-                            تعديل
-                        </button>
-                    </a>
+                    <form action="{{ route('user.restore', $user->id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-sm btn-warning">أستعادة</button>
+                    </form>
 
-                    <form action="{{ route('user.delete', $user->id) }}" method="POST">
+                    <form action="{{ route('user.force-delete', $user->id )}}" method="POST" class="mr-3">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">
                             <i class="far fa-trash-alt"></i>
-                            حذف
+                            حذف نهائي
                         </button>
                     </form>
                 </td>

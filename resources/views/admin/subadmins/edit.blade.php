@@ -172,7 +172,8 @@
         <!-- Avatar -->
         <div class="input-group mb-3">
             <label class="input-group">صورة</label>
-            <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="avatar" name="avatar">
+            <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="avatar" name="avatar"
+            value="{{ $subadmin->avatar }}">
         </div>
 
         @error('avatar')

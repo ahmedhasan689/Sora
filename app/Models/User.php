@@ -90,11 +90,39 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function subscriptions() {
+    // Accessors For avatar
+    public function getImageAttribute()
+    {
+        if (!$this->avatar) {
+            return asset('assets/img/AdminLTELogo.png');
+        }
+
+        if (stripos($this->avatar, 'http') === 0) {
+            return $this->avatar;
+        }
+
+        return asset('uploads' . '/' . $this->avatar);
+    }
+
+
+    // Relation
+    public function subscriptions()
+    {
         return $this->belongsTo(Subscription::class, 'subscription_id');
     }
 
-    public function country() {
+    public function country()
+    {
         return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'user_id');
     }
 }

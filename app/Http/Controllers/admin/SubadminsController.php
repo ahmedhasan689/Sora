@@ -120,6 +120,15 @@ class SubadminsController extends Controller
             }
         }
 
+        // Upload Image
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar'); // UploadedFile Objects
+        
+            $image_path = $file->store('/', [
+                'disk' => 'uploads',
+            ]);       
+        }
+
         $sub_admin->update([
             'name' => $request->post('name'),
             'phone_number' => $request->post('phone_number'),
@@ -128,7 +137,7 @@ class SubadminsController extends Controller
             'country_id' => $request->post('country'),
             'city' => $request->post('city'),
             'zip_code' => $request->post('zip_code'),
-            'avatar' => $request->post('avatar'),
+            'avatar' => $image_path,
         ]);
 
         return redirect()->route('subadmin.index')->with('success', 'User ' . ($sub_admin->name) . ' Updated');

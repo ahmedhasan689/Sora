@@ -53,28 +53,34 @@ class AdminsController extends Controller
         $request->validate(User::adminValidateRules());
 
         // Upload Image
-        // if ($request->hasFile('avatar')) {
-        //     $file = $request->file('avatar'); // UploadedFile Objects
-        //
-        //     $image_path = $file->store('/', [
-        //         'disk' => 'uploads',
-        //     ]);
-        //
-        // }
-
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar'); // UploadedFile Objects
+        
+            $image_path = $file->store('/', [
+                'disk' => 'uploads',
+            ]);
+        
+        }
 
         // Create
         if ($request->post('password') === $request->post('re-password')) {
 
             // Hash The Password After Checked & Fill The User Type = 2 ('admin') & Insert The $image_path
-            $request->merge([
-                // 'avatar' => $image_path,
-                'user_type' => $request->post('admin'),
-                'password' => Hash::make($request->post('password')),
-            ]);
+            // $request->merge([
+            //     'user_type' => $request->post('admin'),
+            //     'password' => Hash::make($request->post('password')),
+            // ]);
 
             // dd($request);
-            $admin = User::create($request->all());
+            $admin = User::create([
+                'name' => $request->post('name'),
+                'phone_number' => $request->post('phone_number'),
+                'email' => $request->post('email'),
+                'password' => Hash::make($request->post('password')),
+                'country' => $request->post('country_id'),
+                'avatar' => $image_path,
+                'user_type' => $request->post('admin'),
+            ]);
 
             return redirect()->route('admin.index')->with('success', 'User ' . ($admin->name) . ' Created');
         } else {
@@ -133,10 +139,6 @@ class AdminsController extends Controller
             $image_path = $file->store('/', [
                 'disk' => 'uploads',
             ]);
-
-            $request->merge([
-                'avatar' => $image_path,
-            ]);
         }
 
 
@@ -158,6 +160,7 @@ class AdminsController extends Controller
             'name' => $request->post('name'),
             'phone_number' => $request->post('phone_number'),
             'email' => $request->post('email'),
+            'avatar' => $image_path,
             'country_id' => $request->post('country'),
         ]);
 

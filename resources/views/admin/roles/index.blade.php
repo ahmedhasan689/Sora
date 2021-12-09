@@ -1,16 +1,16 @@
 @extends ('layouts.main')
 
-@section('page_title', 'Users')
+@section('page_title', 'Roles')
 
 @section('title')
     <h3 class="d-flex flex-column">
         <div>
-            قائمة المستخدمين
+            قائمة الصلاحيات
         </div>
         <div class="mt-3 mb-6 flex-row-reverse">
-            <a href="{{ route('user.trash') }}">
-                <button class="btn btn-sm btn-warning">
-                    قائمة المحذوفات
+            <a href="{{ route('role.create') }}">
+                <button class="btn btn-sm btn-primary">
+                    انشاء صلاحية
                 </button>
             </a>
         </div>
@@ -19,8 +19,8 @@
 @endsection
 
 @section('breadcrumb')
-    <a href="{{ route('user.index') }}">
-        Users
+    <a href="{{ route('role.index') }}">
+        Roles
     </a>
 @endsection
 
@@ -41,36 +41,25 @@
         <thead class="table-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">الصورة الشخصية</th>
-            <th scope="col">الأسم</th>
-            <th scope="col">رقم الجوال</th>
-            <th scope="col">الايميل</th>
-            <th scope="col">الدولة</th>
-            <th scope="col">نوع الاشتراك</th>
-            <th scope="col">خيارات</th>
+            <th scope="col">الاسم</th>
+            <th scope="col">Users #</th>
+
         </tr>
         </thead>
         <tbody>
-        @foreach ($users as $user)
+        @foreach ($roles as $role)
             <tr>
-                <th scope="row">{{ $user->id }}</th>
-                <td>
-                    <img src="{{ $user->image }}" width="100" height="80">
-                </td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->phone_number }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->country->country_name }}</td>
-                <td>{{ $user->subscriptions->name }}</td>
+                <th scope="row">{{ $role->id }}</th>
+                <th scope="row">{{ $role->name }}</th>
+                <td>{{ $role->users_count }}</td>
                 <td class="d-flex">
-                    <a href="{{ route('user.edit', $user->id) }}" class="mr-2">
+                    <a href="{{ route('role.edit', $role->id) }}" class="mr-2">
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="far fa-edit"></i>
                             تعديل
                         </button>
                     </a>
-
-                    <form action="{{ route('user.delete', $user->id) }}" method="POST">
+                    <form action="{{ route('role.delete', $role->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">

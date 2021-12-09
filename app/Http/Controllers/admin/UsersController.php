@@ -27,10 +27,9 @@ class UsersController extends Controller
 
     public function create()
     {
-//        $users = User::all();
+        //        $users = User::all();
         $countries = Country::all();
         return view('admin.users.create', compact('countries'));
-
     }
 
 
@@ -46,24 +45,29 @@ class UsersController extends Controller
             ]);
         }
 
-//        $request->merge([
-//            'user_type' => 0,
-//        ]);
+        //        $request->merge([
+        //            'user_type' => 0,
+        //        ]);
 
+        // Upload Image
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar'); // UploadedFile Objects
+
+            $image_path = $file->store('/', [
+                'disk' => 'uploads',
+            ]);
+        }
         $user = User::create([
             'name' => $request->post('name'),
             'phone_number' => $request->post('phone_number'),
             'email' => $request->post('email'),
             'password' => $request->post('password'),
             'country_id' => $request->post('country'),
-            'avatar' => $request->post('avatar'),
+            'avatar' => $image_path,
             'user_type' => 0,
         ]);
 
         return redirect()->route('user.index')->with('success', 'User ' . ($user->name) . ' Created');
-
-
-
     }
 
 
@@ -77,7 +81,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $countries = Country::all();
-        return view('admin.users.edit', compact('user','countries'));
+        return view('admin.users.edit', compact('user', 'countries'));
     }
 
 
@@ -87,22 +91,32 @@ class UsersController extends Controller
 
         $request->validate(User::usersValidateRules());
 
-        if( !empty($request->post('password')) && !empty($request->post('re-password')) ){
+        if (!empty($request->post('password')) && !empty($request->post('re-password'))) {
             if ($request->post('password') === $request->post('re-password')) {
                 $request->merge([
                     'password' => Hash::make($request->post('password'))
                 ]);
-            }else{
+            } else {
                 return redirect()->route('user.index')->with('success', 'Password Not Correct');
             }
         }
 
+        // Upload Image
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar'); // UploadedFile Objects
+
+            $image_path = $file->store('/', [
+                'disk' => 'uploads',
+            ]);
+        }
+
         $user->update([
-                'name' => $request->post('name'),
-                'phone_number' => $request->post('phone_number'),
-                'email' => $request->post('email'),
-                'password' => $request->post('password'),
-                'country_id' => $request->post('country'),
+            'name' => $request->post('name'),
+            'phone_number' => $request->post('phone_number'),
+            'email' => $request->post('email'),
+            'password' => $request->post('password'),
+            'country_id' => $request->post('country'),
+            'avatar' => $image_path,
         ]);
 
         return redirect()->route('user.index')->with('success', 'User ' . ($user->name) . ' Updated');
@@ -148,23 +162,4 @@ class UsersController extends Controller
         $user = User::onlyTrashed()->forceDelete();
         return redirect()->route('user.index')->with('success', 'All Users Deleted');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
