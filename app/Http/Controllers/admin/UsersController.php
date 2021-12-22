@@ -3,19 +3,39 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 use App\Models\User;
 use App\Models\Country;
-
-
+use App\Policies\UserPolicy;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
 
+    // public function __construct()
+    // {   
+    //     $this->authorizeResource(User::class, 'id');
+    // }
+
+
+
+
     public function index()
     {
+
+        // dd(!Gate::allows('users.view'));
+
+        if (!Gate::allows('users.view')) {
+            abort(403, 'You Are Not Authrized');
+        } 
+
+        // $this->authorize('view-any', User::class);
+        // dd($this->authorize('view-any', User::class));
+
         $users = User::where('user_type', '0')->get();
 
         // Read The Flash MSG
@@ -27,7 +47,13 @@ class UsersController extends Controller
 
     public function create()
     {
-        //        $users = User::all();
+        // If You Are Not Allow Gate::allow => true , !Gate::allow => false
+        // if (!Gate::allows('users.create')) {
+        //     abort(403, 'You Are Not Authrized');
+        // }    
+        $this->authorize('create', User::class);
+
+        // $users = User::all();
         $countries = Country::all();
         return view('admin.users.create', compact('countries'));
     }
@@ -35,7 +61,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-
+        
         $request->validate(User::usersValidateRules());
 
         if ($request->post('password') === $request->post('re-password')) {
@@ -79,7 +105,9 @@ class UsersController extends Controller
 
     public function edit($id)
     {
+        
         $user = User::find($id);
+        $this->authorize('update', $user);
         $countries = Country::all();
         return view('admin.users.edit', compact('user', 'countries'));
     }
@@ -87,6 +115,9 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        
+        // $this->authorize('update', $id);
         $user = User::findOrFail($id);
 
         $request->validate(User::usersValidateRules());
@@ -125,6 +156,8 @@ class UsersController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', User::class);
+        
         $user = User::find($id);
         $user->delete();
 

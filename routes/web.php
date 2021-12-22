@@ -3,10 +3,12 @@
 use App\Http\Controllers\admin\AdminsController;
 use App\Http\Controllers\admin\SubadminsController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Front\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,18 +26,35 @@ use Illuminate\Support\Facades\Route;
         return view('welcome');
 }); */
 
+// Front Controller
+Route::get('/', [FrontController::class, 'index'])->name('front.home');
+
+Route::namespace('Front')
+    ->prefix('profile')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        // Start Profile Route [ ProfileController ]
+        Route::group([
+            'as' => 'profile.'
+        ], function () {
+            Route::get('/', [ProfileController::class, 'index'])->name('index');
+        });
+        // End Profile Route [ ProfileController ]
+    });
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('layouts.home');
-})->middleware(['auth']);
+})->middleware(['auth', 'redirect'])->name('login');
 
 // Home Controller
-Route::get('/', [HomeController::class, 'index'])->middleware(['auth'])->name('admin.home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('admin.home');
 
 
 

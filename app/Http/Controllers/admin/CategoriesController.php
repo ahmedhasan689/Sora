@@ -10,8 +10,19 @@ use App\Models\Category;
 class CategoriesController extends Controller
 {
 
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Category::class, 'id');
+    // }
+
+
+
+
     public function index()
     {
+
+        $this->authorize('view-any', Category::class);
+
         $categories = Category::all();
 
         $success = session()->get('success');
@@ -22,6 +33,8 @@ class CategoriesController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Category::class);
+
         $categories = Category::all();
         $parents = Category::where('type', 'parent')->get();
 
@@ -57,9 +70,11 @@ class CategoriesController extends Controller
 
 
     public function edit($id)
-    {
-
+    {   
         $categories = Category::find($id);
+
+        $this->authorize('update', $categories);
+
         $parents = Category::where('type', 'parent')->get();
 
         return view('admin.categories.edit', compact('categories', 'parents'));
@@ -93,6 +108,8 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
+
+        $this->authorize('delete', $category);
 
         $category->delete();
 

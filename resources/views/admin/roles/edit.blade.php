@@ -43,7 +43,7 @@
 
     @endif
 
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('role.update', ['id' => $role->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -52,7 +52,7 @@
             <!-- Start Name -->
             <div class="form-group col-md-4">
                 <label>الأسم</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="أدخل الأسم" name="name" value="{{ old('name', $role->name) }}">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="أدخل الأسم" name="name" value="{{ $role->name }}">
             </div>
 
             @error('name')
@@ -67,8 +67,14 @@
 
             @foreach( config('abilities') as $ability => $value)
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="abilities[]" value="{{ $ability }}" id="flexCheckDefault" @if ( in_array($ability, $role->abilities ?? []) ) checked @endif>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" name="abilities[]" value="{{ $ability }}"
+                    <?php 
+                        if (in_array($ability, $role->abilities ?? [])) {
+                            echo 'checked';
+                        }
+                    ?> 
+                    >
+                    <label class="form-check-label">
                         {{ $value }}
                     </label>
                 </div>
@@ -78,7 +84,9 @@
 
 
         </div>
-
+        <button class="btn btn-success">
+            تعديل
+        </button>
 
 
     </form>

@@ -17,9 +17,14 @@ class Role extends Model
     protected $casts = [
         'abilities' => 'array',
     ];
-
+    
+    public function user() {
+        return $this->hasOne(user::class, 'role_id');
+    }
+    
     public function users() {
         return $this->belongsToMany(User::class, 'role_user');
     }
+
 
 }

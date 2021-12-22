@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
 //            subscriptionsSeeder::class,
 //            UsersSeeder::class,
             // CategorySeeder::class,
-            ImagesSeeder::class,
+            // ImagesSeeder::class,
+            ProfileSeeder::class,
         ]);
 
         // \App\Models\User::factory(30)->create();

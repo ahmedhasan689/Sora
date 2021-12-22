@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\Country;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
+
 
 class SubadminsController extends Controller
 {
@@ -90,8 +92,9 @@ class SubadminsController extends Controller
     public function edit($id)
     {
         $subadmin = User::find($id);
+        $roles = Role::all();
         $countries = Country::all();
-        return view('admin.subadmins.edit', compact('countries', 'subadmin'));
+        return view('admin.subadmins.edit', compact('countries', 'subadmin', 'roles'));
     }
 
 
@@ -106,7 +109,10 @@ class SubadminsController extends Controller
             'password' => 'nullable|min:6|max:20',
             'country' => 'required',
             'avatar' => 'nullable|Image',
+            'role' => 'nullable',
         ]);
+
+        // dd($request->post('role'));
 
         if ( !empty($request->post('password') && !empty($request->post('re-password')))) {
             if ($request->post('password') === $request->post('re-password')) {
@@ -137,8 +143,10 @@ class SubadminsController extends Controller
             'country_id' => $request->post('country'),
             'city' => $request->post('city'),
             'zip_code' => $request->post('zip_code'),
+            'role_id' => $request->post('role'),
             'avatar' => $image_path,
         ]);
+        // dd($sub_admin);
 
         return redirect()->route('subadmin.index')->with('success', 'User ' . ($sub_admin->name) . ' Updated');
 

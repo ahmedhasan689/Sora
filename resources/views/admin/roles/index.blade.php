@@ -43,6 +43,7 @@
             <th scope="col">#</th>
             <th scope="col">الاسم</th>
             <th scope="col">Users #</th>
+            <th scope="col">خيارات</th>
 
         </tr>
         </thead>

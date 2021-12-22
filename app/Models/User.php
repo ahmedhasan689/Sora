@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 
 
 class User extends Authenticatable
@@ -28,6 +29,7 @@ class User extends Authenticatable
         'country_id',
         'avatar',
         'user_type',
+        'role_id'
 
     ];
 
@@ -116,6 +118,10 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class, 'country_id');
     }
 
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_user');
@@ -125,4 +131,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Image::class, 'user_id');
     }
+
+    public function profile() {
+        return $this->hasOne(Profile::class, 'user_id')->withDefault();
+    }
+
+    
+
+    // Authrized
+    public function hasAbility($ability){
+        foreach($this->roles as $role) {
+            if (in_array($ability ,$role->abilities)) {
+                return true;
+            };
+        };
+        return false;
+    }
+
 }

@@ -1,0 +1,68 @@
+
+ .desc-profile{
+ 	display: block;
+ 	width: 50%;
+ 	margin: auto;
+ 	height: 200px;
+ }
+ .desc-profile-name{
+ 	font-size: 20px;
+ 	text-align: center;
+ 	font-weight: bold;
+ 	margin-top: 10px;
+
+
+ }
+ .desc-profile-pos{
+ 	text-align: center;
+ 	color:#929292;
+ 	margin-top: -18px;
+ 	font-size: 17px;
+ }
+ .desc-number-flower{
+ 	text-align: center;
+ 	margin-top: -10px;
+ 	font-size: 14px;
+ }
+ .desc-number-flower span{
+     color: #4F4F4F;
+ }
+ .desc-profile-desc{
+ 	
+ 	 color: #929292;
+
+ 	text-align: center;
+    font-weight: 100;
+ } 
+ .img-prfile{
+ 	width: 120px; height: 120px; margin-top: -40px;
+ }
+
+  .desc-number-flower span.name-flowers{
+font-size: 14px;color: #929292 ; 
+ }
+ @media only screen and (max-width: 592px) {
+    .desc-profile-pos{
+    	font-size: 16px;
+
+    }
+    .desc-profile-desc{
+    	font-size: 14px;
+    	margin-top: 0px;
+    }
+    .desc-number-flower{
+    	font-size: 10px;
+    	
+    	margin: auto;
+    }
+    .img-prfile{
+    	width: 70px;height: 70px;
+    	margin-top: -40px;
+    }
+    .desc-profile{
+ 	display: block;
+ 	width: 90%;
+ 	margin: auto;
+ 	height: 250px;
+ }
+ }
