@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Front\ProfileController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 
 // Front Controller
 Route::get('/', [FrontController::class, 'index'])->name('front.home');
+
+Route::get('/cart', [CartController::class, 'index']);
 
 Route::namespace('Front')
     ->prefix('profile')
@@ -159,7 +162,7 @@ Route::namespace('Admin')
             Route::delete('/{id}', [CategoriesController::class, 'destroy'])->name('delete');
         });
         // End Admin Dashboard [ Categories ] ...
-        
+
         // Start Admin Dashboard [ Image ] ...
         Route::group([
             'prefix' => '/images',
