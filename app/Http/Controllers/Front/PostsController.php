@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Profile;
-use App\Models\User;
+use App\Models\Post;
 
-class ProfileController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +17,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::where('user_id', Auth::user()->id)->get();
-    //    dd($profiles);
-       return view('Home.profile.index', compact('profiles'));
+        $posts = Post::all();
+        return view('Home.home', compact('posts'));
     }
 
     /**
@@ -30,7 +28,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('Home.post.create');
     }
 
     /**
@@ -41,7 +39,30 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        return view('Home.profile.store');
+        $request->validate([
+            'name' => 'nullable|min:5|max:250',
+            'content' => 'nullable|min:5|max:500',
+            'image' => 'required|mimes:jpeg,bmp,png,jpg,gif',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $image_path = $file->store('/', [
+                'disk' => 'uploads',
+            ]);
+
+
+        }
+
+        $post = Post::create([
+            'user_id' => Auth::user()->id,
+            'name' => $request->post('name'),
+            'content' => $request->post('content'),
+            'image_path' => $image_path,            
+        ]);
+
+        return redirect()->route('front.home')->with('success', 'The ' . $post->name . ' Published');
     }
 
     /**
@@ -52,11 +73,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-
-        // $profile = Profile::where('id', $id)->first();
-        // dd($profile);
-       
-        // return view('Home.profile.index', compact('profile'));
+        //
     }
 
     /**

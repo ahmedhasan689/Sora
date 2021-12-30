@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Front\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,18 @@ Route::get('/', [FrontController::class, 'index'])->name('front.home');
 
 Route::get('/cart', [CartController::class, 'index']);
 
+// Start Posts Controller 
+Route::namespace('Front')
+    ->prefix('post')
+    ->as('post.')
+    ->group(function () {
+        Route::get('/create', [PostsController::class, 'create'])->name('create');
+        Route::post('/', [PostsController::class, 'store'])->name('store');
+    });
+
+// End Posts Controller
+
+// Start Profile Controller
 Route::namespace('Front')
     ->prefix('profile')
     ->middleware(['auth'])
@@ -42,15 +55,17 @@ Route::namespace('Front')
             'as' => 'profile.'
         ], function () {
             Route::get('/', [ProfileController::class, 'index'])->name('index');
+            Route::post('/', [ProfileController::class, 'store'])->name('store');
         });
         // End Profile Route [ ProfileController ]
     });
+// End Profile Route [ ProfileController ]
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/home', function () {
     return view('layouts.home');
@@ -70,7 +85,7 @@ Route::namespace('Admin')
         Route::group([
             'prefix' => '/roles',
             'as' => 'role.',
-        ], function() {
+        ], function () {
             // For Soft Delete ...
             Route::get('/trash', [RolesController::class, 'trash'])->name('trash');
             Route::put('/trash/{id?}', [RolesController::class, 'restore'])->name('restore');
@@ -90,7 +105,7 @@ Route::namespace('Admin')
         Route::group([
             'prefix' => '/admins',
             'as' => 'admin.',
-        ], function() {
+        ], function () {
             // For Soft Delete ...
             Route::get('/trash', [AdminsController::class, 'trash'])->name('trash');
             Route::put('/trash/{id?}', [AdminsController::class, 'restore'])->name('restore');
@@ -110,7 +125,7 @@ Route::namespace('Admin')
         Route::group([
             'prefix' => '/subadmins',
             'as' => 'subadmin.',
-        ], function() {
+        ], function () {
             // For Soft Delete ...
             Route::get('/trash', [SubadminsController::class, 'trash'])->name('trash');
             Route::put('/trash/{id?}', [SubadminsController::class, 'restore'])->name('restore');
@@ -129,7 +144,7 @@ Route::namespace('Admin')
         Route::group([
             'prefix' => '/users', // admin/users
             'as' => 'user.',
-        ], function(){
+        ], function () {
             // For Soft Delete ...
             Route::get('/trash', [UsersController::class, 'trash'])->name('trash');
             Route::put('/trash/{id?}', [UsersController::class, 'restore'])->name('restore');
@@ -148,7 +163,7 @@ Route::namespace('Admin')
         Route::group([
             'prefix' => '/categories', // admin/Categories
             'as' => 'category.',
-        ], function(){
+        ], function () {
             // For Soft Delete ...
             Route::get('/trash', [CategoriesController::class, 'trash'])->name('trash');
             Route::put('/trash/{id?}', [CategoriesController::class, 'restore'])->name('restore');
@@ -167,7 +182,7 @@ Route::namespace('Admin')
         Route::group([
             'prefix' => '/images',
             'as' => 'image.'
-        ], function() {
+        ], function () {
             // For Soft Delete ...
             Route::get('/trash', [ImagesController::class, 'trash'])->name('trash');
             Route::put('/trash/{id?}', [ImagesController::class, 'restore'])->name('restore');
@@ -183,17 +198,3 @@ Route::namespace('Admin')
         // End Admin Dashboard [ Image ] ...
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -39,11 +39,7 @@
     <!-- NavBar Element  ------------------------------>
     <nav class="navbar navbar-expand-lg  navbar-expand-md nav " style="position: fixed;width: 100% ; z-index: 2;top: 0px;left: 0px;right: 0px;">
         <!-- Brand And Links In Header -->
-        <a class="navbar-brand" href="#">Navbar</a>
-
-
-
-
+        <a class="navbar-brand" href="{{ route('front.home') }}">Sora</a>
 
         <a href="#" class="mr-4"><i class=" img-3" aria-hidden="true"></i></a>
         </div>
@@ -73,15 +69,17 @@
                         <div class="dropdown navbar-expand-md">
                             <!-- Image Profile -->
                             @auth
-                            <img src="{{ 'uploads' . '/' . Auth::user()->avatar }}" class="rounded-circle img-profile" id="dropdownMenuprofile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ asset('uploads') . '/' . Auth::user()->avatar }}" class="rounded-circle img-profile" id="dropdownMenuprofile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @endauth
 
                             @guest
-
-                            <a href="{{ route('admin.index') }}" style="text-decoration: none; font-size: 18px; margin-left: 20px">
-                                Login
-                            </a>
-
+                            <li class="nav-item col-md-2 d-flex flex-row-end">
+                                <button class="btn-sm add">
+                                    <a href="{{ route('admin.index') }}" class="add-element">
+                                        <div class="button-content">Login</div>
+                                    </a>
+                                </button>
+                            </li>
                             @endguest
                             <!-- DropDownImg menu -->
                             <div class="dropdown-menu  mt-2 img-profilee" aria-labelledby="dropdownMenuprofile">
@@ -89,7 +87,7 @@
                                 <a class="dropdown-item item-img" href="#" class="mr-4">
                                     @auth
                                     <img src="{{ 'uploads' . '/' . Auth::user()->avatar }}" class="rounded-circle" style="width: 30px; height: 30px ">
-                                    
+
                                     <!--  Name -->
                                     <span class="pr-2" style=" font-weight:lighter;">{{ Auth::user()->name }}</span>
                                     <!-- Email -->
@@ -117,14 +115,13 @@
                             <!-- End DropDown Image -->
                         </div>
 
-
+                        @auth
                         <!-- notifications-profile -->
                         <div class="dropdown mr-4">
                             <!-- notifications Icon  -->
                             <i class=" fa fa-bell-o icon fa-lg fa-lg icon-not" id="dropdownMenuNavagation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- notifications Menu -->
-                                <div class="dropdown-menu notfcation-scroller mt-2 menu-notf" style="overflow-x: hidden;overflow-y: scroll;height: 400px;
-" aria-labelledby="dropdownMenuNavagation">
+                                <div class="dropdown-menu notfcation-scroller mt-2 menu-notf" style="overflow-x: hidden;overflow-y: scroll;height: 400px;" aria-labelledby="dropdownMenuNavagation">
                                     <!-- First Item In Menu -->
                                     <a href="#" class="dropdown-item pt-2 pb-2 first-item-not">الإشعارات</a>
                                     <!-- divider  -->
@@ -188,8 +185,7 @@
                             <!-- Massenger Item -->
                             <i class="fa fa-comment-o icon fa-lg ss" id="dropdownMenuMassenger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
                                 <!-- Massenger Menu -->
-                                <div class="dropdown-menu  mt-2 massenger" aria-labelledby="dropdownMenuMassenger" style="  overflow-y: scroll;
-;width: 300px;height: 250px;">
+                                <div class="dropdown-menu  mt-2 massenger" aria-labelledby="dropdownMenuMassenger" style="  overflow-y: scroll; width: 300px;height: 250px;">
                                     <!-- Item 1 -->
                                     <div class="dropdown-item" style="text-align: right;">
                                         <!-- Image Massenger -->
@@ -220,20 +216,26 @@
                                 </div>
                             </i>
                         </div>
+                        @endauth
                         <!--  -->
                     </div>
                 </div>
 
-
+                @auth
                 <!-- First Element In Header Add Button -->
                 <li class="nav-item col-md-2 d-flex flex-row-end">
-                    <button class="btn-sm add">
+                    <button class="btn-sm btn-add">
                         <span class="icon-add rounded-circle"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span>
-                        <a href="add.html" class="add-element">
+                        <a href="{{ route('post.create') }}" class="add-element">
                             <div class="button-content">أضف جديد</div>
                         </a>
                     </button>
                 </li>
+                @endauth
+
+                @guest
+                <li class="nav-item w-100"></li>
+                @endguest
 
                 <!-- Secound Element In Header -->
                 <li class="nav-item col-md-7 d-flex flex-row-start search">
