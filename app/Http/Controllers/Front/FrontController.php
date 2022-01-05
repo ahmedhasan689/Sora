@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Post;
+
 class FrontController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class FrontController extends Controller
      */
     public function index()
     {
-        return view('home.home');
+        $posts = Post::all();
+        return view('home.front.home', compact('posts'));
     }
 
     /**

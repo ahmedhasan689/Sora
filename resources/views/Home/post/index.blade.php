@@ -2,19 +2,20 @@
 
     <!-- Gallary -->
     <div class="container-fluid" style="margin-top: 70px;">
+        @foreach($posts as $post)
         <div class="row d-flex p-1 mt-4">
-            <div class="column">
+            <div class="col-md-3">
                 <div class="card">
                     <a href="#">
                         <!-- Image Element In Card -->
-                        <img src="https://images.pexels.com/photos/3546429/pexels-photo-3546429.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley">
+                        <img src="{{ asset('uploads') . '/' . $post->image_path }}" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley">
                         <!-- DropDown Element Doted DropDown Save Button-->
                         <div class="dropdown" style="position: absolute;top: 10%;left: 10%">
                             <a class="btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-ellipsis-h fa-lg pt-3"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
-                                <a class="dropdown-item" href="#">Save</a>
+                                <a class="dropdown-item" href="#">تعديل</a>
                             </div>
                         </div>
                         <!-- End Doted Element Save Button -->
@@ -28,7 +29,7 @@
 
                         <!-- Text In Image -->
                         <a href="">
-                            <div class="text" id="titleImage">صوره أبداعيه من أحد الطلاب المحيطين بالمتطقه</div>
+                            <div class="text" id="titleImage">{{ $post->name }}</div>
                         </a>
 
                         <!-- End parent Link in Card -->
@@ -38,31 +39,30 @@
 
                     <div class="card-title d-flex">
                         <!-- image profile -->
-                        <a href="#">
-                            <span>
-                                <img src="{{ asset('Front/img/1.png') }}" style="width: 25px; height: 25px" id="imageProfile">
-                            </span>
-                        </a>
+                        
                         <!-- name profile -->
-                        <a href="#"><span style="color: black;display: block;margin-top: 8px;min-width: 100px;text-align: right;" id="imageName">محمد علي</span></a>
+                        <!-- <a href="#">
+                            <span style="color: black;display: block;margin-top: 8px;min-width: 100px;text-align: right;" id="imageName">{{ $post->user->name }}</span>
+                        </a> -->
                         <!-- group contain like and commend -->
-                        <div class=" w-100 ml-3 mt-2">
+                        <!-- <div class=" w-100 ml-3 mt-2">
                             <!-- like -->
-                            <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span>
+                            <!-- <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
+                            <span>45</span> -->
                             <!-- comment -->
-                            <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span>
-                        </div>
+                            <!-- <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
+                            <span>45</span> -->
+                        <!-- </div>  -->
                     </div>
 
                 </div>
 
-                <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                <!-- <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
                 <img src="https://images.pexels.com/photos/2091160/pexels-photo-2091160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-                <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+                <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
             </div>
-            <div class="column">
+            
+            <!-- <div class="column">
                 <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
                 <img src="https://images.pexels.com/photos/2360569/pexels-photo-2360569.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
                 <img src="https://images.pexels.com/photos/3779785/pexels-photo-3779785.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
@@ -82,8 +82,9 @@
                 <img src="https://images.pexels.com/photos/3779785/pexels-photo-3779785.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
                 <img src="https://images.pexels.com/photos/259987/pexels-photo-259987.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
                 <img src="https://images.pexels.com/photos/2350514/pexels-photo-2350514.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            </div>
+            </div> -->
         </div>
+        @endforeach
     </div>
 
 

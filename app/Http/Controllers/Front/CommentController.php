@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Post;
 use App\Models\Comment;
-class PostsController extends Controller
+use App\Models\Post;
+
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +18,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
         $comments = Comment::all();
-        return view('Home.front.home', [
-            'posts' => $posts,
-            'comments' => $comments,
-        ]);
+        return view('Home.front.home', compact('comments'));
     }
 
     /**
@@ -32,7 +29,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('Home.post.create');
+        return view('Home.front.home');
     }
 
     /**
@@ -44,28 +41,18 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'nullable|min:5|max:250',
-            'content' => 'nullable|min:5|max:500',
-            'image' => 'required|mimes:jpeg,bmp,png,jpg,gif',
+            'comment' => 'nullable|min:5|max:250'
         ]);
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-
-            $image_path = $file->store('/', [
-                'disk' => 'uploads',
-            ]);
-        }
-
-        $post = Post::create([
+        $comment = Comment::create([
             'user_id' => Auth::user()->id,
-            'name' => $request->post('name'),
-            'content' => $request->post('content'),
-            'image_path' => $image_path,            
+            'post_id' => $request->post('post_id'),
+            'content' => $request->post('comment'),
         ]);
 
-        return redirect()->route('front.home')->with('success', 'The ' . $post->name . ' Published');
-    }
+        return redirect()->back();
+
+    }   
 
     /**
      * Display the specified resource.
@@ -75,12 +62,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);        
-    }
-
-    public function model($id)
-    {
-        return Post::findOrFail($id); 
+        //
     }
 
     /**

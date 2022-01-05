@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Front\PostsController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +29,8 @@ use Illuminate\Support\Facades\Route;
         return view('welcome');
 }); */
 
-// Front Controller
-Route::get('/', [FrontController::class, 'index'])->name('front.home');
+// Post Controller [ Just For Home Page => index Function ]
+Route::get('/', [PostsController::class, 'index'])->name('front.home');
 
 Route::get('/cart', [CartController::class, 'index']);
 
@@ -38,11 +39,25 @@ Route::namespace('Front')
     ->prefix('post')
     ->as('post.')
     ->group(function () {
+        // Route::get('/', [PostsController::class, 'index'])->name('index');
         Route::get('/create', [PostsController::class, 'create'])->name('create');
         Route::post('/', [PostsController::class, 'store'])->name('store');
+        Route::get('/{id}', [PostsController::class, 'show'])->name('show');
+        Route::get('model/{id}', [PostsController::class, 'model'])->name('model');
     });
 
 // End Posts Controller
+
+// Start Comment Controller 
+
+Route::namespace('Front')
+    ->prefix('comment')
+    ->as('comment.')
+    ->group(function () {
+        Route::post('/', [CommentController::class, 'store'])->name('store');
+    });
+    
+// End Comment Controller 
 
 // Start Profile Controller
 Route::namespace('Front')
