@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToCategoriesTable extends Migration
+class AddCategoryIdToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnsToCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::table('posts', function (Blueprint $table) {
+            $table->foreignId('category_id')->constrained('categories', 'id')->nullOnDelete();
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnsToCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->dropSoftDeletes();
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeignId('category_id');
         });
     }
 }

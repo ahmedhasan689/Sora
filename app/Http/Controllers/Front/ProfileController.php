@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Comment;
 
 class ProfileController extends Controller
 {
@@ -19,8 +21,11 @@ class ProfileController extends Controller
     public function index()
     {
         $profiles = Profile::where('user_id', Auth::user()->id)->get();
-    //    dd($profiles);
-       return view('Home.profile.index', compact('profiles'));
+
+        $posts = Post::where('user_id', '=', Auth::user()->id)->get();
+        $comments = Comment::all();
+
+        return view('Home.profile.index', compact('profiles', 'posts', 'comments'));
     }
 
     /**

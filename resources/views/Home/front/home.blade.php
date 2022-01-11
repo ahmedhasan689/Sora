@@ -10,15 +10,24 @@
                     <!-- Image Element In Card -->
                     <img src="{{ asset('uploads') . '/' . $post->image_path }}" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley" class="image-post">
                     <!-- DropDown Element Doted DropDown Edit Button-->
-
+                    @auth
+                    @if ($post->user->id == Auth::user()->id)
                     <div class="dropdown" style="position: absolute;top: 10%;left: 10%">
                         <a class="btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-ellipsis-h fa-lg pt-3"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
-                            <a class="dropdown-item" href="#">تعديل</a>
+                            <a class="dropdown-item" href="{{ route('post.edit', ['id' => $post->id]) }}">تعديل</a>
+                            <form action="{{ route('post.delete', ['id' => $post->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="dropdown-item">حذف</button>
+                            </form>
                         </div>
                     </div>
+                    @endif
+                    
+                    @endauth
 
                     <!-- End Doted Element Save Button -->
 
@@ -77,7 +86,7 @@
 
 <!-- End Gallary -->
 <!-- Model In Bootstrap -->
-<div class="container ">
+<div class="container">
     <div class="row">
         <!-- Begining Modal -->
         @foreach($posts as $post)
@@ -172,7 +181,6 @@
                                 @foreach($comments as $comment)
                                 @if($comment->post->id == $post->id)
                                 @if($comment)
-
 
                                 <div class="comment-content">
                                     <!-- Name Comment -->

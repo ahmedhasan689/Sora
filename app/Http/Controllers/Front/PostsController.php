@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Post;
+use App\Models\Category;
 use App\Models\Comment;
+
 class PostsController extends Controller
 {
     /**
@@ -32,7 +34,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('Home.post.create');
+        $categories = Category::all();
+        return view('Home.post.create', compact('categories'));
     }
 
     /**
@@ -47,6 +50,7 @@ class PostsController extends Controller
             'name' => 'nullable|min:5|max:250',
             'content' => 'nullable|min:5|max:500',
             'image' => 'required|mimes:jpeg,bmp,png,jpg,gif',
+            'category_name' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -61,7 +65,8 @@ class PostsController extends Controller
             'user_id' => Auth::user()->id,
             'name' => $request->post('name'),
             'content' => $request->post('content'),
-            'image_path' => $image_path,            
+            'image_path' => $image_path,
+            'category_id' => $request->post('category_name'),            
         ]);
 
         return redirect()->route('front.home')->with('success', 'The ' . $post->name . ' Published');
@@ -91,7 +96,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $posts = Post::findOrFail($id);
+
+        $categories = Category::all();
+        return view('Home.post.edit', compact('posts', 'categories'));
     }
 
     /**
@@ -103,7 +111,35 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $request->validate([
+            'name' => 'nullable|min:5|max:250',
+            'content' => 'nullable|min:5|max:500',
+            'image' => 'nullable|mimes:jpeg,bmp,png,jpg,gif',
+            'category_name' => 'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $image_path = $file->store('/', [
+                'disk' => 'uploads',
+            ]);
+            // dd($request);
+        }
+
+
+        $post->update([
+            'user_id' => Auth::user()->id,
+            'name' => $request->post('name'),
+            'content' => $request->post('content'),
+            'image_path' => $image_path,
+            'category_id' => $request->post('category_name'),          
+        ]);
+
+        return redirect()->route('front.home')->with('success', 'The ' . $post->name . ' Updated');
+
     }
 
     /**
@@ -114,6 +150,13 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+
+        unlink(public_path('uploads' . '/' . $post->image_path));
+
+        return redirect()->route('front.home')->with('success', 'The ' . $post->name . ' Deleted');
+
     }
 }

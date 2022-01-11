@@ -42,9 +42,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">أسم الفئة</th>
-            <th scope="col">النوع</th>
-            <th scope="col">أسم الأب</th>
-            <th scope="col">قابل للبيع</th>
             <th scope="col">خيارات</th>
         </tr>
     </thead>
@@ -53,9 +50,6 @@
         <tr>
             <th scope="row">{{ $category->id }}</th>
             <td>{{ $category->category_name }}</td>
-            <td>{{ $category->type }}</td>
-            <td>{{ $category->parent->category_name }}</td>
-            <td>{{ $category->salable }}</td>
             <td class="d-flex">
                 <a href="{{ route('category.edit', ['id' => $category->id]) }}" class="mr-2">
                     <button type="submit" class="btn btn-sm btn-success">

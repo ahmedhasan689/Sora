@@ -52,10 +52,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">أسم الفئة</th>
-            <th scope="col">النوع</th>
-            <th scope="col">أسم الأب</th>
-            <th scope="col">قابل للبيع</th>
-            <th scope="col">تاريخ الحذف</th>
             <th scope="col">خيارات</th>
         </tr>
     </thead>
@@ -64,9 +60,6 @@
         <tr>
             <th scope="row">{{ $category->id }}</th>
             <td>{{ $category->category_name }}</td>
-            <td>{{ $category->type }}</td>
-            <td>{{ $category->parent->category_name }}</td>
-            <td>{{ $category->salable }}</td>
             <td>{{ $category->deleted_at }}</td>
             <td class="d-flex">
                 <form action="{{ route('category.restore', ['id' => $category->id]) }}" method="POST" class="mr-2">

@@ -20,26 +20,32 @@
 
     <div class="container">
         <h3 class="mt-5 " style="text-align: center;">أضف جديد</h3>
-        <form class="form-group" action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
+        <form class="form-group" action="{{ route('post.update', ['id' => $posts->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('POST')
+            @method('PUT')
 
             <!-- Adress input -->
-            <input type="text" class="form-control w-75 mx-auto mt-4 rounded font-weight-light" placeholder="أدخل العنوان" name="name">
+            <input type="text" class="form-control w-75 mx-auto mt-4 rounded font-weight-light" placeholder="أدخل العنوان" name="name" value="{{ $posts->name }}">
             <!-- Description Input -->
-            <textarea rows="5" cols="20" class="form-control w-75 mx-auto mt-3 font-weight-light" placeholder="أدخل الوصف" name="content"></textarea>
+            <textarea rows="5" cols="20" class="form-control w-75 mx-auto mt-3 font-weight-light" placeholder="أدخل الوصف" name="content">{{ $posts->content }}</textarea>
 
+            <!-- Category Name -->
             <select class="custom-select" name="category_name">
-                @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                
+                @foreach ($categories as $category)
+                <option value="{{ $category->id }}" 
+                    <?php if ($posts->category->id == $category->id) {
+                        echo 'selected';
+                    } ?>>{{ $category->category_name }}</option>
                 @endforeach
+
             </select>
             <!--  -->
             <p class="font-weight-light mt-4" style="text-align: center;font-size: 20px">
                 قم بتحميل الصوره الخاصه بك
             </p>
 
-            <input type="file" id="file" class="file mx-auto w-75 form-control" name="image">
+            <input type="file" id="file" class="file mx-auto w-75 form-control" name="image" value="{{ $posts->image_path }}">
             <div class="row mt-3">
                 <div class="col-md-6 d-flex w-50 btn-1" style="display: inline-block; margin-right: 12%; display: flex; flex-direction: row; flex-flow: nowrap;">
                     <button class="btn btn-success" type="submit">نشر الان</button>

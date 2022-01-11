@@ -14,6 +14,7 @@ class Post extends Model
         'name',
         'content',
         'image_path',
+        'category_id'
     ];
 
     // Relation
@@ -23,6 +24,10 @@ class Post extends Model
 
     public function comments() {
         return $this->hasMany(Comment::class, 'post_id')->withDefault();
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id')->withDefault();
     }
 
 }

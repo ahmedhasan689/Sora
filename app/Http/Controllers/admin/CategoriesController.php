@@ -36,28 +36,20 @@ class CategoriesController extends Controller
         $this->authorize('create', Category::class);
 
         $categories = Category::all();
-        $parents = Category::where('type', 'parent')->get();
 
-        return view('admin.categories.create', compact('categories', 'parents'));
+        return view('admin.categories.create', compact('categories'));
     }
 
 
     public function store(Request $request)
     {
         $request->validate([
-           'category_name' => 'required|min:3|max:15',
-           'type' => 'required',
-           'salable' => 'nullable',
-           'parent_id' => 'nullable',
+           'category_name' => 'required|min:3|max:40',
         ]);
-
-        $categories = Category::create( $request->all() );
-        /* $categories = Category::create([
+        // $categories = Category::create( $request->all() );
+        $categories = Category::create([
            'category_name' => $request->post('category_name'),
-           'type' => $request->post('type'),
-           'salable' => $request->post('salable'),
-           'parent_id' => $request->post('parent_id'),
-        ]); */
+        ]); 
 
         return redirect()->route('category.index')->with('success', 'Category ' . ($categories->category_name) . ' Created');
 
@@ -75,9 +67,7 @@ class CategoriesController extends Controller
 
         $this->authorize('update', $categories);
 
-        $parents = Category::where('type', 'parent')->get();
-
-        return view('admin.categories.edit', compact('categories', 'parents'));
+        return view('admin.categories.edit', compact('categories'));
     }
 
 
@@ -86,10 +76,7 @@ class CategoriesController extends Controller
 		$category = Category::findOrFail($id);
 
         $request->validate([
-			'category_name' => 'required|min:3|max:15',
-           'type' => 'required',
-           'salable' => 'nullable',
-           'parent_id' => 'nullable',
+			'category_name' => 'required|min:3|max:40',
 		]);
 
 		$category->update( $request->all() );

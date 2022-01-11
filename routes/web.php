@@ -44,6 +44,9 @@ Route::namespace('Front')
         Route::post('/', [PostsController::class, 'store'])->name('store');
         Route::get('/{id}', [PostsController::class, 'show'])->name('show');
         Route::get('model/{id}', [PostsController::class, 'model'])->name('model');
+        Route::get('/{id}/edit', [PostsController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [PostsController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PostsController::class, 'destroy'])->name('delete');
     });
 
 // End Posts Controller

@@ -11,7 +11,7 @@
             <p class="desc-profile-name">{{ $profile->user->name }}</p>
             <p class="desc-profile-pos">
                 <i class="fa fa-map-marker ml-2" style="color: black" aria-hidden="true"></i>
-                غزه الارض الفلسطينيه 
+                غزه الارض الفلسطينيه
             </p>
             <p class="desc-number-flower expand-sm">
                 <span class="pr-4">120<span class="name-flowers">صوره</span></span>
@@ -24,7 +24,9 @@
             </p>
             <div class="desc-profile-edit " style="text-align: center; margin-bottom: 100px;">
                 <button class="btn btn-outline-success btn-sm flow-profile" style="background-color: #37BF80;width: 70px;text-align: center;border-radius:10px;color: white;font-size: 16px;">تابع</button>
-                <a href="edit.html"><button class="btn btn-outline-secondary mr-4 btn-sm" style="background-color: white;width: 70px;text-align: center;border-radius:10px;color: #929292;font-size: 16px;border: 1px solid #929292">تعديل</button></a>
+                <a href="#">
+                    <button class="btn btn-outline-secondary mr-4 btn-sm edit-profile">تعديل</button>
+                </a>
             </div>
 
 
@@ -42,21 +44,24 @@
 
 <!-- Gallary -->
 <div class="container-fluid" style="margin-top: 70px;">
-    <div class="row d-flex p-1 mt-4">
-        <div class="column">
+    <div class="row d-flex p-1">
+        @foreach($posts as $post)
+        <div class="col-md-3">
             <div class="card">
-                <a href="#">
+                <a href="#" data-toggle="modal" data-target="#myModal-{{ $post->id }}" data-id="{{ $post->id }}" class="img-click">
                     <!-- Image Element In Card -->
-                    <img src="https://images.pexels.com/photos/3546429/pexels-photo-3546429.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley">
-                    <!-- DropDown Element Doted DropDown Save Button-->
+                    <img src="{{ asset('uploads') . '/' . $post->image_path }}" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley" class="image-post">
+                    <!-- DropDown Element Doted DropDown Edit Button-->
+
                     <div class="dropdown" style="position: absolute;top: 10%;left: 10%">
                         <a class="btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-ellipsis-h fa-lg pt-3"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
-                            <a class="dropdown-item" href="#">Save</a>
+                            <a class="dropdown-item" href="#">تعديل</a>
                         </div>
                     </div>
+
                     <!-- End Doted Element Save Button -->
 
                     <!-- Save the image in the archive -->
@@ -68,7 +73,7 @@
 
                     <!-- Text In Image -->
                     <a href="">
-                        <div class="text" id="titleImage">صوره أبداعيه من أحد الطلاب المحيطين بالمتطقه</div>
+                        <div id="titleImage" class="text-post my-4 mx-2">{{ $post->name }}</div>
                     </a>
 
                     <!-- End parent Link in Card -->
@@ -78,47 +83,33 @@
 
                 <div class="card-title d-flex">
                     <!-- image profile -->
-                    <a href="#"><span><img src="{{ asset('Front/img/1.png') }}" style="width: 25px; height: 25px" id="imageProfile"></span></a>
+                    <a href="#">
+                        <span>
+                            <img src="{{ asset('uploads') . '/' . $post->user->avatar }}" id="imageProfile" class="avatar-post mx-2">
+                        </span>
+                    </a>
                     <!-- name profile -->
-                    <a href="#"><span style="color: black;display: block;margin-top: 8px;min-width: 100px;text-align: right;" id="imageName">محمد علي</span></a>
+                    <a href="#">
+                        <span id="imageName" class="username-post">{{ $post->user->name }}</span>
+                    </a>
                     <!-- group contain like and commend -->
-                    <div class=" w-100 ml-3 mt-2">
-                        <!-- like -->
-                        <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
-                        <span>45</span>
-                        <!-- comment -->
-                        <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
-                        <span>45</span>
-                    </div>
+                    <!-- <div class=" w-100 ml-3 mt-2">
+                            <!-- like -->
+                    <!-- <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
+                            <span>45</span> -->
+                    <!-- comment -->
+                    <!-- <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
+                            <span>45</span> -->
+                    <!-- </div>  -->
                 </div>
 
             </div>
 
-            <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            <img src="https://images.pexels.com/photos/2091160/pexels-photo-2091160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-            <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+            <!-- <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                <img src="https://images.pexels.com/photos/2091160/pexels-photo-2091160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+                <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
         </div>
-        <div class="column">
-            <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-            <img src="https://images.pexels.com/photos/2360569/pexels-photo-2360569.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-            <img src="https://images.pexels.com/photos/3779785/pexels-photo-3779785.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            <img src="https://images.pexels.com/photos/259987/pexels-photo-259987.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            <img src="https://images.pexels.com/photos/2350514/pexels-photo-2350514.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-        </div>
-        <div class="column">
-            <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-            <img src="https://images.pexels.com/photos/2360569/pexels-photo-2360569.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-            <img src="https://images.pexels.com/photos/3779785/pexels-photo-3779785.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            <img src="https://images.pexels.com/photos/259987/pexels-photo-259987.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            <img src="https://images.pexels.com/photos/2350514/pexels-photo-2350514.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-        </div>
-        <div class="column">
-            <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-            <img src="https://images.pexels.com/photos/2360569/pexels-photo-2360569.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-            <img src="https://images.pexels.com/photos/3779785/pexels-photo-3779785.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            <img src="https://images.pexels.com/photos/259987/pexels-photo-259987.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-            <img src="https://images.pexels.com/photos/2350514/pexels-photo-2350514.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-        </div>
+        @endforeach
     </div>
 </div>
 
@@ -126,27 +117,29 @@
 
 
 
+
 <!-- End Gallary -->
 <!-- Model In Bootstrap -->
-<div class="container ">
+<div class="container">
     <div class="row">
         <!-- Begining Modal -->
-        <div class="modal fade md bg-white" id="myModal">
+        @foreach($posts as $post)
+        <div class="modal fade bg-white" id="myModal-{{ $post->id }}">
             <!-- Modal Body -->
-
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <div class="modal-dialog bg-dark " role="document" style="width: 10px;height: 10px;margin-top: -30px;position: relative;">
             </div>
 
 
-            <div class="row  modal-body  expand-sm allModel" id="mm">
-                <div class="row w-100 mx-auto ">
-                    <!-- BigImage Content -->
-
-
-                </div>
+            <div class="row modal-body expand-sm allModel" id="mm">
                 <div class="col-md-6  h-100 photo-parent w-100 ">
                     <!-- The Image -->
-                    <img src="{{ asset('Front/img/3.png') }}" class="w-100 big-img" style="width: 100%;height: 100%;margin-left: 50px;" id="modalImage">
+                    <img src="{{ asset('uploads') . '/' . $post->image_path }}" class="w-100 big-img" style="margin-left: 50px;" id="image">
+
+
+
                 </div>
                 <!-- Content Comment -->
                 <div class="col-md-6">
@@ -156,16 +149,22 @@
                             <div class="d-flex flex-row-start mt-4 mr-4 col-md-6 " id="xx">
                                 <!-- Image Profile -->
                                 <div class="d-flex">
-                                    <img src="{{ asset('Front/img/2.png') }}" class="rounded-circle  mt-3 pro-comment" id="modalProfile">
+                                    <img src="{{ asset('uploads') . '/' . $post->user->avatar }}" class="rounded-circle  mt-3 pro-comment" id="modalProfile">
                                     <!-- Description Profile -->
-                                    <p class="mt-4 mr-3" style="min-width: 100px;text-align: right;" id="nameProfile"> <span class="nameProfile">محمد علي</span>
+                                    <p class="mt-4 mr-3" style="min-width: 120px;text-align: right;" id="nameProfile">
+                                        <span class="nameProfile">
+                                            {{ $post->user->name }}
+                                        </span>
                                         <!-- Flowers Profile -->
-                                        <br><span class="d-flex flowers-comment">12متابع</span>
+                                        <br>
+                                        <span class="d-flex flowers-comment">12متابع</span>
                                     </p>
                                     <!-- Like -->
-                                    <span class="mt-4 mr-1"><button class="btn btn-success likeModel">
-                                            <p style="margin-top: -10px">تابع</p>
-                                        </button></span>
+                                    <span class="mt-4 mr-1 follow">
+                                        <button class="btn btn-success">
+                                            <p class="text">تابع</p>
+                                        </button>
+                                    </span>
                                 </div>
 
 
@@ -177,7 +176,8 @@
                                 <!-- Like Button -->
                                 <button class="btn" style="width: 300px;height: 30px;border-radius: 10px;background: #DFDFDF;">
                                     <div style="margin-top: -4px">
-                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <span style="color: #6E6E6E">أعجاب </span>
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                        <span style="color: #6E6E6E">أعجاب</span>
                                     </div>
                                 </button>
                                 <!-- Save Button -->
@@ -188,84 +188,118 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-md-12">
                                     <!-- Title Modal -->
                                     <div class="description-modal">
-                                        <h1 style="width: 80%;text-align: right; margin-top: 10px;font-weight: bold;" class="mr-5" id="modalTitle">صوره أبداعيه من أحدى ملاعب المنطقه</h1>
+                                        <h1 class="post-name" class="mr-5" id="modalTitle">
+                                            {{ $post->name }}
+                                        </h1>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <!-- Description -->
-                                    <p style="text-align: right;margin-top: 30px;color: #929292;font-size: 14px" class="mr-5" id="modalDescription">صورة إبداعية من داخل إحدى العلب صورة إبداعية من داخل إحدى العلب صورة
-                                        إبداعية من داخل إحدى العلب صورة إبداعية من داخل إحدى العلب صورة إبداعية من داخل إحدى العلب صورة إبداعية من داخل إحدى العلب صورة إبداعية من داخل إحدى العلب صورة إبداعية من داخل إحدى العلب </p>
+                                    <span class="mr-5 post-content" id="modalDescription">
+                                        {{ $post->content }}
+                                    </span>
                                 </div>
                             </div>
                             <!-- Collapes Comment -->
-                            <p data-toggle="collapse" data-target="#demo" style="font-size: 25px;font-weight: bold;margin-right: 40px;">التعليقات <i class="fa fa-caret-down mr-3" aria-hidden="true"></i></p>
-                            <div dir='ltr' id="demo" class="collapse mt-5 " style="margin-right:-120px;">
+                            <p data-toggle="collapse" data-target="#demo-{{ $post->id }}" class="col-md-12 post-comment">
+                                التعليقات
+                                <i class="fa fa-caret-down mr-3" aria-hidden="true"></i>
+                            </p>
+                            <div dir='ltr' id="demo-{{ $post->id }}" class="collapse mt-5 post-comment" style="margin-right:-120px;">
                                 <!-- Firest Element In Comment -->
-                                <div class="content" style="text-align: center;margin-right:-80px;">
-                                    <!-- Name COmment -->
-                                    <span style="margin-right: 20px; margin-top: -10px;font-weight: bold;">محمد المدهون</span>
+                                @foreach($comments as $comment)
+                                @if($comment->post->id == $post->id)
+                                @if($comment)
+
+
+                                <div class="comment-content">
+                                    <!-- Name Comment -->
+                                    <span class="username">
+                                        {{ $comment->user->name }}
+                                    </span>
                                     <!-- Image Comment -->
-                                    <img src="{{ asset('Front/img/3.png') }}" style="width: 30px;height: 30px;" class="rounded-circle">
+                                    <img src="{{ asset('uploads') . '/' . $comment->user->avatar }}" style="width: 30px;height: 30px;" class="rounded-circle">
+
+                                    <div class="dropdown comment-settings d-flex">
+                                        <a class="btn comment-btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        </a>
+                                        <div class="dropdown-menu comment-dropdown" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
+
+                                            <form action="#" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <a class="dropdown-item" class="beforeClick" href="#">تعديل</a>
+                                            </form>
+                                            <a class="dropdown-item" href="#">حذف</a>
+                                        </div>
+                                    </div>
+
                                     <!-- Description Comment -->
-                                    <br><span>
-                                        <p style="width: 300px; padding-right: 120px; font-size: 12px;color: #4F4F4F;"> مانها صوره جميله ومييزه نجميله وم </p>
+                                    <br>
+                                    <span>
+                                        <p id="beforeContent" class="comment">
+                                            {{ $comment->content }}
+                                        </p>
                                     </span>
                                 </div>
                                 <!-- Like And Comment -->
                                 <div style="text-align: center; margin-top: -18px">
-                                    <a href="#"> <i class="fa fa-commenting-o pr-3 fa-sm" style="color:#4F4F4F; " aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-thumbs-o-up pr-2" aria-hidden="true" style="color:#4F4F4F; "></i></a>
-                                    <span style="font-size: 10px;color:#4F4F4F; ">ساعه واحده</span>
-                                </div>
-                                <!--  -->
-                                <div class="content" style="text-align: center;margin-right:-80px;">
-                                    <!-- Name COmment -->
-                                    <span style="margin-right: 20px; margin-top: -10px;font-weight: bold;">محمد المدهون</span>
-                                    <!-- Image Comment -->
-                                    <img src="{{ asset('Front/img/3.png') }}" style="width: 30px;height: 30px;" class="rounded-circle">
-                                    <!-- Description Comment -->
-                                    <br><span>
-                                        <p style="width: 300px; padding-right: 120px; font-size: 12px;color: #4F4F4F"> مانها صوره جميله ومييزه نجميله وم </p>
+                                    <a href="#">
+                                        <i class="fa fa-commenting-o pr-3 fa-sm" style="color:#4F4F4F; " aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="fa fa-thumbs-o-up pr-2" aria-hidden="true" style="color:#4F4F4F; "></i>
+                                    </a>
+                                    <span style="font-size: 10px;color:#4F4F4F; ">
+                                        {{ $comment->created_at }}
                                     </span>
                                 </div>
-                                <!-- Like And Comment -->
-                                <div style="text-align: center; margin-top: -18px">
-                                    <a href="#"> <i class="fa fa-commenting-o pr-3 fa-sm" style="color:#4F4F4F; " aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-thumbs-o-up pr-2" aria-hidden="true" style="color:#4F4F4F; "></i></a>
-                                    <span style="font-size: 10px;color:#4F4F4F; ">ساعه واحده</span>
+                                @else
+                                <div dir='ltr' id="demo-{{ $post->id }}" class="collapse mt-5 post-comment" style="margin-right:-120px;">
+                                    <h1>
+                                        كن أول من يعلق على هذا المنشور
+                                    </h1>
                                 </div>
+                                @endif
+                                @endif
+                                @endforeach
+
                                 <!--  -->
 
 
 
                             </div>
+
+                            @auth
                             <div class="row mt-4 w-100 end">
+                                <form action="{{ route('comment.store') }}" method="POST">
+                                    @csrf
+                                    <div class="col-md-12 expand-sm">
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
 
-                                <div class="col-md-12 expand-sm">
-                                    <img src="{{ asset('Front/img/3.png') }}" style="width: 45px;height: 45px;position: absolute;right: 5px;" class="rounded-circle end-img">
-                                    <textarea name="message" rows="3" style="background-color: #EDEDED" style="margin-right: 70px" class="form-control w-75 mx-auto   font-weight-light
-                  " placeholder="أدخل الوصف"></textarea>
+                                        <img src="{{ asset('uploads') . '/' . Auth::user()->avatar }}" style="width: 45px;height: 45px;position: absolute;right: 5px;" class="rounded-circle end-img">
 
-
-                                </div>
-
-
+                                        <textarea class="form-control comment-area" id="exampleFormControlTextarea1" rows="4" cols="45" placeholder="التعليق الخاص بك" name="comment"></textarea>
+                                        </textarea>
+                                        <button type="submit" class="btn btn-success comment-submit">
+                                            أضافة تعليق
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
+                            @endauth
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
-
-
         </div>
+        @endforeach
     </div>
 </div>
 
@@ -282,6 +316,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('Front/js/Front.js') }}"></script>
+<script>
+    $('#myModal').modal('hide');
+
+    $(document).ready(function() {
+        $('.img-click').click(function() {
+            const id = $(this).attr('data-id');
+            $.ajax({
+                url: 'post/model/' + id,
+                type: 'GET',
+                data: {
+                    "id": id
+                },
+                success: function(data) {
+                    $('#image').html(data.image_path);
+                    $('#modalProfile').html(data.user_id);
+                    $('#nameProfile').html(data.name);
+
+                }
+            })
+        });
+    });
+</script>
 </body>
 
 </html>

@@ -9,36 +9,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use HasFactory;
-    use softDeletes;
+
+    use SoftDeletes;
 
     protected $fillable = [
         'category_name',
-        'type',
-        'salable',
-        'parent_id',
     ];
 
-
-
-    // Relations
-    public function childern()
-    {
-        return $this->hasMany(Category::class, 'parent_id');
-    }
-
-    public function parent()
-    {
-        return $this->belongsTo(Category::class, 'parent_id')->withDefault([
-            'category_name' => 'It,s Parent',
-        ]);
-    }
-
     public function images() {
-        return $this->hasMany(Image::class, 'category_id')->withDefault();
+        return $this->hasMany(Image::class, 'category_id');
     }
 
-
-
-
-
+    public function posts() {
+        return $this->hasMany(Post::class, 'post_id');
+    }
 }

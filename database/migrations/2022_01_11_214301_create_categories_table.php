@@ -16,11 +16,6 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category_name');
-            $table->enum('type', ['parent', 'child'])->nullable();
-            $table->boolean('salable')->default(0);
-
-            //Foreign ID For Parent Name
-            $table->foreignId('parent_id')->default(1)->constrained('categories')->cascadeOnDelete();
             $table->timestamps();
         });
     }
