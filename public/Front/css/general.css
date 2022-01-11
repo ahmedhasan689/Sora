@@ -137,3 +137,20 @@
     margin-top: 10px;
     margin-right: 45px;
 }
+
+.comment-settings {
+    float: left;
+    margin-left: -90px;
+}
+.comment-btn:focus,  .comment-btn:hover{
+    outline: none;
+    border-color: white;
+}
+
+.fa-ellipsis-v {
+    color: #000;
+}
+
+.comment-dropdown a {
+    text-align: right;
+}

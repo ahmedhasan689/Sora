@@ -157,9 +157,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <!-- Description -->
-                                    <p class="mr-5  post-content" id="modalDescription">
+                                    <span class="mr-5 post-content" id="modalDescription">
                                         {{ $post->content }}
-                                    </p>
+                                    </span>
                                 </div>
                             </div>
                             <!-- Collapes Comment -->
@@ -172,39 +172,57 @@
                                 @foreach($comments as $comment)
                                 @if($comment->post->id == $post->id)
                                 @if($comment)
-                                    <div class="comment-content">
-                                        <!-- Name Comment -->
-                                        <span class="username">
-                                            {{ $comment->user->name }}
-                                        </span>
-                                        <!-- Image Comment -->
-                                        <img src="{{ asset('uploads') . '/' . $comment->user->avatar }}" style="width: 30px;height: 30px;" class="rounded-circle">
-                                        <!-- Description Comment -->
-                                        <br>
-                                        <span>
-                                            <p class="comment">
-                                                {{ $comment->content }}
-                                            </p>
-                                        </span>
-                                    </div>
-                                    <!-- Like And Comment -->
-                                    <div style="text-align: center; margin-top: -18px">
-                                        <a href="#">
-                                            <i class="fa fa-commenting-o pr-3 fa-sm" style="color:#4F4F4F; " aria-hidden="true"></i>
+
+
+                                <div class="comment-content">
+                                    <!-- Name Comment -->
+                                    <span class="username">
+                                        {{ $comment->user->name }}
+                                    </span>
+                                    <!-- Image Comment -->
+                                    <img src="{{ asset('uploads') . '/' . $comment->user->avatar }}" style="width: 30px;height: 30px;" class="rounded-circle">
+
+                                    <div class="dropdown comment-settings d-flex">
+                                        <a class="btn comment-btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                         </a>
-                                        <a href="#">
-                                            <i class="fa fa-thumbs-o-up pr-2" aria-hidden="true" style="color:#4F4F4F; "></i>
-                                        </a>
-                                        <span style="font-size: 10px;color:#4F4F4F; ">
-                                            {{ $comment->created_at }}
-                                        </span>
+                                        <div class="dropdown-menu comment-dropdown" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
+
+                                        <form action="#" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <a class="dropdown-item" class="beforeClick" href="#">تعديل</a>
+                                        </form>
+                                            <a class="dropdown-item" href="#">حذف</a>
+                                        </div>
                                     </div>
-                                    @else
-                                    <div dir='ltr' id="demo-{{ $post->id }}" class="collapse mt-5 post-comment" style="margin-right:-120px;">
-                                        <h1>
-                                            كن أول من يعلق على هذا المنشور
-                                        </h1>
-                                    </div>
+
+                                    <!-- Description Comment -->
+                                    <br>
+                                    <span>
+                                        <p id="beforeContent" class="comment">
+                                            {{ $comment->content }}
+                                        </p>
+                                    </span>
+                                </div>
+                                <!-- Like And Comment -->
+                                <div style="text-align: center; margin-top: -18px">
+                                    <a href="#">
+                                        <i class="fa fa-commenting-o pr-3 fa-sm" style="color:#4F4F4F; " aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="fa fa-thumbs-o-up pr-2" aria-hidden="true" style="color:#4F4F4F; "></i>
+                                    </a>
+                                    <span style="font-size: 10px;color:#4F4F4F; ">
+                                        {{ $comment->created_at }}
+                                    </span>
+                                </div>
+                                @else
+                                <div dir='ltr' id="demo-{{ $post->id }}" class="collapse mt-5 post-comment" style="margin-right:-120px;">
+                                    <h1>
+                                        كن أول من يعلق على هذا المنشور
+                                    </h1>
+                                </div>
                                 @endif
                                 @endif
                                 @endforeach
@@ -214,15 +232,16 @@
 
 
                             </div>
+
                             @auth
                             <div class="row mt-4 w-100 end">
                                 <form action="{{ route('comment.store') }}" method="POST">
                                     @csrf
                                     <div class="col-md-12 expand-sm">
                                         <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                        
+
                                         <img src="{{ asset('uploads') . '/' . Auth::user()->avatar }}" style="width: 45px;height: 45px;position: absolute;right: 5px;" class="rounded-circle end-img">
-                                        
+
                                         <textarea class="form-control comment-area" id="exampleFormControlTextarea1" rows="4" cols="45" placeholder="التعليق الخاص بك" name="comment"></textarea>
                                         </textarea>
                                         <button type="submit" class="btn btn-success comment-submit">

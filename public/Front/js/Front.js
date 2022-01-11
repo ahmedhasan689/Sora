@@ -76,5 +76,22 @@ function archif() {
 
 }
 
+$('.comment').each(function(){
+  var label = $('.beforeClick')
+  label.after("<input type='text' style='display:none'/>")
+  var comment = $(this).next()
+  // comment[0].name = this.id.replace('beforeComment','afterComment')
+  comment.val(label.html())
+  label.click(function() {
+    $(this).hide()
+    $(this).next.show()
+  })
+  comment.focusout(function() {
+    $(this).hide
+    $(this).prev().html($(this).val())
+    $(this).prev().show()
+  })
+  
+})
 
 
