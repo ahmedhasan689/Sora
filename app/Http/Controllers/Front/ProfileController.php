@@ -72,7 +72,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+        return view('home.profile.edit', compact('profile'));
     }
 
     /**

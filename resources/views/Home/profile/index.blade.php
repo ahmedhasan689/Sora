@@ -24,7 +24,7 @@
             </p>
             <div class="desc-profile-edit " style="text-align: center; margin-bottom: 100px;">
                 <button class="btn btn-outline-success btn-sm flow-profile" style="background-color: #37BF80;width: 70px;text-align: center;border-radius:10px;color: white;font-size: 16px;">تابع</button>
-                <a href="#">
+                <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
                     <button class="btn btn-outline-secondary mr-4 btn-sm edit-profile">تعديل</button>
                 </a>
             </div>

@@ -48,11 +48,11 @@
             <input type="file" id="file" class="file mx-auto w-75 form-control" name="image" value="{{ $posts->image_path }}">
             <div class="row mt-3">
                 <div class="col-md-6 d-flex w-50 btn-1" style="display: inline-block; margin-right: 12%; display: flex; flex-direction: row; flex-flow: nowrap;">
-                    <button class="btn btn-success" type="submit">نشر الان</button>
+                    <button class="btn btn-success" type="submit">تعديل</button>
                     <!-- <button class="btn btn-secondary mr-4">حفظ كمسوده</button> -->
                 </div>
                 <div class="d-flex mx-auto  expand-sm">
-                    <button class="btn btn-secondary " style="margin-right: 50px">ألغاء</button>
+                    <a href="{{ route('front.home') }}" class="btn btn-secondary " style="margin-right: 50px">ألغاء</a>
                 </div>
             </div>
         </form>

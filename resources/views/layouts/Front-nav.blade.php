@@ -47,7 +47,6 @@
 
 
         <!-- Button Toggler -->
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
                 <i class="fa fa-navicon" style="color:#fff; font-size:28px;"></i>
@@ -86,7 +85,7 @@
                                 <!-- First Item In Menu -->
                                 <a class="dropdown-item item-img" href="#" class="mr-4">
                                     @auth
-                                    <img src="{{ 'uploads' . '/' . Auth::user()->avatar }}" class="rounded-circle" style="width: 30px; height: 30px ">
+                                    <img src="{{ asset('uploads') . '/' . Auth::user()->avatar }}" class="rounded-circle" style="width: 30px; height: 30px ">
 
                                     <!--  Name -->
                                     <span class="pr-2" style=" font-weight:lighter;">{{ Auth::user()->name }}</span>
@@ -310,3 +309,6 @@
         </div>
 
     </nav>
+    <main class="main-content">
+        @yield('content')
+    </main>
