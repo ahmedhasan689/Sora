@@ -9,10 +9,10 @@ class Profile extends Model
 {
     use HasFactory;
 
-
-
-
-
+    protected $fillable = [
+        'information',
+        'image_header',
+    ];
 
     // Relation With User
     public function user() {

@@ -75,6 +75,7 @@ Route::namespace('Front')
             Route::get('/', [ProfileController::class, 'index'])->name('index');
             Route::post('/', [ProfileController::class, 'store'])->name('store');
             Route::get('/{id}/edit', [ProfileController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [ProfileController::class, 'update'])->name('update');
         });
         // End Profile Route [ ProfileController ]
     });

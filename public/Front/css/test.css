@@ -1,0 +1,62 @@
+.post-content {
+    text-align: right;
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.post-comment {
+    width: 100%;
+    text-align: right;
+    margin-top: 12px;
+    font-size: 18px;
+    margin-right: 30px;
+}
+
+.comment-content {
+    text-align: center;
+    margin-top: -45px;
+    margin-right: -50px;
+}
+
+.comment-content .username {
+    margin-right: 5px;
+    margin-top: -10px;
+    font-size: 15px;
+}
+
+.comment-content .comment {
+    width: 300px;
+    margin-left: 123px;
+    font-size: 14px;
+    color: #4F4F4F;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.comment-area {
+    margin-right: 45px;
+}
+
+.comment-submit {
+    float: right;
+    margin-top: 10px;
+    margin-right: 45px;
+}
+
+.comment-settings {
+    float: left;
+    margin-left: -90px;
+}
+
+.comment-btn:focus, .comment-btn:hover {
+    outline: none;
+    border-color: white;
+}
+
+.fa-ellipsis-v {
+    color: #000;
+}
+
+.comment-dropdown a {
+    text-align: right;
+}

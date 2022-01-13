@@ -85,7 +85,49 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+        $user = User::findOrfail(Auth::user()->id);
+        
+        // $request->validate([
+        //     'username' => 'required|string',
+        //     'country' => 'nullable|string',
+        //     'information' => 'nullable|min:5',
+        //     'image_header' => 'nullable',
+        // ]);
+
+        if($request->hasFile('image_header')){
+            $file = $request->file('image_header');
+
+            $image_path = $file->store('/', [
+                'disk' => 'uploads'
+            ]);
+        }
+
+        if ($request->has('informatin') || $request->has('image_header') || $request->has('username')) {
+            $profile->update([
+                'information' => $request->post('information'),
+                'image_header' => $image_path,
+            ]);
+            $user->update([
+                'name' => $request->post('username'),
+                // 'name' => $request->post('country'),
+            ]);
+        }
+        
+        return redirect()->route('profile.index');
+        
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**
