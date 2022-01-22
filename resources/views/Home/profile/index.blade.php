@@ -3,7 +3,7 @@
 <!-- Profile Content -->
 <div class="bg-profile">
     @foreach($profiles as $profile)
-    <img src="{{ asset('Front/img/') . $profile->image_header }}" class="w-100 expand-sm" style="height: 200px">
+    <img src="{{ asset('uploads') . '/' . $profile->image_header }}" class="w-100 expand-sm" style="height: 200px">
     <div class="img-profilee expand-sm mb-5">
         <!-- Image Profile -->
         <img src="{{ asset('/uploads') . '/' . $profile->user->avatar }}" class="rounded-circle d-block mx-auto img-prfile">

@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use integerValue;
 
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Subscription;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -72,8 +76,10 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $profile = Profile::findOrFail($id);
-        return view('home.profile.edit', compact('profile'));
+        $profiles = Profile::findOrFail($id);
+        $subscriptions = Subscription::all();
+        // dd($profiles);
+        return view('home.profile.edit', compact('profiles', 'subscriptions'));
     }
 
     /**
@@ -87,13 +93,20 @@ class ProfileController extends Controller
     {
         $profile = Profile::findOrFail($id);
         $user = User::findOrfail(Auth::user()->id);
+
         
-        // $request->validate([
-        //     'username' => 'required|string',
-        //     'country' => 'nullable|string',
-        //     'information' => 'nullable|min:5',
-        //     'image_header' => 'nullable',
-        // ]);
+        $request->validate([
+            'username' => 'required|string',
+            'country' => 'nullable|string',
+            'info' => 'nullable|min:5',
+            'image_header' => 'nullable',
+            'avatar' => 'nullable',
+            'old_password' => 'nullable|min:8|max:20',
+            'new_password' => 'nullable|min:8|max:20',
+            'repeat_password' => 'nullable|min:8|max:20',
+            'email' => 'nullable|email',
+            'subscription' => 'nullable|integer', 
+        ]);
 
         if($request->hasFile('image_header')){
             $file = $request->file('image_header');
@@ -103,14 +116,46 @@ class ProfileController extends Controller
             ]);
         }
 
-        if ($request->has('informatin') || $request->has('image_header') || $request->has('username')) {
-            $profile->update([
-                'information' => $request->post('information'),
-                'image_header' => $image_path,
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+
+            $avatar_path = $file->store('/', [
+                'disk' => 'uploads'
             ]);
+        }
+
+        // dd($request);
+        // Check Password
+
+        if ($request->post('old_password')) {
+            if (Hash::check($request->old_password, Auth::user()->password) && $request->post('new_password') ==  $request->post('repeat_password') ) {
+                $request->merge([
+                    'password' => Hash::make($request->post('new_password')),
+                ]);
+            }
+        }
+
+        if ($request->post('subscription')) {
+            $request->merge([
+                'subscription_id' => $request->post('subscription'),
+            ]);          
+        }
+
+        // dd($request);
+
+        if ($request->has('info') || $request->has('image_header') || $request->has('username') || $request->has('new_password') || $request->has('email') || $request->has('sub')) {
+
+            $profile->update([
+                'information' => $request->post('info'),
+                'image_header' => $image_path ?? $profile->image_header,
+            ]);
+
             $user->update([
                 'name' => $request->post('username'),
-                // 'name' => $request->post('country'),
+                'avatar' => $avatar_path ?? $user->avatar,
+                'password' => $request->post('new_password'),
+                'email' => $request->post('email'),
+                'subscription_id' => $request->post('subscription'),
             ]);
         }
         

@@ -17,20 +17,29 @@ class Redirect
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = $request->user();
+        // $user = $request->user();
 
         
-        if (Auth::check()) {
-            if ($user->user_type == 2 && $user->user_type == 1) {
+        // if ( Auth::check() ) {
+        //     if ($user->user_type == 2 || $user->user_type == 1) {
     
-                return redirect()->route('admin.home');
+        //         return $next($request);
     
-            } elseif($user->user_type == 0) {
+        //     }
+            
+        //     return redirect()->route('/');
     
-                return redirect()->route('/');
-    
+            
+        // }
+
+        if (Auth::user()){
+            if (Auth::user()->user_type == 2 || Auth::user()->user_type == 1) {
+                return $next($request);
             }
-        }
+            return redirect()->route('front.home');
+        }   
+
+        return redirect()->route('front.home');
 
         // return $next($request);
     }

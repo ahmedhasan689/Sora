@@ -252,16 +252,25 @@
     z-index: 3;
     text-align: center;
     font-size: 20px;
+    width: 140px;
+    margin-right: -100;
 }
 
 .edit-navigation .nav-item {
     list-style: none;
     margin-bottom: 1px;
+    width: 200px;
+}
+
+#myTab {
+    border: none;
 }
 
 .edit-navigation .nav-item .nav-link {
     color: #929292 !important;
     text-decoration: none !important;
+    border: none;
+    margin-top: 10px;
 }
 
 .edit-submit {
@@ -278,16 +287,7 @@
     background-color: #37bf80e8 !important;
 }
 
-#my_file {
-    display: none;
-}
 
-#get_file {
-    background: #37BF80;
-    border-radius: 5px;
-    margin: 1px 16px 0px 0px;
-    cursor: pointer;
-}
 
 .delete-photo {
     background-color: #E8E8E8;
@@ -299,4 +299,133 @@
     font-weight: 100;
     margin-bottom: 23px;
     margin-right: -2px !important;
+}
+
+.edit-form-page {
+    direction: rtl;
+    padding-top: 100px;
+}
+
+.edit-form-page .row {
+    margin-top: 60px;
+}
+
+.edit-form-page .row .col-3 {
+    margin-top: 5px;
+}
+
+.edit-form-page ul li {
+    list-style: none;
+    text-align: center;
+    font-size: 20px;
+    padding: 8;
+}
+
+.edit-form-page ul li a {
+    text-decoration: none;
+    color: gray;
+}
+
+.edit-form-page .form-label {
+    text-align: right;
+}
+
+* {
+
+    font-family: 'Almarai', sans-serif;
+    font-family: 'PT Sans', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400&family=PT+Sans&display=swap');
+
+#edit-page-profile {
+    width: 70%;
+    display: block;
+    margin-top: 80px;
+    margin-right: 25%;
+
+}
+
+.image_edit_page {
+    text-align: left;
+    margin-right: 20px;
+    margin-top: 20px;
+    width: 25%;
+}
+
+.image_edit_profile {
+    width: 100%;
+    height: 100%;
+    margin-top: 3%;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.nameprofile-edit-page {
+    margin: 20px 20px;
+}
+
+.nameprofile-edit-name {
+    font-weight: bold;
+    font-size: 25px;
+    text-align: right;
+}
+
+.nameprofile-edit {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 25px;
+    margin-right: -20px;
+    text-align: right;
+}
+
+.nameprofile-desc {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: right;
+    color: #4F4F4F;
+    margin-top: 5px;
+}
+
+.secound-image-edit {
+    width: 80px;
+    height: 80px;
+}
+
+.edit-imagee {
+    width: 70px;
+    height: 70px;
+}
+
+.btn-download {
+    background-color: #37BF80;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    height: 35px;
+}
+
+#my_file {
+    display: none;
+}
+
+#get_file {
+    background: #37BF80;
+    border-radius: 5px;
+    margin: 1px 16px 0px 0px;
+    cursor: pointer;
+}
+
+.footer-icon {
+    color: #333;
+    font-weight: 100;
+}
+
+.footer-icon:hover {
+    color: #333;
+    text-decoration: none;
 }

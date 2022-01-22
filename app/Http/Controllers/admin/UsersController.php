@@ -147,7 +147,7 @@ class UsersController extends Controller
             'email' => $request->post('email'),
             'password' => $request->post('password'),
             'country_id' => $request->post('country'),
-            'avatar' => $image_path,
+            'avatar' => $image_path ?? $user->avatar,
         ]);
 
         return redirect()->route('user.index')->with('success', 'User ' . ($user->name) . ' Updated');

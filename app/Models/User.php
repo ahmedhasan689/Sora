@@ -96,7 +96,7 @@ class User extends Authenticatable
     public function getImageAttribute()
     {
         if (!$this->avatar) {
-            return asset('assets/img/AdminLTELogo.png');
+            return asset('assets/Front/img/no-image.png');
         }
 
         if (stripos($this->avatar, 'http') === 0) {

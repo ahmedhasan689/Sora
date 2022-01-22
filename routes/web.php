@@ -89,16 +89,16 @@ require __DIR__ . '/auth.php';
 
 Route::get('/home', function () {
     return view('layouts.home');
-})->middleware(['auth', 'redirect'])->name('login');
+})->middleware(['auth'])->name('login');
 
 // Home Controller
-Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('admin.home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'redirect'])->name('admin.home');
 
 
 
 Route::namespace('Admin')
     ->prefix('admin')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'redirect'])
     ->group(function () {
 
         // Start Admin Dashboard [Roles]...
