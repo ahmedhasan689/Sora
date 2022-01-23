@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Profile;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -37,15 +38,26 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone_number' => ['required', 'min:10']
         ]);
 
+        // dd($user->max('id'));
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone_number' => $request->phone_number,
         ]);
 
-        event(new Registered($user));
+        $profile = Profile::with('user')->create([
+            'information' => 'But Some Information Here',
+            'image_header' => asset('Front/img/header-1.jpg'),
+            'user_id' => $user->max('id'),
+        ]);
+
+
+        event(new Registered($user, $profile));
 
         Auth::login($user);
 

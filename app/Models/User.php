@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
@@ -29,8 +29,8 @@ class User extends Authenticatable
         'country_id',
         'avatar',
         'user_type',
-        'role_id'
-
+        'role_id',
+        'subscription_id',
     ];
 
 

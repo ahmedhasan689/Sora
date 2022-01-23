@@ -55,6 +55,7 @@ Route::namespace('Front')
 
 Route::namespace('Front')
     ->prefix('comment')
+    ->middleware('verified')
     ->as('comment.')
     ->group(function () {
         Route::post('/', [CommentController::class, 'store'])->name('store');

@@ -22,8 +22,7 @@
     <!--  -->
 
     <!-- Bootstrap CSS -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('Front/css/font-awesome.min.css') }}">
 
@@ -75,10 +74,11 @@
 
                             @guest
                             <li class="nav-item col-md-2 d-flex flex-row-end">
-                                <button class="btn-sm add">
-                                    <a href="{{ route('admin.index') }}" class="add-element">
-                                        <div class="button-content">Login</div>
-                                    </a>
+                                <button class="btn-sm add" style="border: none;">
+                                    <a href="" class="btn btn-success" data-toggle='modal' data-target="#signupPage">Sign up</a>
+                                </button>
+                                <button class="btn-sm add" style="border: none;">
+                                    <a href="" class="btn btn-success" data-toggle='modal' data-target="#loginPage">login</a>
                                 </button>
                             </li>
                             @endguest
@@ -118,9 +118,9 @@
 
                         @auth
                         <!-- notifications-profile -->
-                        <div class="dropdown mr-4">
+                        <div class="dropdown mr-4 ">
                             <!-- notifications Icon  -->
-                            <i class=" fa fa-bell-o icon fa-lg fa-lg icon-not" id="dropdownMenuNavagation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class=" fa fa-bell-o icon fa-lg fa-lg icon-not notification" id="dropdownMenuNavagation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- notifications Menu -->
                                 <div class="dropdown-menu notfcation-scroller mt-2 menu-notf" style="overflow-x: hidden;overflow-y: scroll;height: 400px;" aria-labelledby="dropdownMenuNavagation">
                                     <!-- First Item In Menu -->
@@ -140,80 +140,8 @@
                                     </a>
                                     <!-- Divider -->
                                     <div class="dropdown-divider"></div>
-                                    <!-- Thierd Item in Notifcation -->
-                                    <a href="#" class="dropdown-item therd-item-not">
-                                        <!-- Imag-Notifcation -->
-                                        <img src="{{ asset('Front/img/4.jfif') }}" class="rounded-circle imag-Notifcation">
-                                        <!-- Name -notifcation -->
-                                        <span class="pr-2 Name-notification">أعجب بصوره
-                                            <!-- Decription Notifcation -->
-                                            <span class="desc mr-2 desc-notf">قام بمتابعتك<<br>
-                                                    <!-- content Notifcation test -->
-                                                    <span class="mr-3 content-not-text">أسلاك مضيئه <span style="color: rgba(0,0,0,0.5);"> الخاصه
-                                                            بك</span> </span>
-                                                    <!-- Content Notifcation Image -->
-                                                    <br><img src="{{ asset('Front/img/2.png') }}" class="rounded mr-5 content-not-img "><br>
-                                                    <!-- Content Notifcation test -->
-                                                    <span class="desc-notf-end" style="margin-right: 30px;">منذ دقيقه واحده</span>
-                                    </a>
 
-
-                                    <div class="dropdown-divider"></div>
-
-                                    <!--4 Item in Nptifcation -->
-                                    <a href="#" class="dropdown-item therd-item-not">
-                                        <!-- Imag-Notifcation -->
-                                        <img src="{{ asset('Front/img/4.jfif') }}" class="rounded-circle imag-Notifcation">
-                                        <!-- Name -notifcation -->
-                                        <span class="pr-2 Name-notification">أعجب بصوره
-                                            <!-- Decription Notifcation -->
-                                            <span class="desc mr-2 desc-notf">قام بمتابعتك<<br>
-                                                    <!-- content Notifcation test -->
-                                                    <span class="mr-3 content-not-text">أسلاك مضيئه <span style="color: rgba(0,0,0,0.5);"> الخاصه
-                                                            بك</span> </span>
-                                                    <!-- Content Notifcation Image -->
-                                                    <br><img src="{{ asset('Front/img/2.png') }}" class="rounded mr-5 content-not-img "><br>
-                                                    <!-- Content Notifcation test -->
-                                                    <span class="desc-notf-end" style="margin-right: 30px;">منذ دقيقه واحده</span>
-                                    </a>
-
-                                    <div class="dropdown-divider"></div>
-                                </div>
-                            </i>
-                        </div>
-                        <!-- Massenger Profile -->
-                        <div class="dropdown mr-4 ">
-                            <!-- Massenger Item -->
-                            <i class="fa fa-comment-o icon fa-lg ss" id="dropdownMenuMassenger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
-                                <!-- Massenger Menu -->
-                                <div class="dropdown-menu  mt-2 massenger" aria-labelledby="dropdownMenuMassenger" style="  overflow-y: scroll; width: 300px;height: 250px;">
-                                    <!-- Item 1 -->
-                                    <div class="dropdown-item" style="text-align: right;">
-                                        <!-- Image Massenger -->
-                                        <img src="{{ asset('Front/img/4.jfif') }}" class="rounded-circle massenger-img">
-                                        <!-- Name Massenger -->
-                                        <span class="pr-2 name-massengerr" style="font-weight: bold;">أحمد عبد الرحمن </span>
-                                        <!-- Time Massenger -->
-                                        <span class="time-massenger">الساعه 2</span>
-                                        <!-- Description Massenger -->
-                                        <p style="font-size:14px; font-weight: bold;" class="pr-5 massenger-des">أريد التحدث معك في موضوع
-                                            مهم جدا جدا</p>
-                                        <div class="dropdown-divider"></div>
-                                    </div>
-                                    <!-- Item 2 -->
-                                    <div class="dropdown-item" style="text-align: right;">
-                                        <!-- Image Massenger -->
-                                        <img src="{{ asset('Front/img/4.jfif') }}" class="rounded-circle" style="width: 50px; height: 50px;margin-top: 10px">
-                                        <!-- Name Massenger -->
-                                        <span class="pr-2 name-massenger">أحمد عبد الرحمن </span>
-                                        <!-- Time Massenger -->
-                                        <span class="time-massenger">الساعه 2</span>
-                                        <!-- Description Massenger -->
-                                        <p style="font-size:14px; font-weight: bold; color: #929292" id="description-massengerr" class="pr-5 ">أريد التحدث معك في موضوع مهم جدا جدا</p>
-                                        <div class="dropdown-divider"></div>
-                                    </div>
-                                    <!-- Item 3 -->
-                                    <div class="dropdown-divider"></div>
+                                    
                                 </div>
                             </i>
                         </div>
@@ -313,4 +241,224 @@
     </nav>
     <main class="main-content">
         @yield('content')
+
+        <!-- Start Signup Modal -->
+        <div class="modal fade mt-5" id="signupPage">
+            <div class="modal-dialog">
+                <div class="modal-content w-75 mx-auto mt-5" style="border-radius: 10px;">
+
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title text-center w-100 font-weight-bold mt-3">انشاء حساب جديد</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="modal-body mx-auto w-75">
+
+                        <div class="" style="font-weight: 200;font-size: 12px;text-align: right;">
+                            <p>ألديك حساب بالفعل ?<a href="#" data-toggle='modal' data-target="#loginPage" data-dismiss="modal" style="color: green">تسجيل الدخول</a></p>
+                        </div>
+
+
+
+                        <div class="md-form mb-5">
+                            <form method="POST" action="{{ route('register') }}">
+                                @csrf
+
+                                <div>
+
+                                    <!-- Validation Errors -->
+                                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+                                </div>
+
+
+                                <input type="text" class="form-control" id="name" name="name" :value="old('name')" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="الاسم">
+
+                                <br>
+
+                                <input id="email" name="email" type="email" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="البريد الالكتروني">
+
+                                <br>
+
+
+                                <input id="phone_number" name="phone_number" type="integer" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="رقم الجوال">
+                                <br>
+
+                                <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="كلمة المرور">
+
+                                <br>
+
+
+                                <input id="password_confirmation" type="password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" name="password_confirmation" required placeholder="أعادة كلمة المرور">
+
+                                <br>
+
+                                <input type="checkbox" class="form-check-input d-flex flex-row-start">
+
+                                <span style="font-weight: 200; font-size: 11px;text-align: right;margin-right: 13px;">انشاء حساب جديد يعني
+                                    انك <span style="color: green;text-align: left;">
+                                        توافق على سياسات الخددمه الخاصه بالموقع</span>
+                                </span>
+
+                                <br>
+
+                                <input type="submit" value="انشاء حساب جديد" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;">
+
+
+
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Signup Modal -->
+
+        <!-- Forget Password -->
+        <div class="modal fade mt-5" id="forget_password">
+            <div class="modal-dialog">
+                <div class="modal-content w-75 mx-auto mt-5" style="border-radius: 10px;">
+
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title text-center w-100 font-weight-bold mt-3">نسيت كلمه المرور</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="modal-body mx-auto w-75">
+                        <div class="" style="font-weight: 200;font-size: 12px;text-align: right;">
+                            <p>ادخل عنوان البريد الالكتروني الذي استخدمته اثناء انضمامك وسنرسل اليك رساله على الايميل لاستعاده كلمه السر
+                                الخاصه بك</p>
+                        </div>
+                        <div class="md-form mb-5">
+                            <form method="POST" action="{{ route('password.email') }}">
+                                @csrf
+
+
+                                <input id="email" type="email" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="البريد الالكتروني" name="email" :value="old('email')" required autofocus>
+
+                                <input type="submit" value="ارسال" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;">
+                                <a href="#" style="color: black;text-align: right;text-decoration: none;">
+                                    <p style="margin-top: 10px;font-size: 13px;">
+                                        لا تتذكر
+                                        <span style="color: green" data-toggle='modal' data-target="#loginPage" data-dismiss="modal">
+                                            تسجيل الدخول
+                                        </span>
+                                    </p>
+                                </a>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Forget Password -->
+
+        <!-- Reset Password -->
+        <!-- Reset Password -->
+        <div class="modal fade mt-5" id="RestPassword">
+            <div class="modal-dialog">
+                <div class="modal-content w-75 mx-auto mt-5" style="border-radius: 10px;">
+
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title text-center w-100 font-weight-bold mt-3">اعادة تعين كلمة السر</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="modal-body mx-auto w-75">
+
+                        <div class="md-form mb-5">
+                            <form action="">
+
+
+                            </form>
+                            <input type="Password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="كلمه المرور الجديدة"><br>
+
+                            <input type="password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="تأكيد كلمة المرور">
+
+                            <input type="submit" value="اعادة التعين" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;margin-top: -20px;">
+                            <div class="" style="font-weight: 200;font-size: 12px;text-align: right;margin-top: 20px;">
+                                <p>لديك حساب بالفعل؟<a href="#" style="color: green" data-toggle='modal' data-target="#loginPage" data-dismiss="modal">تسجيل الدخول</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- End Reset Password -->
+
+        <!-- Login Model  -->
+        <div class="modal fade mt-5" id="loginPage">
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div>
+                    <!-- Session Status -->
+                    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" style="color: white; padding-left: 50px; margin-top: 10px; background-color: #871010E6; padding: 9px 39px" />
+                </div>
+                <div class="modal-dialog">
+                    <div class="modal-content w-75 mx-auto mt-5" style="border-radius: 10px;">
+
+
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title text-center w-100 font-weight-bold mt-3">اهلا بك في منصه صوره </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+
+
+                        <!-- Move To Signup Model-->
+                        <div class="modal-body mx-auto w-75">
+                            <div class="" style="font-weight: bold;font-size: 15px;text-align: right;">
+                                <p>
+                                    مستخدم جديد ؟
+                                    <a href="#" style="color: green; font-size: 15px" data-toggle='modal' data-target="#signupPage" data-dismiss="modal">
+                                        انشاء حساب جديد
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="md-form mb-5">
+
+                                <!-- Email -->
+                                <input type="email" id="email" name="email" :value="old('email')" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="البريد الالكتروني">
+                                <br>
+
+                                <!-- Password -->
+                                <input type="password" name="password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="كلمه المرور">
+
+                                <br>
+
+
+                                <div class="forget_password" style="text-align: right;">
+                                    <a href="#" style="color: black;text-align: right;font-weight: bold;font-size: 14px" data-toggle='modal' data-target="#forget_password" data-dismiss="modal">نسيت كلمه المرور ؟</a>
+                                </div>
+
+                                <!-- Submit -->
+                                <input type="submit" value="تسجيل الدخول" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;">
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <!-- End Login Model -->
+
+
+
+
+
     </main>

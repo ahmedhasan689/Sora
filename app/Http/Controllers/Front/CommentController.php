@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\CommentCreatedNotification;
 
 class CommentController extends Controller
 {
@@ -49,6 +52,17 @@ class CommentController extends Controller
             'post_id' => $request->post('post_id'),
             'content' => $request->post('comment'),
         ]);
+
+        
+
+        $user = User::where('id', $request->post('user'))->first();
+
+        Notification::send($user, new CommentCreatedNotification($comment));
+
+
+        // post_id = 2  
+
+       
 
         return redirect()->back();
 

@@ -246,7 +246,9 @@
                                 <form action="{{ route('comment.store') }}" method="POST">
                                     @csrf
                                     <div class="col-md-12 expand-sm">
-                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                        <input type="hidden" name="post_id" value="{{ $post->id  }}">
+
+                                        <input type="hidden" name="user" value="{{ $post->user_id }}">
 
                                         <img src="{{ asset('uploads') . '/' . Auth::user()->avatar }}" style="width: 45px;height: 45px;position: absolute;right: 5px;" class="rounded-circle end-img">
 

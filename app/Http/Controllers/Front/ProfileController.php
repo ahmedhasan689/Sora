@@ -153,7 +153,7 @@ class ProfileController extends Controller
             $user->update([
                 'name' => $request->post('username'),
                 'avatar' => $avatar_path ?? $user->avatar,
-                'password' => $request->post('new_password'),
+                'password' => Hash::make('new_password'),
                 'email' => $request->post('email'),
                 'subscription_id' => $request->post('subscription'),
             ]);

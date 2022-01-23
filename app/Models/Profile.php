@@ -12,6 +12,7 @@ class Profile extends Model
     protected $fillable = [
         'information',
         'image_header',
+        'user_id',
     ];
 
     // Relation With User
