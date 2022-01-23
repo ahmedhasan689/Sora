@@ -53,10 +53,10 @@ class CommentCreatedNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'title' => __('تمت أضافة تعليق جديد بواسطة', ['user' => $this->comment->user->name]),
-            'body' => 'تمت أضافة تعليق جديد بواسطة',
+            'title' => __('تعليق جديد'),
+            'body' => __('تمت أضافة تعليق جديد بواسطة', ['user' => $this->comment->user->name]),
             'icon' => asset('Front/img/comment-icon.jpg'),
-            'url' => '/',
+            'url' => route('front.home'),
         ];
     }
     /**

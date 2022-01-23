@@ -118,33 +118,7 @@
 
                         @auth
                         <!-- notifications-profile -->
-                        <div class="dropdown mr-4 ">
-                            <!-- notifications Icon  -->
-                            <i class=" fa fa-bell-o icon fa-lg fa-lg icon-not notification" id="dropdownMenuNavagation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!-- notifications Menu -->
-                                <div class="dropdown-menu notfcation-scroller mt-2 menu-notf" style="overflow-x: hidden;overflow-y: scroll;height: 400px;" aria-labelledby="dropdownMenuNavagation">
-                                    <!-- First Item In Menu -->
-                                    <a href="#" class="dropdown-item pt-2 pb-2 first-item-not">الإشعارات</a>
-                                    <!-- divider  -->
-                                    <div class="dropdown-divider"></div>
-                                    <!-- Secound Item In NotFi -->
-                                    <a href="#" class="dropdown-item secound-item-not">
-                                        <!-- Imag-Notifcation -->
-                                        <img src="{{ asset('Front/img/4.jfif') }}" class="rounded-circle imag-Notifcation">
-                                        <!-- Name-notification -->
-                                        <span class="pr-2 Name-notification">أحمد عبد الرحمن </span>
-                                        <!-- decription-notifcation -->
-                                        <span class="desc-notf">قام بمتابعتك<br>
-                                            <span class="mr-3 desc-notf-end">منذ دقيقه واحد</span></span>
-                                        <!-- End Secound item in Menu -->
-                                    </a>
-                                    <!-- Divider -->
-                                    <div class="dropdown-divider"></div>
-
-                                    
-                                </div>
-                            </i>
-                        </div>
+                        <x-notifications-menu />
                         @endauth
                         <!--  -->
                     </div>

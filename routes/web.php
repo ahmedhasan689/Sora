@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Front\CommentController;
+use App\Http\Controllers\Front\NotificationsController;
 use App\Http\Controllers\Front\PostsController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,9 @@ Route::get('/', [PostsController::class, 'index'])->name('front.home');
 
 Route::get('/cart', [CartController::class, 'index']);
 
+// Notification Controller
+Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications');
+Route::get('notifications/{id}', [NotificationsController::class, 'show'])->name('notifications.read');
 // Start Posts Controller 
 Route::namespace('Front')
     ->prefix('post')
