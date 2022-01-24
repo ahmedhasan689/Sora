@@ -15,6 +15,7 @@ use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Front\NotificationsController;
 use App\Http\Controllers\Front\PostsController;
 use App\Http\Controllers\Front\SearchController;
+use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,10 @@ Route::post('/board', [BoardController::class, 'store'])->name('board.store');
 
 // Search Controller
 Route::get('/search', [SearchController::class, 'search'])->middleware(['auth'])->name('search');
+
+// Likes Controller
+Route::post('/like', [LikesController::class, 'like'])->name('like');
+Route::post('/dislike', [LikesController::class, 'dislike'])->name('dislike');
 
 // Notification Controller
 Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications');

@@ -34,5 +34,10 @@ class Post extends Model
         return $this->belongsToMany(Board::class, 'board_post');
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
 
 }

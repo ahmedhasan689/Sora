@@ -1,4 +1,7 @@
-@extends('layouts.Front-nav');
+@extends('layouts.Front-nav')
+
+
+@section('page_title', 'Add Admin')
 
 <!-- Gallary -->
 <div class="container-fluid" style="margin-top: 70px;">
@@ -39,7 +42,7 @@
                             @auth
                             <input type="hidden" name="post" value="{{ $post->id }}" />
                             <input type="hidden" name="user" value="{{ Auth::user()->id }}" />
-                            
+
                             <button type="submit" class="archive-image-link btn bg-none" onclick="archif()" style="background-color: transparent;">
                                 <i class="fa fa-bookmark-o fa-lg archive" style="color:white"> حفظ</i>
                             </button>
@@ -147,17 +150,59 @@
                             </div>
                             <!-- End Coment Content -->
 
+                            @php
+                            $like_count = 0;
+                            $dislike_count = 0;
+
+                            $like_status = 'btn-secondary';
+                            $dislike_status = 'btn-secondary';
+                            @endphp
+
+                            @foreach ($post->likes as $like)
+                            @php
+                            if($like->like == 1)
+                            {
+                            $like_count++;
+                            }
+                            if($like->like == 0)
+                            {
+                            $dislike_count++;
+                            }
+
+                            if(Auth::check())
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id)
+                            {
+                            $like_status = 'btn-success';
+                            }
+
+                            if ($like->like == 0 && $like->user_id == Auth::user()->id)
+                            {
+                            $dislike_status = 'btn-danger';
+                            }
+
+                            @endphp
+                            @endforeach
+
                             <div class="d-flex flex-row-end mt-5 mr-3 col-md-5">
                                 <!-- Like Button -->
-                                <button class="btn" style="width: 300px;height: 30px;border-radius: 10px;background: #DFDFDF;">
+                                <button id="like" data-postid="{{ $post->id }}_l" class="like btn {{ $like_status }}" data-like="{{ $like_status }}" style="width: 300px;height: 30px;border-radius: 10px;">
                                     <div style="margin-top: -4px">
+                                        <span class="like_count">
+                                            {{ $like_count }}
+                                        </span>
                                         <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                        <span style="color: #6E6E6E">أعجاب</span>
+                                        <span style="color: white">أعجاب</span>
                                     </div>
                                 </button>
                                 <!-- Save Button -->
-                                <button class="btn" style="width: 300px;height: 30px;margin-right: 10px;border-radius: 10px;background-color: #DFDFDF;">
-                                    <div style="margin-top: -4px"><i class="fa fa-bookmark-o" aria-hidden="true"></i><span style="color: #6E6E6E;margin-right: 5px">حفظ</span></div>
+                                <button id="dislike" data-postid="{{ $post->id }}_d" class="dislike btn {{ $dislike_status }}" style="width: 300px;height: 30px;border-radius: 10px; margin-right: 5px;">
+                                    <div style="margin-top: -4px">
+                                        <span class="dislike_count">
+                                            {{ $dislike_count }}
+                                        </span>
+                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                        <span style="color: white">عدم الاعجاب</span>
+                                    </div>
                                 </button>
 
 
@@ -313,6 +358,115 @@
                 }
             })
         });
+    });
+
+
+    var token = "{{ Session::token() }}";
+
+    $(".like").on('click', function() {
+
+        var like_s = $(this).attr('data-like');
+        var post_id = $(this).attr('data-postid');
+
+        post_id = post_id.slice(0, -2)
+
+        // alert(post_id);
+
+        $.ajax({
+            type: 'POST',
+            url: '/like',
+            data: {
+                like_s: like_s,
+                post_id: post_id,
+                _token: token,
+            },
+
+            success: function(data) {
+                // alert('test')    
+
+                if (data.is_like == 1) {
+                    $('*[data-postid="' + post_id + '_l"]').removeClass('btn-secondary').addClass('btn-success');
+                    $('*[data-postid="' + post_id + '_d"]').removeClass('btn-danger').addClass('btn-secondary');
+
+                    var cu_like = $('*[data-postid="' + post_id + '_l"]').find('.like_count').text();
+                    var new_like = parseInt(cu_like) + 1;
+                    $('*[data-postid="' + post_id + '_l"]').find('.like_count').text(new_like);
+
+                    if (data.change_like == 1) {
+
+                        var cu_like = $('*[data-postid="' + post_id + '_d"]').find('.dislike_count').text();
+                        var new_like = parseInt(cu_like) - 1;
+                        $('*[data-postid="' + post_id + '_d"]').find('.dislike_count').text(new_like);
+                    }
+
+                }
+                if (data.is_like == 0) {
+                    $('*[data-postid="' + post_id + '_l"]').removeClass('btn-success').addClass('btn-secondary');
+
+                    var cu_like = $('*[data-postid="' + post_id + '_l"]').find('.like_count').text();
+                    var new_like = parseInt(cu_like) - 1;
+                    $('*[data-postid="' + post_id + '_l"]').find('.like_count').text(new_like);
+                }
+
+
+
+            }
+        })
+
+    });
+
+    $(".dislike").on('click', function() {
+
+        var like_s = $(this).attr('data-like');
+        var post_id = $(this).attr('data-postid');
+
+        post_id = post_id.slice(0, -2)
+
+        // alert(post_id);
+
+        $.ajax({
+            type: 'POST',
+            url: '/dislike',
+            data: {
+                like_s: like_s,
+                post_id: post_id,
+                _token: token,
+            },
+
+            success: function(data) {
+                // alert('test')    
+
+                if (data.is_dislike == 1) {
+                    $('*[data-postid="' + post_id + '_d"]').removeClass('btn-secondary').addClass('btn-danger');
+                    $('*[data-postid="' + post_id + '_l"]').removeClass('btn-success').addClass('btn-secondary');
+
+
+                    var cu_like = $('*[data-postid="' + post_id + '_d"]').find('.dislike_count').text();
+                    var new_like = parseInt(cu_like) + 1;
+                    $('*[data-postid="' + post_id + '_d"]').find('.dislike_count').text(new_like);
+
+                    if (data.change_dislike == 1) {
+
+                        var cu_dislike = $('*[data-postid="' + post_id + '_l"]').find('.like_count').text();
+                        var new_dislike = parseInt(cu_dislike) - 1;
+                        $('*[data-postid="' + post_id + '_l"]').find('.like_count').text(new_dislike);
+                    }
+
+
+                }
+                if (data.is_dislike == 0) {
+                    $('*[data-postid="' + post_id + '_d"]').removeClass('btn-danger').addClass('btn-secondary');
+
+                    var cu_like = $('*[data-postid="' + post_id + '_d"]').find('.dislike_count').text();
+                    var new_like = parseInt(cu_like) - 1;
+                    $('*[data-postid="' + post_id + '_d"]').find('.dislike_count').text(new_like);
+                }
+
+
+
+            }
+        })
+
     });
 </script>
 

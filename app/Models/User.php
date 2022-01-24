@@ -148,6 +148,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Board::class, 'user_id')->withDefault();
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
     // Authrized
     public function hasAbility($ability){
         foreach($this->roles as $role) {

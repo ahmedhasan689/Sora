@@ -1,5 +1,9 @@
 @extends('layouts.Front-nav')
 
+@section('title')
+    <h1>Profile</h1>
+@endsection
+
 <!-- Profile Content -->
 <div class="bg-profile">
     @foreach($profiles as $profile)
