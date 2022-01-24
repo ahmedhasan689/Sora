@@ -450,3 +450,20 @@
 .not-count {
     top: 30px !important;
 }
+
+.change-sub {
+    float:right; 
+    margin-top: -30px; 
+    margin-bottom: 2px;
+    color: red;
+    font-size: 18px;
+}
+
+.change-sub a{
+  color: rgb(0, 51, 255);
+}
+
+.change-sub a:hover{
+    color: red;
+    text-decoration: none;
+  }

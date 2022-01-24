@@ -145,11 +145,13 @@
 
                     <div class="col-lg-12 mx-auto">
                         <!-- Form incloud Add Button And Search -->
-                        <form dir="ltr">
+                        <form dir="ltr" action="{{ route('search') }}" method="GET">
+                            @csrf
                             <div>
                                 <div class="input-group">
                                     <!-- Search Element -->
-                                    <input type="search" dir="rtl" placeholder="ماذا تفكر؟" class="form-control">
+                                    <button class="btn btn-secondary" >بحث</button>
+                                    <input type="search" dir="rtl" placeholder="ماذا تفكر؟" name="query" class="form-control">
                                     <div class="input-group-append">
                                         <!-- Add Button -->
                                         <div class="btn-group">
@@ -157,18 +159,26 @@
                                                 الكل
                                             </button>
                                             <!-- Btn DropDown -->
-                                            <div class="dropdown-menu " style="border-radius: 20px; margin-top: 20px;">
-                                                <a href="#" class="dropdown-item"><input type="checkbox" class="form-check-input" id="checkbox-menu">
+                                            <div class="dropdown-menu" style="border-radius: 20px; margin-top: 20px;">
+                                                <a href="#" class="dropdown-item">
+                                                    <input type="checkbox" class="form-check-input" id="checkbox-menu">
                                                     <label class="form-check-label btn " for="checkbox-menu"> الكل </label>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a href="#" class="dropdown-item"><input type="checkbox" class="form-check-input rounded" id="checkbox-menu">
-                                                        <label class="form-check-label" for="checkbox-menu"> الطبيعه</label>
-                                                        <a href="#" class="dropdown-item"><input type="checkbox" class="form-check-input rounded" id="checkbox-menu">
-                                                            <label class="form-check-label" for="checkbox-menu"> أشخاص</label>
-                                                            <a href="#" class="dropdown-item"><input type="checkbox" class="form-check-input rounded" id="checkbox-menu">
-                                                                <label class="form-check-label" for="checkbox-menu"> حيوانات</label>
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="#" class="dropdown-item">
+                                                    <input type="checkbox" class="form-check-input rounded" id="checkbox-menu">
+                                                    <label class="form-check-label" for="checkbox-menu">الطبيعه</label>
+                                                </a>
 
-                                                            </a>
+                                                <a href="#" class="dropdown-item">
+                                                    <input name="person" type="checkbox" class="form-check-input rounded" id="checkbox-menu">
+                                                    <label class="form-check-label" for="checkbox-menu"> أشخاص</label>
+                                                </a>
+
+                                                <a href="#" class="dropdown-item">
+                                                    <input name="type" type="checkbox" class="form-check-input rounded" id="checkbox-menu">
+                                                    <label class="form-check-label" for="checkbox-menu"> حيوانات</label>
+                                                </a>
 
                                             </div>
                                             <!-- End Button DropDwon -->

@@ -40,10 +40,24 @@
             </p>
 
             <input type="file" id="file" class="file mx-auto w-75 form-control" name="image">
-            <div class="row mt-3">
+
+
+            <div class="row mt-3" style="margin-top: 40px !important;">
                 <div class="col-md-6 d-flex w-50 btn-1" style="display: inline-block; margin-right: 12%; display: flex; flex-direction: row; flex-flow: nowrap;">
+
+                    @if( Auth::user()->posts->count() == Auth::user()->subscriptions->number_of_image )
+                    <span class="change-sub">
+                        لقد انتهى أشتراكك ، يمكنك تجديده من
+                        <a href="subscription.index">هنا</a>
+                    </span>
+
+                    <!-- <span>
+                        Click To Change
+                    </span> -->
+                    <button class="btn btn-success" type="submit" disabled style="margin-right: -235px">نشر الان</button>
+                    @elseif ( Auth::user()->posts->count() < Auth::user()->subscriptions->number_of_image )
                     <button class="btn btn-success" type="submit">نشر الان</button>
-                    <!-- <button class="btn btn-secondary mr-4">حفظ كمسوده</button> -->
+                    @endif
                 </div>
                 <div class="d-flex mx-auto  expand-sm">
                     <button class="btn btn-secondary " style="margin-right: 50px">ألغاء</button>

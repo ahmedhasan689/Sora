@@ -160,7 +160,8 @@ class AdminsController extends Controller
             'name' => $request->post('name'),
             'phone_number' => $request->post('phone_number'),
             'email' => $request->post('email'),
-            'avatar' => $image_path,
+            'avatar' => $image_path ?? $admin->avatar,
+            'password' => Hash::make($request->post('password')) ?? $admin->password,
             'country_id' => $request->post('country'),
         ]);
 

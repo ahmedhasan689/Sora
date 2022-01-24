@@ -144,6 +144,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Comment::class, 'user_id')->withDefault();
     }
 
+    public function board() {
+        return $this->hasOne(Board::class, 'user_id')->withDefault();
+    }
+
     // Authrized
     public function hasAbility($ability){
         foreach($this->roles as $role) {

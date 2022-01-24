@@ -18,7 +18,7 @@ class CreateCartsTable extends Migration
             $table->uuid('cookie_id');
 
             // ForeignId For Image
-            $table->foreignId('image_id')->constrained('images', 'id')->nullOnDelete();
+            $table->foreignId('post_id')->constrained('posts', 'id')->nullOnDelete();
             // ForeignId For User
             $table->foreignId('user_id')->nullable()->constrained('users', 'id')->cascadeOnDelete();
 

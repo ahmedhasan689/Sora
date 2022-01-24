@@ -9,10 +9,12 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Front\ProfileController;
+use App\Http\Controllers\Front\BoardController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Front\NotificationsController;
 use App\Http\Controllers\Front\PostsController;
+use App\Http\Controllers\Front\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +35,12 @@ use Illuminate\Support\Facades\Route;
 // Post Controller [ Just For Home Page => index Function ]
 Route::get('/', [PostsController::class, 'index'])->name('front.home');
 
-Route::get('/cart', [CartController::class, 'index']);
+Route::get('/board', [BoardController::class, 'index'])->name('board.index');
+Route::post('/board', [BoardController::class, 'store'])->name('board.store');
+
+
+// Search Controller
+Route::get('/search', [SearchController::class, 'search'])->middleware(['auth'])->name('search');
 
 // Notification Controller
 Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications');
@@ -98,6 +105,7 @@ Route::get('/home', function () {
 
 // Home Controller
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'redirect'])->name('admin.home');
+Route::get('/{id}/edit', [HomeController::class, 'edit'])->middleware(['auth', 'redirect'])->name('edit');
 
 
 

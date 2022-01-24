@@ -30,4 +30,9 @@ class Post extends Model
         return $this->belongsTo(Category::class, 'category_id')->withDefault();
     }
 
+    public function board() {
+        return $this->belongsToMany(Board::class, 'board_post');
+    }
+
+
 }

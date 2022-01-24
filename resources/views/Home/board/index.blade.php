@@ -1,119 +1,14 @@
 @extends('layouts.Front-nav')
 
-<!-- Profile Content -->
-<div class="bg-profile">
-    @foreach($profiles as $profile)
-    <img src="{{ asset('uploads') . '/' . $profile->image_header }}" class="w-100 expand-sm" style="height: 200px">
-    <div class="img-profilee expand-sm mb-5">
-        <!-- Image Profile -->
-        <img src="{{ asset('/uploads') . '/' . $profile->user->avatar }}" class="rounded-circle d-block mx-auto img-prfile">
-        <div class="desc-profile">
-            <p class="desc-profile-name">{{ $profile->user->name }}</p>
-            <p class="desc-profile-pos">
-                <i class="fa fa-map-marker ml-2" style="color: black" aria-hidden="true"></i>
-                غزه الارض الفلسطينيه
-            </p>
-            <p class="desc-number-flower expand-sm">
-                <span class="pr-4">120<span class="name-flowers">صوره</span></span>
-                <span class="pr-4">{{ $profile->followers }}<span class="name-flowers">متابعون</span></span>
-                <span class="pr-4">{{ $profile->followings }}<span class="name-flowers">متابعين </span></span>
-            </p>
-
-            <p class="desc-profile-desc expand-sm" style="max-width: 350px;margin: auto;margin-bottom: 10px;">
-                {{ $profile->information }}
-            </p>
-            <div class="desc-profile-edit " style="text-align: center; margin-bottom: 100px;">
-                <button class="btn btn-outline-success btn-sm flow-profile" style="background-color: #37BF80;width: 70px;text-align: center;border-radius:10px;color: white;font-size: 16px;">تابع</button>
-                <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
-                    <button class="btn btn-outline-secondary mr-4 btn-sm edit-profile">تعديل</button>
-                </a>
-                <a href="{{ route('board.index') }}">
-                    <button class="btn btn-outline-secondary mr-4 btn-sm edit-profile" style="width: 30px; height: 30px;">
-                        <i class="fa fa-bookmark" aria-hidden="true"></i>
-                    </button>
-                </a>
-            </div>
-
-
-        </div>
-    </div>
-    @endforeach
-
-
-</div>
-
-
-
-
-<!-- End Profile Content -->
-
 <!-- Gallary -->
+
+
 <div class="container-fluid" style="margin-top: 70px;">
     <div class="row d-flex p-1">
-        @foreach($posts as $post)
-        <div class="col-md-3">
-            <div class="card">
-                <a href="#" data-toggle="modal" data-target="#myModal-{{ $post->id }}" data-id="{{ $post->id }}" class="img-click">
-                    <!-- Image Element In Card -->
-                    <img src="{{ asset('uploads') . '/' . $post->image_path }}" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley" class="image-post">
-                    <!-- DropDown Element Doted DropDown Edit Button-->
-
-                    <div class="dropdown" style="position: absolute;top: 10%;left: 10%">
-                        <a class="btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-h fa-lg pt-3"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
-                            <a class="dropdown-item" href="#">تعديل</a>
-                        </div>
-                    </div>
-
-                    <!-- End Doted Element Save Button -->
-
-                    <!-- Save the image in the archive -->
-                    <div class="archive-image">
-                        <a href="#" class="archive-image-link" onclick="archif()">
-                            <i class="fa fa-bookmark-o fa-lg archive"> حفظ</i>
-                        </a>
-                    </div>
-
-                    <!-- Text In Image -->
-                    <a href="">
-                        <div id="titleImage" class="text-post my-4 mx-2">{{ $post->name }}</div>
-                    </a>
-
-                    <!-- End parent Link in Card -->
-                </a>
-
-                <!-- Secound Element In Card Contain like and comment -->
-
-                <div class="card-title d-flex">
-                    <!-- image profile -->
-                    <a href="#">
-                        <span>
-                            <img src="{{ asset('uploads') . '/' . $post->user->avatar }}" id="imageProfile" class="avatar-post mx-2">
-                        </span>
-                    </a>
-                    <!-- name profile -->
-                    <a href="#">
-                        <span id="imageName" class="username-post">{{ $post->user->name }}</span>
-                    </a>
-                    <!-- group contain like and commend -->
-                    <!-- <div class=" w-100 ml-3 mt-2">
-                            <!-- like -->
-                    <!-- <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- comment -->
-                    <!-- <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- </div>  -->
-                </div>
-
-            </div>
-
-            <!-- <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                <img src="https://images.pexels.com/photos/2091160/pexels-photo-2091160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-                <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
-        </div>
+        @foreach($boards as $board)
+            <h3>
+                {{ $board->post->name }}
+            </h3>
         @endforeach
     </div>
 </div>
@@ -307,42 +202,3 @@
         @endforeach
     </div>
 </div>
-
-
-
-
-
-
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script type="text/javascript" src="{{ asset('Front/js/Front.js') }}"></script>
-<script>
-    $('#myModal').modal('hide');
-
-    $(document).ready(function() {
-        $('.img-click').click(function() {
-            const id = $(this).attr('data-id');
-            $.ajax({
-                url: 'post/model/' + id,
-                type: 'GET',
-                data: {
-                    "id": id
-                },
-                success: function(data) {
-                    $('#image').html(data.image_path);
-                    $('#modalProfile').html(data.user_id);
-                    $('#nameProfile').html(data.name);
-
-                }
-            })
-        });
-    });
-</script>
-</body>
-
-</html>

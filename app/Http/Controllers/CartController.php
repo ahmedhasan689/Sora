@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cookie;
 use App\Repositories\Cart\CartRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Image;
+use App\Models\Cart;
 
 class CartController extends Controller
 {
@@ -30,6 +34,5 @@ class CartController extends Controller
 
 
     }
-
 
 }

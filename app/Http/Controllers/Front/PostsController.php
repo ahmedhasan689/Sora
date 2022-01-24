@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use App\Models\Comment;
+use App\Models\Subscription;
 
 class PostsController extends Controller
 {
@@ -35,7 +37,10 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('Home.post.create', compact('categories'));
+        $users = User::all();
+        $subscriptions = Subscription::all();
+
+        return view('Home.post.create', compact('categories', 'users', 'subscriptions'));
     }
 
     /**
