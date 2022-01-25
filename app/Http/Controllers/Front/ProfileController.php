@@ -62,10 +62,19 @@ class ProfileController extends Controller
     public function show($id)
     {
 
-        // $profile = Profile::where('id', $id)->first();
-        // dd($profile);
-       
-        // return view('Home.profile.index', compact('profile'));
+        $profiles = Profile::findOrFail($id);
+
+        
+        foreach ($profiles as $profile) {
+            
+            $user_id = $profiles->user_id;
+        };
+
+        $posts = Post::where('user_id', '=', $user_id)->get();
+        // dd($posts);
+        $comments = Comment::all();
+        return view('Home.profile.show', compact('posts', 'comments', 'profiles'));
+
     }
 
     /**

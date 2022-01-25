@@ -1,45 +1,47 @@
 @extends('layouts.Front-nav')
 
-@section('content')
-@foreach($users as $user)
-<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
-    <div class="cardbox p-4">
-        <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+@section('title')
+    <h1>Profile</h1>
+@endsection
 
-            <div class="search-btn"> 
-                <img src="{{ asset('uploads') . '/' . $user->avatar }}"  />
-            </div> 
+<!-- Profile Content -->
+<div class="bg-profile">
+    <img src="{{ asset('uploads') . '/' . $profiles->image_header }}" class="w-100 expand-sm" style="height: 200px">
+    <div class="img-profilee expand-sm mb-5">
+        <!-- Image Profile -->
+        <img src="{{ asset('/uploads') . '/' . $profiles->user->avatar }}" class="rounded-circle d-block mx-auto img-prfile">
+        <div class="desc-profile">
+            <p class="desc-profile-name">{{ $profiles->user->name }}</p>
+            <p class="desc-profile-pos">
+                <i class="fa fa-map-marker ml-2" style="color: black" aria-hidden="true"></i>
+                غزه الارض الفلسطينيه
+            </p>
+            <p class="desc-number-flower expand-sm">
+                <span class="pr-4">120<span class="name-flowers">صوره</span></span>
+                <span class="pr-4">{{ $profiles->followers }}<span class="name-flowers">متابعون</span></span>
+                <span class="pr-4">{{ $profiles->followings }}<span class="name-flowers">متابعين </span></span>
+            </p>
 
-            <span class="us-name mt-3">{{ $user->name }}</span> 
-
-            <span class="idd">{{ $user->email }}</span>
-
-            <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
-                <span class="number">
-                    1069 
-                    <span class="follow">Followers</span>
-                </span> 
+            <p class="desc-profile-desc expand-sm" style="max-width: 350px;margin: auto;margin-bottom: 10px;">
+                {{ $profiles->information }}
+            </p>
+            <div class="desc-profile-edit " style="text-align: center; margin-bottom: 100px;">
+                <button class="btn btn-outline-success btn-sm flow-profile" style="background-color: #37BF80;width: 70px;text-align: center;border-radius:10px;color: white;font-size: 16px;">تابع</button>
+                
             </div>
 
-            <div class=" d-flex mt-2"> 
-                <a class="btn1 btn-success" href="{{ route('profile.show', ['id' => $user->profile->id]) }}">Show Profile</a> 
-            </div>
-            <div class="text mt-3"> 
-                <span>
-                    {{ $user->profile->information }}
-                </span>
-            </div>
-
-            <div class=" px-2 rounded mt-4 date "> 
-                <span class="join">Joined May,2021</span> 
-            </div>
 
         </div>
     </div>
+
+
+
 </div>
 
-@endforeach
-@endsection
+
+
+
+<!-- End Profile Content -->
 
 <!-- Gallary -->
 <div class="container-fluid" style="margin-top: 70px;">
@@ -51,41 +53,15 @@
                     <!-- Image Element In Card -->
                     <img src="{{ asset('uploads') . '/' . $post->image_path }}" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley" class="image-post">
                     <!-- DropDown Element Doted DropDown Edit Button-->
-                    @auth
-                    @if ($post->user->id == Auth::user()->id)
-                    <div class="dropdown" style="position: absolute;top: 10%;left: 10%">
-                        <a class="btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-h fa-lg pt-3"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
-                            <a class="dropdown-item" href="{{ route('post.edit', ['id' => $post->id]) }}">تعديل</a>
-                            <form action="{{ route('post.delete', ['id' => $post->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="dropdown-item">حذف</button>
-                            </form>
-                        </div>
-                    </div>
-                    @endif
 
-                    @endauth
 
-                    <!-- End Doted Element Save Button -->
+
 
                     <!-- Save the image in the archive -->
                     <div class="archive-image">
-                        <form action="{{ route('board.store') }}" method="POST">
-                            @csrf
-
-                            @auth
-                            <input type="hidden" name="post" value="{{ $post->id }}" />
-                            <input type="hidden" name="user" value="{{ Auth::user()->id }}" />
-
-                            <button type="submit" class="archive-image-link btn bg-none" onclick="archif()" style="background-color: transparent;">
-                                <i class="fa fa-bookmark-o fa-lg archive" style="color:white"> حفظ</i>
-                            </button>
-                            @endauth
-                        </form>
+                        <a href="#" class="archive-image-link" onclick="archif()">
+                            <i class="fa fa-bookmark-o fa-lg archive"> حفظ</i>
+                        </a>
                     </div>
 
                     <!-- Text In Image -->
@@ -109,15 +85,7 @@
                     <a href="#">
                         <span id="imageName" class="username-post">{{ $post->user->name }}</span>
                     </a>
-                    <!-- group contain like and commend -->
-                    <!-- <div class=" w-100 ml-3 mt-2">
-                            <!-- like -->
-                    <!-- <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- comment -->
-                    <!-- <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- </div>  -->
+
                 </div>
 
             </div>
@@ -129,6 +97,7 @@
         @endforeach
     </div>
 </div>
+
 
 
 
@@ -232,6 +201,7 @@
                                 @if($comment->post->id == $post->id)
                                 @if($comment)
 
+
                                 <div class="comment-content">
                                     <!-- Name Comment -->
                                     <span class="username">
@@ -296,9 +266,7 @@
                                 <form action="{{ route('comment.store') }}" method="POST">
                                     @csrf
                                     <div class="col-md-12 expand-sm">
-                                        <input type="hidden" name="post_id" value="{{ $post->id  }}">
-
-                                        <input type="hidden" name="user" value="{{ $post->user_id }}">
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
 
                                         <img src="{{ asset('uploads') . '/' . Auth::user()->avatar }}" style="width: 45px;height: 45px;position: absolute;right: 5px;" class="rounded-circle end-img">
 
@@ -329,11 +297,10 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('Front/js/Front.js') }}"></script>
-
 <script>
     $('#myModal').modal('hide');
 
@@ -356,10 +323,6 @@
         });
     });
 </script>
-
-
-
-
 </body>
 
 </html>

@@ -170,15 +170,15 @@
                             }
 
                             if(Auth::check())
-                            if ($like->like == 1 && $like->user_id == Auth::user()->id)
-                            {
-                            $like_status = 'btn-success';
-                            }
-
-                            if ($like->like == 0 && $like->user_id == Auth::user()->id)
-                            {
-                            $dislike_status = 'btn-danger';
-                            }
+                                if ($like->like == 1 && $like->user_id == Auth::user()->id)
+                                {
+                                $like_status = 'btn-success';
+                                }
+                            if(Auth::check())        
+                                if ($like->like == 0 && $like->user_id == Auth::user()->id)
+                                {
+                                $dislike_status = 'btn-danger';
+                                }
 
                             @endphp
                             @endforeach

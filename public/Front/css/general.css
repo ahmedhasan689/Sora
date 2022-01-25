@@ -452,18 +452,112 @@
 }
 
 .change-sub {
-    float:right; 
-    margin-top: -30px; 
+    float: right;
+    margin-top: -30px;
     margin-bottom: 2px;
     color: red;
     font-size: 18px;
 }
 
-.change-sub a{
-  color: rgb(0, 51, 255);
+.change-sub a {
+    color: rgb(0, 51, 255);
 }
 
-.change-sub a:hover{
+.change-sub a:hover {
     color: red;
     text-decoration: none;
-  }
+}
+
+/* Search Profile */
+.cardbox {
+    width: 350px;
+    background-color: #efefef;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.image img {
+    transition: all 0.5s;
+    height: 100;
+    width: 100;
+    border-radius: 50%;
+    margin-right: -12px;
+    margin-top: -6px;
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+.search-btn {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%
+}
+
+.us-name {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.idd {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.idd1 {
+    font-size: 12px
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.follow {
+    font-size: 12px;
+    font-weight: 500;
+    color: #444444
+}
+
+.btn1 {
+    height: 40px;
+    width: 128px;
+    border: none;
+    background-color: #000;
+    color: #aeaeae;
+    font-size: 15px;
+    text-align: center;
+    padding-top: 9px;
+    border-radius: 12px;
+}
+
+.btn1:hover {
+    text-decoration: none;
+}
+
+.text span {
+    font-size: 13px;
+    color: #545454;
+    font-weight: 500;
+    text-align: center;
+}
+
+.icons i {
+    font-size: 19px
+}
+
+hr .new1 {
+    border: 1px solid
+}
+
+.join {
+    font-size: 14px;
+    color: #a0a0a0;
+    font-weight: bold
+}
+
+.date {
+    background-color: #ccc
+}
