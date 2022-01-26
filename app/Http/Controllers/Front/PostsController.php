@@ -26,6 +26,7 @@ class PostsController extends Controller
         return view('Home.front.home', [
             'posts' => $posts,
             'comments' => $comments,
+            
         ]);
     }
 

@@ -170,15 +170,15 @@
                             }
 
                             if(Auth::check())
-                                if ($like->like == 1 && $like->user_id == Auth::user()->id)
-                                {
-                                $like_status = 'btn-success';
-                                }
-                            if(Auth::check())        
-                                if ($like->like == 0 && $like->user_id == Auth::user()->id)
-                                {
-                                $dislike_status = 'btn-danger';
-                                }
+                            if ($like->like == 1 && $like->user_id == Auth::user()->id)
+                            {
+                            $like_status = 'btn-success';
+                            }
+                            if(Auth::check())
+                            if ($like->like == 0 && $like->user_id == Auth::user()->id)
+                            {
+                            $dislike_status = 'btn-danger';
+                            }
 
                             @endphp
                             @endforeach
@@ -230,13 +230,16 @@
                                 التعليقات
                                 <i class="fa fa-caret-down mr-3" aria-hidden="true"></i>
                             </p>
+                            <div class="row">
+
+                            </div>
                             <div dir='ltr' id="demo-{{ $post->id }}" class="collapse mt-5 post-comment" style="margin-right:-120px;">
                                 <!-- Firest Element In Comment -->
                                 @foreach($comments as $comment)
                                 @if($comment->post->id == $post->id)
                                 @if($comment)
 
-                                <div class="comment-content">
+                                <div class="comment-content" style="margin-bottom: 55px;">
                                     <!-- Name Comment -->
                                     <span class="username">
                                         {{ $comment->user->name }}
@@ -244,10 +247,13 @@
                                     <!-- Image Comment -->
                                     <img src="{{ asset('uploads') . '/' . $comment->user->avatar }}" style="width: 30px;height: 30px;" class="rounded-circle">
 
+                                    @auth
+                                    @if($comment->user->id == Auth::user()->id)
                                     <div class="dropdown comment-settings d-flex">
                                         <a class="btn comment-btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                         </a>
+                                        
                                         <div class="dropdown-menu comment-dropdown" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
 
                                             <form action="#" method="POST">
@@ -258,27 +264,24 @@
                                             <a class="dropdown-item" href="#">حذف</a>
                                         </div>
                                     </div>
+                                    @endif
+                                    @endauth
 
                                     <!-- Description Comment -->
                                     <br>
                                     <span>
-                                        <p id="beforeContent" class="comment">
+                                        <p id="beforeContent" class="comment" style="padding-right: 35px;">
                                             {{ $comment->content }}
                                         </p>
                                     </span>
+                                    <!-- Like And Comment -->
+                                    <div style="text-align: center; margin-top: -18px">
+                                        <span style="font-size: 10px;color:#4F4F4F; ">
+                                            {{ $comment->created_at->diffForHumans() }}
+                                        </span>
+                                    </div>
                                 </div>
-                                <!-- Like And Comment -->
-                                <div style="text-align: center; margin-top: -18px">
-                                    <a href="#">
-                                        <i class="fa fa-commenting-o pr-3 fa-sm" style="color:#4F4F4F; " aria-hidden="true"></i>
-                                    </a>
-                                    <a href="#">
-                                        <i class="fa fa-thumbs-o-up pr-2" aria-hidden="true" style="color:#4F4F4F; "></i>
-                                    </a>
-                                    <span style="font-size: 10px;color:#4F4F4F; ">
-                                        {{ $comment->created_at }}
-                                    </span>
-                                </div>
+
                                 @else
                                 <div dir='ltr' id="demo-{{ $post->id }}" class="collapse mt-5 post-comment" style="margin-right:-120px;">
                                     <h1>
