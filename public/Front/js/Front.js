@@ -107,3 +107,26 @@ var loadFile = function(event) {
   }
 };
 
+function processData(selector, action, user_id) {
+ 
+  Notiflix.Confirm.show(
+    alert('hi'),
+    'أنتباه', 'هل توافق على المتابعة',
+    // function () {
+    //   alert('hi')
+    // },
+    // function () {
+    //   // No
+    // },
+    // {
+    //   width: '320px',
+    //   borderRadius: '8px',
+    //   // etc...
+    // },
+  );
+
+
+
+
+
+}

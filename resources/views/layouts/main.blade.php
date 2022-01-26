@@ -114,9 +114,13 @@
             <img src="{{ asset('uploads') . '/' . Auth::user()->avatar }}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="{{ route('admin.edit',['id' => Auth::user()->id]) }}" class="d-block">
-              {{ Auth::user()->name }}
-            </a>
+            <form action="{{ route('admin.update',['id' => Auth::user()->id]) }}">
+              @csrf
+              @method('PUT')
+              <a href="{{ route('admin.edit',['id' => Auth::user()->id]) }}" class="d-block">
+                {{ Auth::user()->name }}
+              </a>  
+            </form>
           </div>
         </div>
 

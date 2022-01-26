@@ -561,3 +561,12 @@ hr .new1 {
 .date {
     background-color: #ccc
 }
+
+.flow-profile {
+    background-color: #37BF80 !important;
+    width: 70px !important;
+    text-align: center !important;
+    border-radius:10px !important;
+    color: white;
+    font-size: 16px !important;
+}

@@ -82,7 +82,7 @@
                             <input type="hidden" name="user" value="{{ Auth::user()->id }}" />
 
                             <button type="submit" class="archive-image-link btn bg-none" onclick="archif()" style="background-color: transparent;">
-                                <i class="fa fa-bookmark-o fa-lg archive" style="color:white"> حفظ</i>
+                                <i class="fa fa-bookmark-o fa-lg archive" style="color:white">حفظ</i>
                             </button>
                             @endauth
                         </form>
@@ -109,22 +109,11 @@
                     <a href="#">
                         <span id="imageName" class="username-post">{{ $post->user->name }}</span>
                     </a>
-                    <!-- group contain like and commend -->
-                    <!-- <div class=" w-100 ml-3 mt-2">
-                            <!-- like -->
-                    <!-- <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- comment -->
-                    <!-- <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- </div>  -->
+                    
                 </div>
 
             </div>
 
-            <!-- <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                <img src="https://images.pexels.com/photos/2091160/pexels-photo-2091160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-                <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
         </div>
         @endforeach
     </div>

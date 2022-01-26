@@ -96,7 +96,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getImageAttribute()
     {
         if (!$this->avatar) {
-            return asset('assets/Front/img/no-image.png');
+            return asset('Front/img/no-image.png');
         }
 
         if (stripos($this->avatar, 'http') === 0) {

@@ -1,8 +1,5 @@
 @extends('layouts.Front-nav')
 
-@section('title')
-    <h1>Profile</h1>
-@endsection
 
 <!-- Profile Content -->
 <div class="bg-profile">
@@ -18,16 +15,43 @@
             </p>
             <p class="desc-number-flower expand-sm">
                 <span class="pr-4">120<span class="name-flowers">صوره</span></span>
-                <span class="pr-4">{{ $profiles->followers }}<span class="name-flowers">متابعون</span></span>
-                <span class="pr-4">{{ $profiles->followings }}<span class="name-flowers">متابعين </span></span>
+                <span class="pr-4">
+                    {{ $follow->count() }}
+                    <span class="name-flowers">متابعون</span>
+                </span>
+                <span class="pr-4">
+                    {{ $followed->count() }}
+                    <span class="name-flowers">متابعين </span>
+                </span>
             </p>
 
             <p class="desc-profile-desc expand-sm" style="max-width: 350px;margin: auto;margin-bottom: 10px;">
                 {{ $profiles->information }}
             </p>
+
             <div class="desc-profile-edit " style="text-align: center; margin-bottom: 100px;">
-                <button class="btn btn-outline-success btn-sm flow-profile" style="background-color: #37BF80;width: 70px;text-align: center;border-radius:10px;color: white;font-size: 16px;">تابع</button>
-                
+                <form action="{{ route('follow') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="follow_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="user_id" value="{{ $profiles->user->id }}">
+
+                    <?php
+
+                        if(isset($followers[0])){
+                            echo '<input type="button" value="تتابع" class="btn btn-dark" />';
+                        }else{
+                            echo '<input type="submit" value="تابع" class="btn btn-success" />';
+                        }
+
+                    ?>
+               
+
+                   
+
+                    
+                </form>
+
             </div>
 
 

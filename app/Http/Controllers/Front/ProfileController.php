@@ -12,6 +12,7 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Followship;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Hash;
 
@@ -59,7 +60,7 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
 
         $profiles = Profile::findOrFail($id);
@@ -68,12 +69,23 @@ class ProfileController extends Controller
         foreach ($profiles as $profile) {
             
             $user_id = $profiles->user_id;
+            
         };
 
         $posts = Post::where('user_id', '=', $user_id)->get();
-        // dd($posts);
         $comments = Comment::all();
-        return view('Home.profile.show', compact('posts', 'comments', 'profiles'));
+
+        
+
+        $followed = Followship::where('follow_id', Auth::user()->id)->get();
+        
+        $follow = Followship::where('user_id', $user_id)->get();
+        $followers = Followship::where('user_id', $user_id)->where('follow_id', Auth::user()->id)->get();
+        
+        // dd($followers);
+   
+
+        return view('Home.profile.show', compact('posts', 'comments', 'profiles', 'followers', 'followed', 'follow'));
 
     }
 
@@ -169,18 +181,6 @@ class ProfileController extends Controller
         }
         
         return redirect()->route('profile.index');
-        
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -194,4 +194,24 @@ class ProfileController extends Controller
     {
         //
     }
+
+    public function follow()
+    {
+        $fol = Followship::all();
+
+        return view('Home.profile.index', compact('fol'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

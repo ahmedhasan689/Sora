@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 use App\Models\Subscription;
+use Illuminate\Support\Facades\Auth;
 
 class AdminsController extends Controller
 {
@@ -19,7 +20,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        $users = User::where('user_type', '2')->get();
+        $users = User::where('user_type', '2')->where('id', '!=', auth::user()->id)->get();
 
         // Flash MSG
         $success = session()->get('success');
@@ -128,7 +129,8 @@ class AdminsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+   {
+    //    dd($request);
         $admin = User::findOrFail($id);
 
         $request->validate(User::adminValidateRules());
@@ -146,8 +148,9 @@ class AdminsController extends Controller
         if( !empty($request->post('password')) && !empty($request->post('re-password')) ){
             if ($request->post('password') === $request->post('re-password')) {
                 $request->merge([
-                    'password' => Hash::make($request->post('password'))
+                    'password' => Hash::make($request->post('password')),
                 ]);
+                // dd($request->post('password'));
             }else{
 
                 return redirect()->route('admin.index')->with('success', 'Password Not Correct');
@@ -161,7 +164,6 @@ class AdminsController extends Controller
             'phone_number' => $request->post('phone_number'),
             'email' => $request->post('email'),
             'avatar' => $image_path ?? $admin->avatar,
-            'password' => Hash::make($request->post('password')) ?? $admin->password,
             'country_id' => $request->post('country'),
         ]);
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\Front\BoardController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Front\NotificationsController;
 use App\Http\Controllers\Front\PostsController;
@@ -42,6 +43,9 @@ Route::post('/board', [BoardController::class, 'store'])->name('board.store');
 
 // Search Controller
 Route::get('/search', [SearchController::class, 'search'])->middleware(['auth'])->name('search');
+
+// Follow Controller
+Route::put('/follow', [FollowController::class, 'follow'])->name('follow');
 
 // Likes Controller
 Route::post('/like', [LikesController::class, 'like'])->name('like');
@@ -76,7 +80,7 @@ Route::namespace('Front')
     ->group(function () {
         Route::post('/', [CommentController::class, 'store'])->name('store');
     });
-    
+
 // End Comment Controller 
 
 // Start Profile Controller
@@ -94,6 +98,8 @@ Route::namespace('Front')
             Route::get('/{id}', [ProfileController::class, 'show'])->name('show');
             Route::get('/{id}/edit', [ProfileController::class, 'edit'])->name('edit');
             Route::put('/{id}', [ProfileController::class, 'update'])->name('update');
+            // Follow
+            Route::get('/follow', [ProfileController::class, 'follow'])->name('follow');
         });
         // End Profile Route [ ProfileController ]
     });

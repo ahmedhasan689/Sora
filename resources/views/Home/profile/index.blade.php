@@ -10,7 +10,7 @@
     <img src="{{ asset('uploads') . '/' . $profile->image_header }}" class="w-100 expand-sm" style="height: 200px">
     <div class="img-profilee expand-sm mb-5">
         <!-- Image Profile -->
-        <img src="{{ asset('/uploads') . '/' . $profile->user->avatar }}" class="rounded-circle d-block mx-auto img-prfile">
+        <img src="{{ $profile->user->image }}" class="rounded-circle d-block mx-auto img-prfile">
         <div class="desc-profile">
             <p class="desc-profile-name">{{ $profile->user->name }}</p>
             <p class="desc-profile-pos">
@@ -27,7 +27,7 @@
                 {{ $profile->information }}
             </p>
             <div class="desc-profile-edit " style="text-align: center; margin-bottom: 100px;">
-                <button class="btn btn-outline-success btn-sm flow-profile" style="background-color: #37BF80;width: 70px;text-align: center;border-radius:10px;color: white;font-size: 16px;">تابع</button>
+                <button class="btn btn-outline-success btn-sm flow-button">تابع</button>
                 <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
                     <button class="btn btn-outline-secondary mr-4 btn-sm edit-profile">تعديل</button>
                 </a>

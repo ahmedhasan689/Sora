@@ -35,7 +35,7 @@
             <div class="col-md-8 d-flex">
                 <div class="img-edit d-flex w-100 mx-auto">
                     <span class="image_edit_page">
-                        <img src="{{ asset('uploads') . '/' . $profiles->user->avatar }}" name="avatar" class="mr-3 image_edit_profile">
+                        <img src="{{ $profiles->user->image }}" name="avatar" class="mr-3 image_edit_profile">
                     </span>
 
                     <span class="w-100 nameprofile-edit-page">
@@ -165,9 +165,7 @@
 
                 <!-- Notificaitons Tap -->
                 <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
-                    <p>
-                        notification
-                    </p>
+                    <x-notifications-menu />
                 </div>
                 <!-- End Notificaitons Tap -->
 
