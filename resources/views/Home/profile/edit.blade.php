@@ -1,5 +1,7 @@
 @extends('layouts.Front-nav')
 
+@section('title', 'Edit Profile')
+
 @section('content')
 <!-- End Navegation -->
 <div class="row " id="edit-page-profile">

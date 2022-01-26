@@ -1,7 +1,7 @@
 @extends('layouts.Front-nav')
 
 
-@section('page_title', 'Add Admin')
+@section('title', 'Sora')
 
 <!-- Gallary -->
 <div class="container-fluid" style="margin-top: 70px;">

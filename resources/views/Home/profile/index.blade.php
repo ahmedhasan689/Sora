@@ -1,8 +1,6 @@
 @extends('layouts.Front-nav')
 
-@section('title')
-    <h1>Profile</h1>
-@endsection
+@section('title', 'Profile')
 
 <!-- Profile Content -->
 <div class="bg-profile">
@@ -18,7 +16,7 @@
                 غزه الارض الفلسطينيه
             </p>
             <p class="desc-number-flower expand-sm">
-                <span class="pr-4">120<span class="name-flowers">صوره</span></span>
+                <span class="pr-4">{{ $posts->count() }} <span class="name-flowers">صوره</span></span>
                 <span class="pr-4">{{ $profile->followers }}<span class="name-flowers">متابعون</span></span>
                 <span class="pr-4">{{ $profile->followings }}<span class="name-flowers">متابعين </span></span>
             </p>
@@ -27,8 +25,10 @@
                 {{ $profile->information }}
             </p>
             <div class="desc-profile-edit " style="text-align: center; margin-bottom: 100px;">
+                @if($profile->user->id != Auth::user()->id)
                 <button class="btn btn-outline-success btn-sm flow-button">تابع</button>
-                <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
+                @endif
+                <a href="{{ route('profile.edit', ['id' => $profile->id]) }}" style="text-decoration: none;">
                     <button class="btn btn-outline-secondary mr-4 btn-sm edit-profile">تعديل</button>
                 </a>
                 <a href="{{ route('board.index') }}">
@@ -101,22 +101,10 @@
                     <a href="#">
                         <span id="imageName" class="username-post">{{ $post->user->name }}</span>
                     </a>
-                    <!-- group contain like and commend -->
-                    <!-- <div class=" w-100 ml-3 mt-2">
-                            <!-- like -->
-                    <!-- <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- comment -->
-                    <!-- <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
-                            <span>45</span> -->
-                    <!-- </div>  -->
                 </div>
 
             </div>
 
-            <!-- <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                <img src="https://images.pexels.com/photos/2091160/pexels-photo-2091160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-                <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
         </div>
         @endforeach
     </div>

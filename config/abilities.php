@@ -16,10 +16,9 @@ return [
   'orders.update' => 'Can update order',
   'orders.delete' => 'Can delete order',
 
-  'images.view' => 'Can View image',
-  'images.create' => 'Can Create image',
-  'images.update' => 'Can update image',
-  'images.delete' => 'Can delete image',
-
+  'admins.view' => 'Can View admin',
+  'admins.create' => 'Can Create admin',
+  'admins.update' => 'Can update admin',
+  'admins.delete' => 'Can delete admin',
 
 ];

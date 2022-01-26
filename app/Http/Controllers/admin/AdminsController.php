@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AdminsController extends Controller
 {
@@ -20,6 +21,11 @@ class AdminsController extends Controller
      */
     public function index()
     {
+
+        if (!Gate::allows('admins.view')) {
+            abort(403, 'You Are Not Authrized');
+        }
+
         $users = User::where('user_type', '2')->where('id', '!=', auth::user()->id)->get();
 
         // Flash MSG
@@ -36,6 +42,11 @@ class AdminsController extends Controller
      */
     public function create()
     {
+
+        if (!Gate::allows('admins.create')) {
+            abort(403, 'You Are Not Authrized');
+        }
+
         $countries = Country::all();
         $admin = User::get('country_id');
         // dd($admin);
@@ -110,6 +121,10 @@ class AdminsController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('admins.update')) {
+            abort(403, 'You Are Not Authrized');
+        }
+
         $admin = User::find($id);
 
         $countries = Country::all();
@@ -178,6 +193,9 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('admins.delete')) {
+            abort(403, 'You Are Not Authrized');
+        }
         $users = User::find($id);
         $users->delete();
         return redirect()->route('admin.index')->with('success', 'User ' . ($users->name) .  ' Deleted');

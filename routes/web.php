@@ -126,23 +126,24 @@ Route::namespace('Admin')
     ->middleware(['auth', 'redirect'])
     ->group(function () {
 
+        
         // Start Admin Dashboard [Roles]...
         Route::group([
             'prefix' => '/roles',
             'as' => 'role.',
         ], function () {
             // For Soft Delete ...
-            Route::get('/trash', [RolesController::class, 'trash'])->name('trash');
-            Route::put('/trash/{id?}', [RolesController::class, 'restore'])->name('restore');
-            Route::delete('/admin/admins/trash/{id?}', [RolesController::class, 'forceDelete'])->name('force-delete');
+            Route::get('/trash', [RolesController::class, 'trash'])->middleware(['role'])->name('trash');
+            Route::put('/trash/{id?}', [RolesController::class, 'restore'])->middleware(['role'])->name('restore');
+            Route::delete('/admin/admins/trash/{id?}', [RolesController::class, 'forceDelete'])->middleware(['role'])->name('force-delete');
             // Basics Routes ...
-            Route::get('/', [RolesController::class, 'index'])->name('index');
-            Route::get('/create', [RolesController::class, 'create'])->name('create');
-            Route::post('/', [RolesController::class, 'store'])->name('store');
-            Route::get('/{id}', [RolesController::class, 'show'])->name('show');
-            Route::get('/{id}/edit', [RolesController::class, 'edit'])->name('edit');
-            Route::put('/{id}', [RolesController::class, 'update'])->name('update');
-            Route::delete('/{id}', [RolesController::class, 'destroy'])->name('delete');
+            Route::get('/', [RolesController::class, 'index'])->middleware(['role'])->name('index');
+            Route::get('/create', [RolesController::class, 'create'])->middleware(['role'])->name('create');
+            Route::post('/', [RolesController::class, 'store'])->middleware(['role'])->name('store');
+            Route::get('/{id}', [RolesController::class, 'show'])->middleware(['role'])->name('show');
+            Route::get('/{id}/edit', [RolesController::class, 'edit'])->middleware(['role'])->name('edit');
+            Route::put('/{id}', [RolesController::class, 'update'])->middleware(['role'])->name('update');
+            Route::delete('/{id}', [RolesController::class, 'destroy'])->middleware(['role'])->name('delete');
         });
         // End Admin Dashboard [Roles]...
 

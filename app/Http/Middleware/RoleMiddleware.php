@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Redirect
+class RoleMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,14 +18,12 @@ class Redirect
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()){
-            if (Auth::user()->user_type == 2 || Auth::user()->user_type == 1) {
+            if (Auth::user()->user_type == 2) {
                 return $next($request);
             }
-            return redirect()->route('front.home');
+            return redirect()->route('admin.home');
         }   
 
-        return redirect()->route('front.home');
-
-        // return $next($request);
+        return redirect()->route('admin.home');
     }
 }

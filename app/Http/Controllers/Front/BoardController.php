@@ -21,12 +21,12 @@ class BoardController extends Controller
     {
         $boards = Board::where('user_id', Auth::user()->id)->get();
 
-        $posts = null;
-
-        foreach ($boards as $board) {
-            $posts = Post::where('id', $board->post_id)->get();
+        foreach($boards as $board){
+            $board_post = $board->post_id;
         }
 
+        
+        $posts = Post::where('id', $board_post)->get();
 
         $comments = Comment::all();
 

@@ -1,18 +1,95 @@
 @extends('layouts.Front-nav')
 
+@section('title', 'Board')
+
 <!-- Gallary -->
-
-
 <div class="container-fluid" style="margin-top: 70px;">
     <div class="row d-flex p-1">
-        @foreach($boards as $board)
-            <h3>
-                {{ $board->post->name }}
-            </h3>
+        @foreach($posts as $post)
+        <div class="col-md-3">
+            <div class="card">
+                <a href="#" data-toggle="modal" data-target="#myModal-{{ $post->id }}" data-id="{{ $post->id }}" class="img-click">
+                    <!-- Image Element In Card -->
+                    <img src="{{ asset('uploads') . '/' . $post->image_path }}" data-toggle="modal" data-target="#myModal" onclick="modalscript()" id="largImageGalley" class="image-post">
+                    <!-- DropDown Element Doted DropDown Edit Button-->
+                    @auth
+                    @if ($post->user->id == Auth::user()->id)
+                    <div class="dropdown" style="position: absolute;top: 10%;left: 10%">
+                        <a class="btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-h fa-lg pt-3"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
+                            <a class="dropdown-item" href="{{ route('post.edit', ['id' => $post->id]) }}">تعديل</a>
+                            <form action="{{ route('post.delete', ['id' => $post->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="dropdown-item">حذف</button>
+                            </form>
+                        </div>
+                    </div>
+                    @endif
+
+                    @endauth
+
+                    <!-- End Doted Element Save Button -->
+
+                    <!-- Save the image in the archive -->
+                    <div class="archive-image">
+                        <form action="{{ route('board.store') }}" method="POST">
+                            @csrf
+
+                            @auth
+                            <input type="hidden" name="post" value="{{ $post->id }}" />
+                            <input type="hidden" name="user" value="{{ Auth::user()->id }}" />
+
+                            <button type="submit" class="archive-image-link btn bg-none" onclick="archif()" style="background-color: transparent;">
+                                <i class="fa fa-bookmark-o fa-lg archive" style="color:white"> حفظ</i>
+                            </button>
+                            @endauth
+                        </form>
+                    </div>
+
+                    <!-- Text In Image -->
+                    <a href="">
+                        <div id="titleImage" class="text-post my-4 mx-2">{{ $post->name }}</div>
+                    </a>
+
+                    <!-- End parent Link in Card -->
+                </a>
+
+                <!-- Secound Element In Card Contain like and comment -->
+
+                <div class="card-title d-flex">
+                    <!-- image profile -->
+                    <a href="#">
+                        <span>
+                            <img src="{{ asset('uploads') . '/' . $post->user->avatar }}" id="imageProfile" class="avatar-post mx-2">
+                        </span>
+                    </a>
+                    <!-- name profile -->
+                    <a href="#">
+                        <span id="imageName" class="username-post">{{ $post->user->name }}</span>
+                    </a>
+                    <!-- group contain like and commend -->
+                    <!-- <div class=" w-100 ml-3 mt-2">
+                            <!-- like -->
+                    <!-- <a href="#"><span><i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: black"></i></span></a>
+                            <span>45</span> -->
+                    <!-- comment -->
+                    <!-- <a href="#"><span><i class="fa fa-commenting-o" aria-hidden="true" style="color: black"></i></span></a>
+                            <span>45</span> -->
+                    <!-- </div>  -->
+                </div>
+
+            </div>
+
+            <!-- <img src="https://images.pexels.com/photos/3889868/pexels-photo-3889868.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                <img src="https://images.pexels.com/photos/2091160/pexels-photo-2091160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+                <img src="https://images.pexels.com/photos/2019546/pexels-photo-2019546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
+        </div>
         @endforeach
     </div>
 </div>
-
 
 
 
