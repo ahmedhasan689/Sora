@@ -125,6 +125,8 @@ class PostsController extends Controller
             'image' => 'nullable|mimes:jpeg,bmp,png,jpg,gif',
             'category_name' => 'required',
         ]);
+        
+        $image_path = $post->image_path;
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -133,6 +135,8 @@ class PostsController extends Controller
                 'disk' => 'uploads',
             ]);
             // dd($request);
+        }else{
+            $image_path = $post->image_path;
         }
 
 

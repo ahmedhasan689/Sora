@@ -92,9 +92,9 @@ class SubadminsController extends Controller
     public function edit($id)
     {
         $subadmin = User::find($id);
-        $roles = Role::all();
+        // $roles = Role::all();
         $countries = Country::all();
-        return view('admin.subadmins.edit', compact('countries', 'subadmin', 'roles'));
+        return view('admin.subadmins.edit', compact('countries', 'subadmin'));
     }
 
 
@@ -109,7 +109,6 @@ class SubadminsController extends Controller
             'password' => 'nullable|min:6|max:20',
             'country' => 'required',
             'avatar' => 'nullable|Image',
-            'role' => 'nullable',
         ]);
 
         // dd($request->post('role'));
@@ -125,6 +124,8 @@ class SubadminsController extends Controller
                 return redirect()->route('subadmin.edit')->with('success', 'Password Not Correct');
             }
         }
+        
+        $image_path = $sub_admin->avatar;
 
         // Upload Image
         if ($request->hasFile('avatar')) {
@@ -133,6 +134,8 @@ class SubadminsController extends Controller
             $image_path = $file->store('/', [
                 'disk' => 'uploads',
             ]);       
+        }else{
+            $image_path = $sub_admin->avatar;
         }
 
         $sub_admin->update([
@@ -143,7 +146,6 @@ class SubadminsController extends Controller
             'country_id' => $request->post('country'),
             'city' => $request->post('city'),
             'zip_code' => $request->post('zip_code'),
-            'role_id' => $request->post('role'),
             'avatar' => $image_path,
         ]);
         // dd($sub_admin);

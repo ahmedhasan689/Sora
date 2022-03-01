@@ -100,7 +100,7 @@ class ProfileController extends Controller
         $profiles = Profile::findOrFail($id);
         $subscriptions = Subscription::all();
         // dd($profiles);
-        return view('home.profile.edit', compact('profiles', 'subscriptions'));
+        return view('Home.profile.edit', compact('profiles', 'subscriptions'));
     }
 
     /**
@@ -148,12 +148,15 @@ class ProfileController extends Controller
         // dd($request);
         // Check Password
 
+        $password_input = null;
+
         if ($request->post('old_password')) {
             if (Hash::check($request->old_password, Auth::user()->password) && $request->post('new_password') ==  $request->post('repeat_password') ) {
-                $request->merge([
-                    'password' => Hash::make($request->post('new_password')),
-                ]);
+                    
+                    $password_input =  Hash::make($request->post('new_password'));
             }
+        }else {
+            $password_input = $request->post('password');
         }
 
         if ($request->post('subscription')) {
@@ -174,10 +177,12 @@ class ProfileController extends Controller
             $user->update([
                 'name' => $request->post('username'),
                 'avatar' => $avatar_path ?? $user->avatar,
-                'password' => Hash::make('new_password'),
+                'password' => $password_input,
                 'email' => $request->post('email'),
                 'subscription_id' => $request->post('subscription'),
             ]);
+
+            // dd($request);
         }
         
         return redirect()->route('profile.index');

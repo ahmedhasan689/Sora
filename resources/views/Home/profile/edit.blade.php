@@ -1,4 +1,4 @@
-@extends('layouts.Front-nav')
+ @extends('layouts.Front-nav')
 
 @section('title', 'Edit Profile')
 
@@ -27,7 +27,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" id="notification-tab" data-toggle="tab" href="#notification" role="tab" aria-controls="notification" aria-selected="false">الاشعارات</a>
+                                <a class="nav-link" id="notification-tab" data-toggle="tab" href="#subscriptions" role="tab" aria-controls="notification" aria-selected="false">الأشتراك</a>
                             </li>
 
                         </ul>
@@ -116,20 +116,7 @@
                                     <div>
                                         <label for="name" class=" w-100 " style="text-align: right;">الايميل</label>
                                         <input type="email" value="{{ $profiles->user->email }}" class="form-control" name="email" id="email">
-                                    </div>
-                                    <div>
-                                        <label for="name" class=" w-100 " style="text-align: right;">الاشتراك</label>
-                                        <select class="form-control" name="subscription">
-                                            @foreach ($subscriptions as $subscription)
-                                            <option value="{{ $subscription->id }}" 
-                                                <?php if ($profiles->user->subscription_id == $subscription->id) {
-                                                     echo 'selected';
-                                                } ?>
-                                                >{{ $subscription->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    
-                                    </div>
+                                    </div>  
                                 </div>
                             </span>
                         </div>
@@ -145,6 +132,7 @@
                         <div class=" mt-3  w-100 d-flex ">
                             <span style="margin-right: 14%" class=" w-100 d-flex">
                                 <div class="w-75 navbar-expand-sm ">
+                                    <input type="hidden" name="password" value="{{ $profiles->user->password }}">
                                     <div>
                                         <label for="name" class=" w-100 " style="text-align: right;">كلمة السر</label>
                                         <input type="password" class="form-control @error('old_password') is-invalid @enderror" name="old_password" id="name">
@@ -165,11 +153,43 @@
                 </div>
                 <!-- End Password Tap -->
 
-                <!-- Notificaitons Tap -->
-                <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
-                    <x-notifications-menu />
+                <!-- Subscriptions Tap -->
+                <div class="tab-pane fade" id="subscriptions" role="tabpanel" aria-labelledby="notification-tab">
+                  <div class="wrapper">
+                      <div class="title">
+                          أختر الأشتراك الذي يناسبك !
+                      </div>
+                            <div class="container sub-container">
+                                <div class="row">
+                                    @foreach($subscriptions as $sub)
+                                    <div class="col-md-4">
+                                        <input type="hidden" name="subscription" value="{{ $sub->id }}" />
+                                        <label class="option_item">
+                                            <input type="radio" class="checkbox">
+                                            <div class="option_inner facebook">
+                                                <div class="tickmark"></div>
+                                                <div class="name">{{ $sub->name }}</div>
+                                                <p class="text">
+                                                    يمكنك أضافة حتى
+                                                    <br>
+                                                    <span class="number"> {{ $sub->number_of_image }} صور</span>
+                                                </p>
+                                                <p class="text">
+                                                    وذلك بسعر
+                                                    <br>
+                                                    <span class="price"> {{ $sub->price }} $</span>
+                                                </p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    @endforeach
+
+                                </div>
+
+                            </div>
+                  </div>
                 </div>
-                <!-- End Notificaitons Tap -->
+                <!-- End Subscriptions Tap -->
 
                 <div class="w-75 mx-auto" style="text-align: right;">
                     <button class="btn btn-outline-success mt-4" type="submit" style="background-color: #37BF80;border-radius:10px;color: white;font-size: 16px;height: 35px">

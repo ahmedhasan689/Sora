@@ -126,7 +126,7 @@
         <label for="inputState">الدولة</label>
         <select id="inputState" class="form-control @error('country') is-invalid @enderror" name="country">
             @foreach ($countries as $country)
-            <option>{{ $country->country_name }}</option>
+            <option value="{{ $country->id }}">{{ $country->country_name }}</option>
             @endforeach
         </select>
     </div>

@@ -64,32 +64,28 @@ class AdminsController extends Controller
         // Rules
         $request->validate(User::adminValidateRules());
 
+        $image_path = null;
+
         // Upload Image
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar'); // UploadedFile Objects
-        
+
             $image_path = $file->store('/', [
                 'disk' => 'uploads',
             ]);
-        
+
+        }else{
+          $image_path = null;
         }
 
         // Create
         if ($request->post('password') === $request->post('re-password')) {
-
-            // Hash The Password After Checked & Fill The User Type = 2 ('admin') & Insert The $image_path
-            // $request->merge([
-            //     'user_type' => $request->post('admin'),
-            //     'password' => Hash::make($request->post('password')),
-            // ]);
-
-            // dd($request);
             $admin = User::create([
                 'name' => $request->post('name'),
                 'phone_number' => $request->post('phone_number'),
                 'email' => $request->post('email'),
                 'password' => Hash::make($request->post('password')),
-                'country' => $request->post('country_id'),
+                'country_id' => $request->post('country'),
                 'avatar' => $image_path,
                 'user_type' => $request->post('admin'),
             ]);
@@ -163,7 +159,7 @@ class AdminsController extends Controller
         if( !empty($request->post('password')) && !empty($request->post('re-password')) ){
             if ($request->post('password') === $request->post('re-password')) {
                 $request->merge([
-                    'password' => Hash::make($request->post('password')),
+                    'password' => Hash::make($request->post('password')) ?? $admin->password,
                 ]);
                 // dd($request->post('password'));
             }else{

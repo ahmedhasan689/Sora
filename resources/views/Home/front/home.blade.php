@@ -3,6 +3,7 @@
 
 @section('title', 'Sora')
 
+
 <!-- Gallary -->
 <div class="container-fluid" style="margin-top: 70px;">
     <div class="row d-flex p-1">
@@ -35,20 +36,7 @@
                     <!-- End Doted Element Save Button -->
 
                     <!-- Save the image in the archive -->
-                    <div class="archive-image">
-                        <form action="{{ route('board.store') }}" method="POST">
-                            @csrf
 
-                            @auth
-                            <input type="hidden" name="post" value="{{ $post->id }}" />
-                            <input type="hidden" name="user" value="{{ Auth::user()->id }}" />
-
-                            <button type="submit" class="archive-image-link btn bg-none" onclick="archif()" style="background-color: transparent;">
-                                <i class="fa fa-bookmark-o fa-lg archive" style="color:white"> حفظ</i>
-                            </button>
-                            @endauth
-                        </form>
-                    </div>
 
                     <!-- Text In Image -->
                     <a href="">
@@ -91,7 +79,6 @@
         @endforeach
     </div>
 </div>
-
 
 
 
@@ -253,7 +240,7 @@
                                         <a class="btn comment-btn saveInDevice" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                         </a>
-                                        
+
                                         <div class="dropdown-menu comment-dropdown" aria-labelledby="dropdownMenuLink" style="margin-left: 1px">
 
                                             <form action="#" method="POST">
@@ -314,7 +301,22 @@
                                         <button type="submit" class="btn btn-success comment-submit">
                                             أضافة تعليق
                                         </button>
+
+
+
                                     </div>
+                                </form>
+                                <form action="{{ route('board.store') }}" method="POST">
+                                    @csrf
+
+                                    @auth
+                                    <input type="hidden" name="post" value="{{ $post->id }}" />
+                                    <input type="hidden" name="user" value="{{ Auth::user()->id }}" />
+
+                                    <button type="submit" class="archive-image-link btn btn-dark" onclick="archif()" style="margin-top: 120px; margin-right: -45px">
+                                        <i class="fa fa-bookmark-o fa-lg archive" style="color:white"> حفظ</i>
+                                    </button>
+                                    @endauth
                                 </form>
                             </div>
                             @endauth

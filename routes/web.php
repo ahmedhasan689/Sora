@@ -1,13 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminsController;
 use App\Http\Controllers\admin\SubadminsController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Front\FrontController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\RolesController;
-use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\admin\RolesController;
+use App\Http\Controllers\admin\CategoriesController;
+use App\Http\Controllers\admin\ImagesController;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\Front\BoardController;
 use App\Http\Controllers\CartController;
@@ -17,7 +18,6 @@ use App\Http\Controllers\Front\NotificationsController;
 use App\Http\Controllers\Front\PostsController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\LikesController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ Route::post('/board', [BoardController::class, 'store'])->name('board.store');
 
 
 // Search Controller
-Route::get('/search', [SearchController::class, 'search'])->middleware(['auth'])->name('search');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 // Follow Controller
 Route::put('/follow', [FollowController::class, 'follow'])->name('follow');

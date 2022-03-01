@@ -38,10 +38,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function adminValidateRules()
     {
         return [
-            'name' => 'required|min:3|max:15',
+            'name' => 'required|min:3',
             'phone_number' => 'required|numeric|min:10',
             'email' => 'required|email',
-            'password' => 'nullable|min:6|max:20',
+            'password' => 'nullable|min:8|max:20',
             'country' => 'required',
             'avatar' => 'nullable|Image',
             'admin',
@@ -145,7 +145,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function board() {
-        return $this->hasOne(Board::class, 'user_id')->withDefault();
+        return $this->belongsToMany(Board::class, 'board_post')->withDefault();
     }
 
     public function likes()

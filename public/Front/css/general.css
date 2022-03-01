@@ -1,3 +1,8 @@
+* {
+    font-family: almarai;
+}
+
+
 .img-prfile {
     width: 120px;
 }
@@ -8,7 +13,8 @@
 
 .image-post {
     width: 100%;
-    height: 500px;
+    height: 250px;
+    border-radius: 10px;
 }
 
 .text-post {
@@ -61,8 +67,9 @@
 .modal .big-img {
     margin-top: 30px;
     margin-right: -30px;
-    height: 100%;
+    height: 500px;
     align-items: center;
+    width: 500px !important;
 }
 
 .fa-ellipsis-h {
@@ -469,104 +476,118 @@
 }
 
 /* Search Profile */
-.cardbox {
-    width: 350px;
-    background-color: #efefef;
-    border: none;
+.wrapper {
+    width: 780px;
+    margin: 100px auto 0;
+}
+
+.wrapper .title {
+    font-size: 30px;
+    color: rgb(142, 142, 142);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: -100px;
+}
+
+.sub-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container .option_item {
+    display: block;
+    position: relative;
+    width: 175px;
+    height: 175px;
+    margin: 10px;
+}
+
+.container .option_item .checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+}
+
+.option_item .option_inner {
+    width: 115%;
+    height: 100%;
+    background: #fff;
+    border-radius: 5px;
+    text-align: center;
+    padding: 58px 40px;
     cursor: pointer;
-    transition: all 0.5s
+    color: #585c68;
+    display: block;
+    border: 5px solid transparent;
+    position: relative;
+    box-shadow: 0px 0px 5px #000;
 }
 
-.image img {
-    transition: all 0.5s;
-    height: 100;
-    width: 100;
-    border-radius: 50%;
-    margin-right: -12px;
-    margin-top: -6px;
+.option_item .option_inner .icon {
+    margin-bottom: 10px;
 }
 
-.card:hover .image img {
-    transform: scale(1.5)
+.option_item .option_inner .icon .fab {
+    font-size: 32px;
 }
 
-.search-btn {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%
+.option_item .option_inner .name {
+    user-select: none;
+    color: #5c5c5c;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: -40px;
 }
 
-.us-name {
-    font-size: 22px;
-    font-weight: bold
+.option_item .option_inner .text {
+    color: #C13737;
 }
 
-.idd {
-    font-size: 14px;
-    font-weight: 600
+.option_item .option_inner .text .number {
+    color: #0e1864;
 }
 
-.idd1 {
-    font-size: 12px
+.option_item .option_inner .text .price {
+    color: #ff2222;
 }
 
-.number {
-    font-size: 22px;
-    font-weight: bold
+.option_item .checkbox:checked~.option_inner.facebook {
+    border-color: #3b5999;
+    color: #3b5999;
 }
 
-.follow {
-    font-size: 12px;
-    font-weight: 500;
-    color: #444444
+.option_item .option_inner .tickmark {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border: 20px solid;
+    border-color: #000 transparent transparent #000;
+    display: none;
 }
 
-.btn1 {
-    height: 40px;
-    width: 128px;
-    border: none;
-    background-color: #000;
-    color: #aeaeae;
-    font-size: 15px;
-    text-align: center;
-    padding-top: 9px;
-    border-radius: 12px;
+.option_item .option_inner .tickmark:before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    left: -18px;
+    width: 15px;
+    height: 5px;
+    border: 3px solid;
+    border-color: transparent transparent #fff #fff;
+    transform: rotate(-45deg);
 }
 
-.btn1:hover {
-    text-decoration: none;
+.option_item .checkbox:checked~.option_inner .tickmark {
+    display: block;
 }
 
-.text span {
-    font-size: 13px;
-    color: #545454;
-    font-weight: 500;
-    text-align: center;
+.option_item .option_inner.facebook .tickmark {
+    border-color: #3b5999 transparent transparent #3b5999;
 }
 
-.icons i {
-    font-size: 19px
-}
-
-hr .new1 {
-    border: 1px solid
-}
-
-.join {
-    font-size: 14px;
-    color: #a0a0a0;
-    font-weight: bold
-}
-
-.date {
-    background-color: #ccc
-}
-
-.flow-profile {
-    background-color: #37BF80 !important;
-    width: 70px !important;
-    text-align: center !important;
-    border-radius:10px !important;
-    color: white;
-    font-size: 16px !important;
+.wrapper .btn {
+    background-color: #37BF80;
 }

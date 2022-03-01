@@ -107,7 +107,7 @@ class UsersController extends Controller
     {
         
         $user = User::find($id);
-        $this->authorize('update', $user);
+        // $this->authorize('update', $user);
         $countries = Country::all();
         return view('admin.users.edit', compact('user', 'countries'));
     }
@@ -120,15 +120,25 @@ class UsersController extends Controller
         // $this->authorize('update', $id);
         $user = User::findOrFail($id);
 
-        $request->validate(User::usersValidateRules());
+        $request->validate([
+            'name' => 'nullable|min:3|max:15',
+            'phone_number' => 'nullable|numeric|min:10',
+            'email' => 'nullable|email',
+            'password' => 'nullable|min:6|max:20',
+            'country' => 'nullable',
+            'avatar' => 'nullable|Image',    
+        ]);
 
-        if (!empty($request->post('password')) && !empty($request->post('re-password'))) {
+        if( !empty($request->post('password')) && !empty($request->post('re-password')) ){
             if ($request->post('password') === $request->post('re-password')) {
                 $request->merge([
-                    'password' => Hash::make($request->post('password'))
+                    'password' => Hash::make($request->post('password')) ?? $user->password,
                 ]);
-            } else {
+                // dd($request->post('password'));
+            }else{
+
                 return redirect()->route('user.index')->with('success', 'Password Not Correct');
+
             }
         }
 
@@ -145,7 +155,6 @@ class UsersController extends Controller
             'name' => $request->post('name'),
             'phone_number' => $request->post('phone_number'),
             'email' => $request->post('email'),
-            'password' => $request->post('password'),
             'country_id' => $request->post('country'),
             'avatar' => $image_path ?? $user->avatar,
         ]);

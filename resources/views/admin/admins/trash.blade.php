@@ -48,7 +48,7 @@
         <tr>
             <th scope="row">{{ $user->id }}</th>
             <td>
-                <img src="{{ asset('uploads/' . $user->avatar) }}" width="100" height="80">
+                <img src="{{ $user->image }}" width="100" height="80">
             </td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->phone_number }}</td>

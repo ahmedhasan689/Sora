@@ -182,25 +182,7 @@
         </p>
         @enderror
 
-        <div class="form-row">
-            <!-- Country_name -->
-            <div class="form-group col-md-4">
-                <label>
-                    الصلاحيات
-                </label>
-                <select class="form-control @error('role_id') is-invalid @enderror" name="role" value="abilities[]">
-                @foreach ($roles as $role)
-                <option
-                    <?php
-                        if ($subadmin->role->id == $role->id){
-                             echo 'selected';
-                        }
-                    ?>
-                value="{{ $role->id }}">{{ $role->name }}</option>
-                @endforeach
-                </select>
-            </div>
-        </div>    
+       
 
         <button type="submit" class="btn btn-success">تعديل</button>
 

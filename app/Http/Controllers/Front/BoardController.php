@@ -21,9 +21,16 @@ class BoardController extends Controller
     {
         $boards = Board::where('user_id', Auth::user()->id)->get();
 
-        foreach($boards as $board){
-            $board_post = $board->post_id;
+        $board_post = null;
+
+        if ($boards) {
+            foreach ($boards as $board) {
+                $board_post = $board->post_id;
+            }
+        }elseif(!$boards){
+            $board_post = null;
         }
+
 
         
         $posts = Post::where('id', $board_post)->get();

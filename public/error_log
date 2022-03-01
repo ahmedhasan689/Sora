@@ -1,0 +1,24 @@
+[29-Jan-2022 01:40:41 UTC] PHP Warning:  Uncaught ErrorException: require(/home4/omanfram/public_html/Ahmed/routes/web.php): failed to open stream: No such file or directory in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php:35
+Stack trace:
+#0 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php(35): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(/home4/...', '/home4/omanfram...', 35, Array)
+#1 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php(35): require()
+#2 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/Router.php(425): Illuminate\Routing\RouteFileRegistrar->register('/home4/omanfram...')
+#3 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/Router.php(382): Illuminate\Routing\Router->loadRoutes('/home4/omanfram...')
+#4 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/ in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php on line 35
+[29-Jan-2022 01:40:41 UTC] PHP Fatal error:  Illuminate\Routing\RouteFileRegistrar::register(): Failed opening required '/home4/omanfram/public_html/Ahmed/routes/web.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php on line 35
+[29-Jan-2022 01:40:57 UTC] PHP Warning:  Uncaught ErrorException: require(/home4/omanfram/public_html/Ahmed/routes/web.php): failed to open stream: No such file or directory in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php:35
+Stack trace:
+#0 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php(35): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(/home4/...', '/home4/omanfram...', 35, Array)
+#1 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php(35): require()
+#2 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/Router.php(425): Illuminate\Routing\RouteFileRegistrar->register('/home4/omanfram...')
+#3 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/Router.php(382): Illuminate\Routing\Router->loadRoutes('/home4/omanfram...')
+#4 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/ in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php on line 35
+[29-Jan-2022 01:40:57 UTC] PHP Fatal error:  Illuminate\Routing\RouteFileRegistrar::register(): Failed opening required '/home4/omanfram/public_html/Ahmed/routes/web.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php on line 35
+[29-Jan-2022 01:41:04 UTC] PHP Warning:  Uncaught ErrorException: require(/home4/omanfram/public_html/Ahmed/routes/web.php): failed to open stream: No such file or directory in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php:35
+Stack trace:
+#0 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php(35): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(/home4/...', '/home4/omanfram...', 35, Array)
+#1 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php(35): require()
+#2 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/Router.php(425): Illuminate\Routing\RouteFileRegistrar->register('/home4/omanfram...')
+#3 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/Router.php(382): Illuminate\Routing\Router->loadRoutes('/home4/omanfram...')
+#4 /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/ in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php on line 35
+[29-Jan-2022 01:41:04 UTC] PHP Fatal error:  Illuminate\Routing\RouteFileRegistrar::register(): Failed opening required '/home4/omanfram/public_html/Ahmed/routes/web.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home4/omanfram/public_html/Ahmed/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php on line 35

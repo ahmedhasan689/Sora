@@ -14,24 +14,25 @@
 
             <span class="idd">{{ $user->email }}</span>
 
-            <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
-                <span class="number">
-                    1069 
-                    <span class="follow">Followers</span>
-                </span> 
-            </div>
-
+            
+            @if(Auth::check())
             <div class=" d-flex mt-2"> 
                 <a class="btn1 btn-success" href="{{ route('profile.show', ['id' => $user->profile->id]) }}">Show Profile</a> 
             </div>
+            @else
+            <div class=" d-flex mt-2"> 
+                <a class="btn1 btn-success" href="{{ route('front.home') }}">To Home</a> 
+            </div>
+            @endif
             <div class="text mt-3"> 
                 <span>
                     {{ $user->profile->information }}
                 </span>
             </div>
 
-            <div class=" px-2 rounded mt-4 date "> 
-                <span class="join">Joined May,2021</span> 
+            <div class=" px-2 rounded mt-4 date ">
+                Joined In 
+                <span class="join">{{ $user->profile->created_at }}</span> 
             </div>
 
         </div>

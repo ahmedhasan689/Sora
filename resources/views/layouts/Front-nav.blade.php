@@ -20,7 +20,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-                
+
     </title>
     <!-- Fonts -->
 
@@ -37,6 +37,7 @@
         }
     </style>
 
+    
 </head>
 <!-- End  </Bootstrap>    -->
 
@@ -77,12 +78,24 @@
                             @endauth
 
                             @guest
-                            <li class="nav-item col-md-2 d-flex flex-row-end">
-                                <button class="btn-sm add" style="border: none;">
-                                    <a href="" class="btn btn-success" data-toggle='modal' data-target="#signupPage">Sign up</a>
+                            <li class="nav-item col-md-2 d-flex flex-row-end" style="margin-right: 150px">
+                                <!-- <button class="btn-sm add" style="border: none;">
+                                    <a href="" class="btn btn-success" data-toggle='modal' data-target="#signupPage"></a>
+                                </button> -->
+
+                                <button class="btn-sm btn-add" style="margin-right: 10px; padding: 5px 15px;">
+                                    <a href="" class="add-element" data-toggle='modal' data-target="#signupPage">
+                                        <div class="button-content">التسجيل</div>
+                                    </a>
                                 </button>
-                                <button class="btn-sm add" style="border: none;">
-                                    <a href="" class="btn btn-success" data-toggle='modal' data-target="#loginPage">login</a>
+                                <!-- <button class="btn-sm add" style="border: none;">
+                                    <a href="" class="btn btn-success" data-toggle='modal' data-target="#loginPage">تسجيل الدخول</a>
+                                </button> -->
+
+                                <button class="btn-sm btn-add" style="margin-right: 10px; padding: 5px 8px;">
+                                    <a href="" class="add-element" data-toggle='modal' data-target="#loginPage">
+                                        <div class="button-content" style="width: 80px;">تسجيل الدخول</div>
+                                    </a>
                                 </button>
                             </li>
                             @endguest
@@ -154,7 +167,9 @@
                             <div>
                                 <div class="input-group">
                                     <!-- Search Element -->
-                                    <button class="btn btn-secondary" >بحث</button>
+                                    <button class="btn bg-transparent" style="position: absolute; top: 5px; z-index: 5; height: 37px; margin-top: -4; margin-left: 1px;">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
                                     <input type="search" dir="rtl" placeholder="ماذا تفكر؟" name="query" class="form-control">
                                     <div class="input-group-append">
                                         <!-- Add Button -->
@@ -232,72 +247,72 @@
 
         <!-- Start Signup Modal -->
         <div class="modal fade mt-5" id="signupPage">
-            <div class="modal-dialog">
-                <div class="modal-content w-75 mx-auto mt-5" style="border-radius: 10px;">
+            <div>
+                <div class="modal-dialog">
 
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title text-center w-100 font-weight-bold mt-3">انشاء حساب جديد</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <div>
+                        <!-- Session Status -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" style="color: white; padding-left: 50px; margin-top: 100px; background-color: #871010BA; padding: 9px 39px; z-index: 2; position: relative; width: 430px; margin-right: 40px;" />
                     </div>
-                    <div class="modal-body mx-auto w-75">
 
-                        <div class="" style="font-weight: 200;font-size: 12px;text-align: right;">
-                            <p>ألديك حساب بالفعل ?<a href="#" data-toggle='modal' data-target="#loginPage" data-dismiss="modal" style="color: green">تسجيل الدخول</a></p>
+                    <div class="modal-content w-75 mx-auto mt-5" style="border-radius: 10px;">
+
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title text-center w-100 font-weight-bold mt-3">انشاء حساب جديد</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="close"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
+                        <div class="modal-body mx-auto w-75">
+
+                            <div class="" style="font-weight: 200;font-size: 12px;text-align: right;">
+                                <p>ألديك حساب بالفعل ?<a href="#" data-toggle='modal' data-target="#loginPage" data-dismiss="modal" style="color: green">تسجيل الدخول</a></p>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
 
 
 
-                        <div class="md-form mb-5">
-                            <form method="POST" action="{{ route('register') }}">
-                                @csrf
+                                    <input type="text" class="form-control" id="name" name="name" :value="old('name')" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="الاسم" wire:model="name">
 
-                                <div>
+                                    <br>
 
-                                    <!-- Validation Errors -->
-                                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                                    <input id="email" name="email" type="email" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="البريد الالكتروني" wire:model="email">
 
-                                </div>
+                                    <br>
 
 
-                                <input type="text" class="form-control" id="name" name="name" :value="old('name')" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="الاسم">
+                                    <input id="phone_number" name="phone_number" type="integer" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="رقم الجوال" wire:model="phone">
+                                    <br>
 
-                                <br>
+                                    <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="كلمة المرور" wire:model="password">
 
-                                <input id="email" name="email" type="email" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="البريد الالكتروني">
-
-                                <br>
-
-
-                                <input id="phone_number" name="phone_number" type="integer" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="رقم الجوال">
-                                <br>
-
-                                <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="كلمة المرور">
-
-                                <br>
+                                    <br>
 
 
-                                <input id="password_confirmation" type="password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" name="password_confirmation" required placeholder="أعادة كلمة المرور">
+                                    <input id="password_confirmation" type="password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" name="password_confirmation" required placeholder="أعادة كلمة المرور" wire:model="re_password">
 
-                                <br>
+                                    <br>
 
-                                <input type="checkbox" class="form-check-input d-flex flex-row-start">
+                                    <input type="checkbox" class="form-check-input d-flex flex-row-start">
 
-                                <span style="font-weight: 200; font-size: 11px;text-align: right;margin-right: 13px;">انشاء حساب جديد يعني
-                                    انك <span style="color: green;text-align: left;">
-                                        توافق على سياسات الخددمه الخاصه بالموقع</span>
-                                </span>
+                                    <span style="font-weight: 200; font-size: 11px;text-align: right;margin-right: 13px;">انشاء حساب جديد يعني
+                                        انك <span style="color: green;text-align: left;">
+                                            توافق على سياسات الخددمه الخاصه بالموقع</span>
+                                    </span>
 
-                                <br>
+                                    <br>
 
-                                <input type="submit" value="انشاء حساب جديد" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;">
+                                    <input type="submit" wire:click.prevent="register" value="انشاء حساب جديد" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;">
 
+                                </form>
 
-
-
-                            </form>
+                            </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -345,7 +360,6 @@
         </div>
         <!-- End Forget Password -->
 
-        <!-- Reset Password -->
         <!-- Reset Password -->
         <div class="modal fade mt-5" id="RestPassword">
             <div class="modal-dialog">
@@ -420,11 +434,11 @@
                             <div class="md-form mb-5">
 
                                 <!-- Email -->
-                                <input type="email" id="email" name="email" :value="old('email')" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="البريد الالكتروني">
+                                <input type="email" id="login-email" name="email" :value="old('email')" class="form-control" style="background-color: #F6F6F6;border-radius: 10px" placeholder="البريد الالكتروني">
                                 <br>
 
                                 <!-- Password -->
-                                <input type="password" name="password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="كلمه المرور">
+                                <input id="login-password" type="password" name="password" class="form-control" style="background-color: #F6F6F6;border-radius: 10px;margin-top: -10px" placeholder="كلمه المرور">
 
                                 <br>
 
@@ -434,7 +448,7 @@
                                 </div>
 
                                 <!-- Submit -->
-                                <input type="submit" value="تسجيل الدخول" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;">
+                                <input id="form" type="submit" value="تسجيل الدخول" class="btn btn-success mx-auto w-100 mt-4" style="border-radius: 10px;">
                                 <div>
 
                                 </div>
@@ -450,3 +464,6 @@
 
 
     </main>
+
+    
+    

@@ -20,7 +20,7 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/jqvmap/jqvmap.min.css')}}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.min.css')}}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Daterange picker -->
@@ -317,7 +317,7 @@
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('assets/plugins/jQuery/jquery.min.js') }}"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
